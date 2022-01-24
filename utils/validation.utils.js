@@ -53,6 +53,6 @@ const handler = (res, err, page) => {
     }
     // err.status = err.status || 500;
     // return res.status(err.status).send({ success: false, message: err.message });
-}
+};
 module.exports = { usernameValidation, firstNameValidation, lastNameValidation, passwordValidation, phoneValidation, handler };
 

@@ -10,6 +10,7 @@ const userValidation = async (req, res, next) => {
         phoneValidation(req, res);
         next();
     } catch (error) {
+
         next(createError(500));
     }
 };
