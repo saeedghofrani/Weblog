@@ -19,16 +19,9 @@ $(document).ready(function () {
     });
     $('#cancel').click(function (e) {
         e.preventDefault();
-        $('.inputUpdate').removeClass("inputUpdateActive");
-        $('.inputUpdate').attr('disabled', 'disabled');
-        $('.inputUpdate').attr('readonly', 'readonly');
+        inputMod();
         $('.btnUpdatesCancel').addClass('d-none');
-        $('#username').val(lastData.username);
-        $('#password').val(lastData.password);
-        $('#lastName').val(lastData.lastName);
-        $('#firstName').val(lastData.firstName);
-        $('#gender').val(lastData.gender);
-        $('#phone').val(lastData.phone);
+        lastdata(lastData);
 
     });
     $('#update').click(function (e) {
@@ -55,9 +48,7 @@ $(document).ready(function () {
                 $('#gender').val(gender);
                 $('#phone').val(phone);
                 $('#fullName').text(firstName + " " + lastName);
-                $('.inputUpdate').removeClass("inputUpdateActive");
-                $('.inputUpdate').attr('disabled', 'disabled');
-                $('.inputUpdate').attr('readonly', 'readonly');
+                inputMod();
                 $('.btnUpdatesCancel').addClass('d-none');
                 $('.toast-body').css('font-size', 16);
                 $('.toast-body').css('border', '1px solid green');
@@ -67,19 +58,9 @@ $(document).ready(function () {
             },
             error: function (xhr, textStatus, errorThrown) {
                 if (xhr.status === 400) {
-                    $('#username').val(lastData.username);
-                    $('#lastName').val(lastData.lastName);
-                    $('#firstName').val(lastData.firstName);
-                    $('#password').val(lastData.password);
-                    $('#gender').val(lastData.gender);
-                    $('#phone').val(lastData.phone);
+                    lastdata(lastData);
                     $('.btnUpdatesCancel').addClass('d-none');
-                    $('.inputUpdate').removeClass("inputUpdateActive");
-                    $('.inputUpdate').attr('disabled', 'disabled');
-                    $('.inputUpdate').attr('readonly', 'readonly');
-                    $('.inputUpdate').removeClass("inputUpdateActive");
-                    $('.inputUpdate').attr('disabled', 'disabled');
-                    $('.inputUpdate').attr('readonly', 'readonly');
+                    inputMod();
                     $('.btnUpdatesCancel').addClass('d-none');
                     $('.toast-body').removeClass('text-success');
                     $('.toast-body').addClass('text-danger');
@@ -90,27 +71,11 @@ $(document).ready(function () {
                 }
                 else {
                     alert(xhr.responseText);
-                    $('#username').val(lastData.username);
-                    $('#lastName').val(lastData.lastName);
-                    $('#firstName').val(lastData.firstName);
-                    $('#password').val(lastData.password);
-                    $('#gender').val(lastData.gender);
-                    $('#phone').val(lastData.phone);
                     $('.btnUpdatesCancel').addClass('d-none');
-                    $('.inputUpdate').removeClass("inputUpdateActive");
-                    $('.inputUpdate').attr('disabled', 'disabled');
-                    $('.inputUpdate').attr('readonly', 'readonly');
                     $('.toast-body').removeClass('text-danger');
-                    $('.inputUpdate').removeClass("inputUpdateActive");
-                    $('.inputUpdate').attr('disabled', 'disabled');
-                    $('.inputUpdate').attr('readonly', 'readonly');
+                    inputMod();
                     $('.btnUpdatesCancel').addClass('d-none');
-                    $('#username').val(lastData.username);
-                    $('#password').val(lastData.password);
-                    $('#lastName').val(lastData.lastName);
-                    $('#firstName').val(lastData.firstName);
-                    $('#gender').val(lastData.gender);
-                    $('#phone').val(lastData.phone);
+                    lastdata(lastData);
                     $('.toast-body').addClass('text-danger');
                     $('.toast-body').css('border', '1px solid red');
                     $('.toast-body').css('font-size', 16);
@@ -121,3 +86,18 @@ $(document).ready(function () {
         });
     });
 });
+
+function lastdata(lastData) {
+    $('#username').val(lastData.username);
+    $('#password').val(lastData.password);
+    $('#lastName').val(lastData.lastName);
+    $('#firstName').val(lastData.firstName);
+    $('#gender').val(lastData.gender);
+    $('#phone').val(lastData.phone);
+}
+
+function inputMod() {
+    $('.inputUpdate').removeClass("inputUpdateActive");
+    $('.inputUpdate').attr('disabled', 'disabled');
+    $('.inputUpdate').attr('readonly', 'readonly');
+}

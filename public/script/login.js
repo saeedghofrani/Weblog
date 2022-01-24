@@ -11,7 +11,6 @@ $(document).ready(function () {
 
     // Label effect
     $('input').focus(function () {
-
         $(this).siblings('label').addClass('active');
     });
     // Form validation
@@ -49,7 +48,6 @@ $(document).ready(function () {
                 passwordError = false;
             }
         }
-
         // PassWord confirmation
         if ($('.pass').val() !== $('.passConfirm').val()) {
             $('.passConfirm').siblings('.error').text('Passwords don\'t match').fadeIn().parent('.form-group').addClass('hasError');
