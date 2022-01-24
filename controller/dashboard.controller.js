@@ -1,7 +1,6 @@
 const User = require('../model/user.model');
 const dashboard = (request, response, _next) => {
     const data = { firstName, lastName, username, password, gender, phone } = request.session.user;
-    console.log(request.session.user);
     return response.render('dashboard', { data: data });
 };
 const dashboardProcess = async (request, response, _next) => {
@@ -13,7 +12,6 @@ const dashboardProcess = async (request, response, _next) => {
     if (!updatedUser)
         return response.status(400).send({ success: false, message: 'user update was unsuccessfully.', data: updatedUser });
     request.session.user = updatedUser;
-    console.log(updatedUser);
     return response.status(200).send({ success: true, message: 'user updated successfully.', data: updatedUser });
 };
 module.exports = { dashboard, dashboardProcess };

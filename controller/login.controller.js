@@ -1,6 +1,5 @@
 const User = require('../model/user.model');
 const login = (_request, response, _next) => {
-    console.log('ddddddddddddsss');
     return response.render('login', { ERROR: "" });
 };
 const loginProcess = async (request, response, _next) => {

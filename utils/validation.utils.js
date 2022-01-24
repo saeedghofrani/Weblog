@@ -1,9 +1,12 @@
 const validator = require('validator');
 const User = require('../model/user.model');
+const { Error } = require('mongoose');
+const { MongoError } = require('mongodb');
 const usernameValidation = async (req, res) => {
     let { username } = req.body;
     username = username.trim();
-    if (!username || username === 'undefined' || username === 'null' || validator.isEmpty(username) || username.length < 5 || await User.findOne({ username })) {
+    const duplicate = await User.findOne({ username });
+    if (!username || username === 'undefined' || username === 'null' || validator.isEmpty(username) || username.length < 5 || duplicate) {
         res.locals.error = true;
         res.locals.message.push('invalid username: username most be more than 5 letter and UNIQUE!!');
     }
@@ -41,5 +44,15 @@ const phoneValidation = (req, res) => {
         res.locals.message.push('invalid phone: phone is required!!');
     }
 };
-module.exports = { usernameValidation, firstNameValidation, lastNameValidation, passwordValidation, phoneValidation };
+const handler = (res, err, page) => {
+    if (err instanceof Error.ValidationError) {
+        return res.render(`${page}`, { ERROR: err });
+    }
+    if (err instanceof MongoError) {
+        return res.render(`${page}`, { ERROR: err });
+    }
+    // err.status = err.status || 500;
+    // return res.status(err.status).send({ success: false, message: err.message });
+}
+module.exports = { usernameValidation, firstNameValidation, lastNameValidation, passwordValidation, phoneValidation, handler };
 

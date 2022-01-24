@@ -7,20 +7,16 @@ function handler(res, err, from) {
     validationErrorLogger(err, from);
     return res.status(406).send({ success: false, message: 'Not Acceptable Values.' });
   }
-
   if(err instanceof MongoError) {
     mongoErrorLogger(err, from);
     return res.status(406).send({ success: false, message: 'Not Acceptable Values.' });
   }
-
   if(err instanceof TypeError) {
     console.log('\x1b[31m%s\x1b[0m', err.message);
     process.exit(1);
   }
-
   // errorLogger(from, err.message);
   err.status = err.status || 500;
-
   return res.status(err.status).send({ success: false, message: err.message });
 }
 
