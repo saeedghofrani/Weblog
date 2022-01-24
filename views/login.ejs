@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./common/header.ejs', {Document: "login" }) %>
+        <link rel="stylesheet" href="/style/login.css">
+</head>
+
+<body>
+    <div class="container">
+        <section id="formHolder">
+            <div class="row">
+                <!-- Brand Box -->
+                <div class="col-sm-6 brand">
+                    <div class="heading">
+                        <h2>ESTER</h2>
+                        <p>WE ARE THE BEST</p>
+                    </div>
+                </div>
+
+                <!-- Form Box -->
+                <div class="col-sm-6 form">
+
+                    <!-- Login Form -->
+                    <div class="login form-peice">
+                        <form class="login-form" action="/login" method="post">
+                            <div class="form-group">
+                                <label for="loginusername">Username</label>
+                                <input type="text" name="username" id="loginemail" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword">Password</label>
+                                <input type="password" name="password" id="loginPassword" required />
+                            </div>
+
+                            <div class="CTA">
+                                <input type="submit" value="Login" />
+                                <a href="/register">Rigester</a>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End Login Form -->
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <h5 id="errorLogin" class="text-danger">
+                <%= ERROR %>
+            </h5>
+            <p>©2021 Saeed ghofrani Ivari.<a>All rights reserved</a></p>
+        </footer>
+    </div>
+
+    <%- include('./common/scripts.ejs') %>
+        <script src="/script/login.js"></script>
+</body>
+
+</html>

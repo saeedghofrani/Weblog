@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./common/header.ejs', {Document: "error" }) %>
+        <link rel="stylesheet" href="style/error.css">
+</head>
+
+<body>
+    <div title="errorStatus">
+        <%= error.status %>
+    </div>
+    <h1>
+        <%= error.message %>
+    </h1>
+    <section class="wrap">
+        <a href="/login"><button id="back" class="button">BACK</button></a>
+    </section>
+
+    <%- include('./common/scripts.ejs') %>
+</body>
+
+</html>

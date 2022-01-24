@@ -1,0 +1,102 @@
+@media only screen and (min-width: 687px) {
+  body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background: #131313;
+    color: #fff;
+    font-size: 96px;
+    font-family: "Fira Mono", monospace;
+    letter-spacing: -7px;
+  }
+  h1 {
+    font-size: 30px;
+    letter-spacing: 11px;
+  }
+
+  .wrap {
+    margin: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button {
+    width: 140px;
+    height: 45px;
+    font-family: "Fira Mono", monospace;
+    letter-spacing: 2.5px;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .button:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 15px 20px rgba(248, 248, 248, 0.53);
+    color: rgb(0, 0, 0);
+    transform: translateY(-7px);
+  }
+}
+
+
+@media only screen and (max-width: 687px) {
+  body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background: #131313;
+    color: #fff;
+    font-size: 50px;
+    font-family: "Fira Mono", monospace;
+    letter-spacing: -7px;
+  }
+  h1 {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+
+  .wrap {
+    margin: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button {
+    width: 140px;
+    height: 45px;
+    font-family: "Fira Mono", monospace;
+    letter-spacing: 2.5px;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .button:hover {
+    background-color: #ffffff;
+    box-shadow: 0px 15px 20px rgba(248, 248, 248, 0.53);
+    color: rgb(0, 0, 0);
+    transform: translateY(-7px);
+  }
+}

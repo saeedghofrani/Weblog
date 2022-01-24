@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const loginRouter = require('./login.route.js');
+const registerRouter = require('./register.route.js');
+const dashboardRouter = require('./dashboard.route.js');
+const logoutRouter = require('./logout.route.js');
+router.get('/_health', (_req, res) => { res.send('good') });
+router.use('/login', loginRouter);
+router.use('/register', registerRouter);
+router.use('/dashboard', dashboardRouter);
+router.use('/logout', logoutRouter);
+module.exports = router;

@@ -1,0 +1,46 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+nav {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+nav ul {
+  text-align: center;
+  background: linear-gradient(
+    90deg,
+    rgba(51, 130, 117, 0) 0%,
+    rgba(51, 130, 117, 0.381) 25%,
+    rgba(51, 130, 117, 0.401) 75%,
+    rgba(51, 130, 117, 0) 100%
+  );
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1),
+    inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+nav ul li {
+  display: inline-block;
+}
+nav ul li a {
+  padding: 10px;
+  font-family: "Open Sans";
+  text-transform: uppercase;
+  color: #1b515e;
+  font-size: 14px;
+  text-decoration: none;
+  display: block;
+}
+nav ul li a:hover {
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.503), inset 0 0 1px rgba(0, 0, 0, 0.6);  
+  color: rgb(0, 0, 0);
+}
+nav a btn {
+  padding: 18px;
+  font-family: "Open Sans";
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.932);
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.503), inset 0 0 1px rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.1);
+}
