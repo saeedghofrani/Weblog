@@ -37,7 +37,7 @@ $(document).ready(function () {
         $.ajax({
             type: "PUT",
             url: "/dashboard",
-            data,
+            data: data,
             success: function (response) {
                 const { firstName, lastName, gender, phone, username, password } = response.data;
                 $('.toast-body').removeClass('text-danger');

@@ -5,6 +5,6 @@ const sessionsCheck = require('../middleware/sessionCheck.middleware');
 const safeCall = require('../controller/safeCall.controller');
 const { login, loginProcess } = require('../controller/login.controller.js');
 router.route('/')
-    .get(sessionsCheck.dashboard, safeCall(login))
-    .post(sessionsCheck.dashboard, safeCall(loginProcess));
+    .get(sessionsCheck.dashboard, login)
+    .post(sessionsCheck.dashboard, loginProcess);
 module.exports = router;

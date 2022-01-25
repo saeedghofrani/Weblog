@@ -46,6 +46,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Phone number is required'],
         trim: true,
+        unique: true,
         validate: {
             validator: function (v) {
                 return validator.isMobilePhone(v);

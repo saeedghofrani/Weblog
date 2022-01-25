@@ -1,21 +1,26 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
-// const articleSchema = new Schema({
-//     postedBy: {
-//         type: Schema.Types.ObjectId,
-//         ref: 'Blogger',
-//         required: true
-//     },
-//     title: essential,
-//     image: {
-//         default: 'default.jpg'
-//     },
-//     description: essential,
-//     content: essential,
-//     htmlContent: essential,
-//     createdAt: {
-//         type: Date,
-//         default: Date.now
-//     }
-// });
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const articleSchema = new Schema({
+    title: {
+        type: String,
+        trim: true,
+    },
+    content: {
+        type: String,
+        trim: true,
+    },
+    image: {
+        type: String,
+        default: "https://www.kindpng.com/picc/m/79-792364_write-icon-symbol-design-sign-on-message-graphic.png"
+    },
+    // author: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // },
+    visitCount: {
+        type: Number,
+        default: 0
+    }
+}, { timestamps: true });
 module.exports = mongoose.model('Article', articleSchema);

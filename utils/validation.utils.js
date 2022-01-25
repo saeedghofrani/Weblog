@@ -5,8 +5,7 @@ const { MongoError } = require('mongodb');
 const usernameValidation = async (req, res) => {
     let { username } = req.body;
     username = username.trim();
-    const duplicate = await User.findOne({ username });
-    if (!username || username === 'undefined' || username === 'null' || validator.isEmpty(username) || username.length < 5 || duplicate) {
+    if (!username || username === 'undefined' || username === 'null' || validator.isEmpty(username) || username.length < 5) {
         res.locals.error = true;
         res.locals.message.push('invalid username: username most be more than 5 letter and UNIQUE!!');
     }
@@ -36,7 +35,7 @@ const passwordValidation = (req, res) => {
         res.locals.message.push('invalid password: password is required and most be more than 8 character (uppercase letter, number, lowercase letter )!!');
     }
 };
-const phoneValidation = (req, res) => {
+const phoneValidation = async (req, res) => {
     let { phone } = req.body;
     phone = phone.trim();
     if (!phone || phone === 'undefined' || validator.isEmpty(phone) || !validator.isMobilePhone(phone)) {

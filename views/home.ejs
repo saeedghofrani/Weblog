@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./common/header.ejs', {Document: "Home" }) %>
+        <link rel="stylesheet" href="/style/home.css">
+</head>
+
+<body>
+    <%- include('./common/navbar.ejs') %>
+        <div class="topArticle">
+            <video autoplay muted loop poster="" id="bgvid" playsinline autoplay muted loop>
+                <source src="/video/mixkit-cake-with-burning-candles-in-the-dark-5109-large.mp4" type="video/mp4">
+            </video>
+            <div id="polina">
+                <h1>ESTER</h1>
+                <p>filmed by Alexander Wagner 2011
+                <p><a href="http://thenewcode.com/777/Create-Fullscreen-HTML5-Page-Background-Video">original
+                        article</a>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta dictum turpis, eu mollis
+                    justo
+                    gravida ac. Proin non eros blandit, rutrum est a, cursus quam. Nam ultricies, velit ac suscipit
+                    vehicula, turpis eros sollicitudin lacus, at convallis mauris magna non justo. Etiam et suscipit
+                    elit.
+                    Morbi eu ornare nulla, sit amet ornare est. Sed vehicula ipsum a mattis dapibus. Etiam volutpat vel
+                    enim
+                    at auctor.</p>
+                <button>read more</button>
+            </div>
+        </div>
+        <%- include('./common/scripts.ejs') %>
+            <script src="/script/home.js"></script>
+</body>
+
+</html>
