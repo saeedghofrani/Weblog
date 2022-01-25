@@ -6,7 +6,6 @@ const dashboardRouter = require('./dashboard.route.js');
 const homeRouter = require('./home.route.js');
 const logoutRouter = require('./logout.route.js');
 const articlesRouter = require('./articles.route.js');
-router.get('/_health', (_req, res) => { res.send('good'); });
 router.use('/login', loginRouter);
 router.use('/register', registerRouter);
 router.use('/dashboard', dashboardRouter);
