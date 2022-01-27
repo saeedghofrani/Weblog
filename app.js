@@ -24,7 +24,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: 60000000
+        maxAge: 24 * 60 * 60 * 60 * 100
     }
 }));
 app.use('/', appRouter);
