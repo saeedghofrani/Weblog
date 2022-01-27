@@ -2,7 +2,7 @@ const User = require('../model/user.model');
 const createError = require('http-errors');
 const safeCall = require('../utils/safeCall.utils');
 const login = (_request, response, _next) => {
-    return response.render('login', { ERROR: "" });
+    return response.render('login');
 };
 const loginProcess = safeCall(async (request, response, _next) => {
     const { username, password } = request.body;

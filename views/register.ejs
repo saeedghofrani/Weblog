@@ -63,9 +63,9 @@
         </section>
         <footer>
             <h5 id="errorLogin" class="text-danger">
-                <%= ERROR %>
+                <%= typeof ERROR != 'undefined' ? ERROR : '' %>
             </h5>
-            <p> <a href="/articles">read article without account</a></p>
+            <p> <a href="/articles"class="readArticle">read article without account</a></p>
             <p>
                 ©2021 Saeed ghofrani Ivari.<a>All rights reserved</a>
             </p>

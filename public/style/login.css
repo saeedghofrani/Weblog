@@ -13,14 +13,14 @@ body {
 
 .container {
   max-width: 900px;
-  
+
   color: #338275 !important;
 }
 
 a {
   display: inline-block;
   text-decoration: none;
-  
+
   color: #338275 !important;
 }
 p {
@@ -351,4 +351,10 @@ footer p a:focus:hover {
   font-size: 15px;
   font-family: "Montserrat", sans-serif;
   z-index: 1;
+}
+.readArticle {
+  color: #000000 !important;
+}
+.readArticle:hover {
+  color: #000000;
 }

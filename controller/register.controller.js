@@ -1,7 +1,7 @@
 const User = require('../model/user.model');
 const safeCall = require('../utils/safeCall.utils');
 const register = (_request, response, _next) => {
-    response.render('register', { ERROR: "" });
+    response.render('register');
 };
 const registerProcess = safeCall(async (request, response, _next) => {
     if (response.locals.error)
