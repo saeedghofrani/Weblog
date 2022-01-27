@@ -1,6 +1,6 @@
 // const { Error } = require('mongoose');
 // const { MongoError } = require('mongodb');
-var safeCall = function (mainFunc, req, res, next) {
+const safeCallUtils = function (mainFunc, req, res, next) {
     return function () {
         try {
             mainFunc.apply(this, arguments);
@@ -9,4 +9,4 @@ var safeCall = function (mainFunc, req, res, next) {
         }
     };
 };
-module.exports = safeCall;
+module.exports = safeCallUtils;

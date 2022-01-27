@@ -15,7 +15,7 @@ body {
   padding: 3px;
   margin-left: 50px !important;
   margin: 6px;
-  line-height: auto;
+
 }
 .profile-img {
   text-align: center;
@@ -51,11 +51,13 @@ body {
 }
 
 .profile-edit-btn {
+  margin: 5px;
   border: none;
   border-radius: 5px;
-  width: 70%;
+  width: 65%;
   padding: 4%;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 14px;
   color: #1b515e;
   background-color: #88b990;
   cursor: pointer;
@@ -65,9 +67,9 @@ a.profile-edit-btn {
   border: none;
   border-radius: 5px;
   text-decoration: none;
-  width: 70%;
+  width: 65%;
   padding: 4%;
-  font-weight: 400;
+  font-weight: 500;
   color: #1b515e;
   background-color: #88b990;
   cursor: pointer;
@@ -133,7 +135,7 @@ p input.inputUpdate {
   width: 100%;
   padding-left: 10px;
   padding: 3px;
-  transition: all 0.6 linear;
+  transition: all 0.6s linear;
   opacity: 0.8;
 }
   

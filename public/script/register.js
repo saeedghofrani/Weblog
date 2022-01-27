@@ -72,7 +72,7 @@ $(document).ready(function () {
             let reg = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
             console.log(reg.test($('#password').val()));
             if (!reg.test($('#password').val())) {
-                $(this).siblings('span.error').text('8 charcters lower,upercase letter,special character, number').fadeIn().parent('.form-group').addClass('hasError');
+                $(this).siblings('span.error').text('8 charcters lower,upercase letter,special character(!@#$&) )').fadeIn().parent('.form-group').addClass('hasError');
                 passwordError = true;
             }
             else {

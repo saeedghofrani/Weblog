@@ -32,13 +32,13 @@ const passwordValidation = (req, res) => {
     const reg = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     if (!password || password === 'undefined' || password === 'null' || validator.isEmpty(password) || !reg.test(password) || password.length < 8) {
         res.locals.error = true;
-        res.locals.message.push('invalid password: password is required and most be more than 8 character (uppercase letter, number, lowercase letter )!!');
+        res.locals.message.push('password most be more than 8 character (uppercase letter, number, lowercase letter, special character(!@#$&) )!!');
     }
 };
 const phoneValidation = async (req, res) => {
     let { phone } = req.body;
     phone = phone.trim();
-    if (!phone || phone === 'undefined' || validator.isEmpty(phone) || !validator.isMobilePhone(phone)) {
+    if (!phone || phone === 'undefined' || validator.isEmpty(phone) || !validator.isMobilePhone(phone, ['fa-IR'])) {
         res.locals.error = true;
         res.locals.message.push('invalid phone: phone is required!!');
     }
