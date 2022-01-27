@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const uniqueValidator = require('mongoose-unique-validator');
+const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     firstName: {
@@ -62,7 +63,34 @@ const UserSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    status: {
+        type: String,
+        enum: ['active', 'suspend', 'inactive'],
+        default: 'active'
+    },
+    // email: {
+    //     type: String,
+    //     trim: true,
+    //     validate: {
+    //         validator: function (v) {
+    //             return validator.isEmail(v);
+    //         },
+    //         message: '{VALUE} is not a valid email!'
+    //     },
+    // }
 }, { timestamps: true });
+
 UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
+
+UserSchema.pre('save', function async(next) {
+    const user = this._doc;
+    console.log(user);
+    if (this.isNew || this.isModified('password')) {
+        const salt = bcrypt.genSalt(10);
+        salt.then(salt => { return bcrypt.hash(user.password, salt); })
+            .then(hash => { user.password = hash; return next(); })
+            .catch(err => next(err));
+    }
+});
 module.exports = mongoose.model('User', UserSchema);

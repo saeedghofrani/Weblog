@@ -11,7 +11,7 @@ const development = {
         name: process.env.DEV_DB_NAME || 'loginSession'
     },
     session: {
-        sessionSecret: process.env.DEV_SESSION_SECRET || "How@You@Doing@regina@phalange@Joey@doesn’t@share@food!@"
+        sessionSecret: process.env.DEV_SESSION_SECRET 
     }
 };
 const config = {

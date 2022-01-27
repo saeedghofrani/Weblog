@@ -166,3 +166,6 @@ p input.inputUpdate:hover {
   align-items: flex-end;
   box-shadow: none !important;
 }
+.genderDiv {
+  height: 64px;
+}
