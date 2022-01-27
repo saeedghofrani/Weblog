@@ -4,9 +4,8 @@ const router = express.Router();
 const sessionsCheck = require('../middleware/sessionCheck.middleware');
 const userValidation = require('../middleware/userValidation.middleware');
 const duplicate = require('../middleware/duplicateCheck.middleware');
-const safeCall = require('../controller/safeCall.controller');
 const { dashboard, dashboardProcess } = require('../controller/dashboard.controller.js');
 router.route('/')
-    .get(sessionsCheck.login, safeCall(dashboard))
-    .put(sessionsCheck.login, duplicate.dashboard, userValidation, safeCall(dashboardProcess));
+    .get(sessionsCheck.login, dashboard)
+    .put(sessionsCheck.login, duplicate.dashboard, userValidation, dashboardProcess);
 module.exports = router;

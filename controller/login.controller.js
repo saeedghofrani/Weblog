@@ -1,6 +1,6 @@
 const User = require('../model/user.model');
 const createError = require('http-errors');
-const safeCall = require('./safeCall.controller');
+const safeCall = require('../utils/safeCall.utils');
 const login = (_request, response, _next) => {
     return response.render('login', { ERROR: "" });
 };

@@ -1,7 +1,7 @@
 "use strict";
 const express = require('express');
 const router = express.Router();
-const logout = require('../controller/logout.controller.js');
+const contact = require('../controller/contact.controller.js');
 router.route('/')
-    .get(logout);
+    .get(contact);
 module.exports = router;
