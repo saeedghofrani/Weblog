@@ -1,5 +1,6 @@
 const User = require('../model/user.model');
 const safeCall = require('../utils/safeCall.utils');
+const bcrypt = require('bcryptjs');
 
 //login controller
 const login = (_request, response, _next) => {
@@ -9,8 +10,11 @@ const login = (_request, response, _next) => {
 //login procces controller
 const loginProcess = safeCall(async (request, response, _next) => {
     const { username, password } = request.body;
-    const user = await User.findOne({ username, password });
+    const user = await User.findOne({ username }).select('+password');
     if (!user)
+        return response.render('login', { ERROR: "wrong username or password" });
+    const userPass = bcrypt.compare(password, user.password);
+    if (!userPass)
         return response.render('login', { ERROR: "wrong username or password" });
     request.session.user = user;
     return response.redirect('/dashboard');

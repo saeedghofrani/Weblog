@@ -8,7 +8,7 @@ const development = {
     db: {
         host: process.env.DEV_DB_HOST || 'localhost',
         port: parseInt(process.env.DEV_DB_PORT) || 27017,
-        name: process.env.DEV_DB_NAME || 'loginSession'
+        name: process.env.DEV_DB_NAME || 'ESTER'
     },
     session: {
         sessionSecret: process.env.DEV_SESSION_SECRET 

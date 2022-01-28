@@ -21,6 +21,6 @@ router.route('/logout')
 //register router
 router.route('/register')
     .get(register)
-    .post(duplicate.register, userValidator, registerProcess);
+    .post(duplicate.register, userValidator('create'), registerProcess);
 
 module.exports = router;

@@ -26,6 +26,7 @@ const UserSchema = new Schema({
             },
             message: '{VALUE} is not a valid password!'
         },
+        select: false,
     },
     username: {
         type: String,
@@ -60,29 +61,28 @@ const UserSchema = new Schema({
         enum: ['admin', 'blogger'],
         default: 'blogger'
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
     status: {
         type: String,
         enum: ['active', 'suspend', 'inactive'],
         default: 'active'
     },
-    // email: {
-    //     type: String,
-    //     trim: true,
-    //     validate: {
-    //         validator: function (v) {
-    //             return validator.isEmail(v);
-    //         },
-    //         message: '{VALUE} is not a valid email!'
-    //     },
-    // }
+    email: {
+        type: String,
+        trim: true,
+        validate: {
+            validator: function (v) {
+                return validator.isEmail(v);
+            },
+            message: '{VALUE} is not a valid email!'
+        },
+        default: 'example@gmail.com'
+    }
 }, { timestamps: true });
 
+//uniqu validator
 UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
 
+//hashing password hook
 UserSchema.pre('save', function async(next) {
     const user = this._doc;
     console.log(user);

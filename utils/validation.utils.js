@@ -1,5 +1,4 @@
 const validator = require('validator');
-const User = require('../model/user.model');
 const { Error } = require('mongoose');
 const { MongoError } = require('mongodb');
 const usernameValidation = async (req, res) => {
@@ -43,6 +42,14 @@ const phoneValidation = async (req, res) => {
         res.locals.message.push('invalid phone: phone is required!!');
     }
 };
+const emailValidation = async (req, res) => {
+    let { email } = req.body;
+    email = email.trim();
+    if (!email || email === 'undefined' || validator.isEmpty(email) || !validator.isEmail(email)) {
+        res.locals.error = true;
+        res.locals.message.push('invalid email: email is required!!');
+    }
+};
 const handler = (res, err, page) => {
     if (err instanceof Error.ValidationError) {
         return res.render(`${page}`, { ERROR: err });
@@ -53,4 +60,4 @@ const handler = (res, err, page) => {
     // err.status = err.status || 500;
     // return res.status(err.status).send({ success: false, message: err.message });
 };
-module.exports = { usernameValidation, firstNameValidation, lastNameValidation, passwordValidation, phoneValidation, handler };
+module.exports = { usernameValidation, firstNameValidation, lastNameValidation, passwordValidation, phoneValidation, emailValidation, handler };

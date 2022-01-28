@@ -35,12 +35,12 @@
                 </div>
             </div>
             <div class="col-12 col-md-2">
-                <a href="/articles" id="Articles" class="profile-edit-btn col-12     text-center">My Article
+                <a href="/articles" id="Articles" class="profile-edit-btn col-12 text-center">My Article
                 </a>
                 <btn id="editProfile" type="submit" class="profile-edit-btn   col-12 text-center" name="btnAddMore">
                     Edit Profile
                 </btn>
-                <a href="/logout" id class="profile-edit-btn col-12 text-center">logout
+                <a href="/auth/logout" id class="profile-edit-btn col-12 text-center">logout
                 </a>
             </div>
         </div>
@@ -76,12 +76,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Password</label>
+                                <label>Email</label>
                             </div>
                             <div class="col-md-6">
                                 <p>
-                                    <input id="password" type="text" name="password"
-                                           value="<%= data.password %>" required disabled readonly
+                                    <input id="username" type="text" name="username"
+                                           value="<%= data.email %>" required disabled readonly
                                            class="inputUpdate"/>
                                 </p>
                             </div>
