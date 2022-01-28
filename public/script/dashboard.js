@@ -1,8 +1,8 @@
 $(document).ready(function () {
     console.log($('#gender').val());
-    const lastData = {
+    let lastData = {
         username: $('#username').val(),
-        password: $('#password').val(),
+        email: $('#email').val(),
         lastName: $('#lastName').val(),
         firstName: $('#firstName').val(),
         gender: $('#gender').val(),
@@ -28,7 +28,7 @@ $(document).ready(function () {
         e.preventDefault();
         const data = {
             username: $('#username').val(),
-            password: $('#password').val(),
+            email: $('#email').val(),
             lastName: $('#lastName').val(),
             firstName: $('#firstName').val(),
             gender: $('#gender').val(),
@@ -39,10 +39,10 @@ $(document).ready(function () {
             url: "/dashboard",
             data: data,
             success: function (response) {
-                const { firstName, lastName, gender, phone, username, password } = response.data;
+                const { firstName, lastName, gender, phone, username, email } = response.data;
                 $('.toast-body').removeClass('text-danger');
                 $('#username').val(username);
-                $('#password').val(password);
+                $('#email').val(email);
                 $('#lastName').val(lastName);
                 $('#firstName').val(firstName);
                 $('#gender').val(gender);
@@ -55,6 +55,14 @@ $(document).ready(function () {
                 $('.toast-body').addClass('text-success');
                 $('.toast-body').text(response.message);
                 $('.toast').toast("show");
+                lastData = {
+                    username: $('#username').val(),
+                    email: $('#email').val(),
+                    lastName: $('#lastName').val(),
+                    firstName: $('#firstName').val(),
+                    gender: $('#gender').val(),
+                    phone: $('#phone').val(),
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 if (xhr.status === 400) {
@@ -89,7 +97,7 @@ $(document).ready(function () {
 
 function lastdata(lastData) {
     $('#username').val(lastData.username);
-    $('#password').val(lastData.password);
+    $('#email').val(lastData.email);
     $('#lastName').val(lastData.lastName);
     $('#firstName').val(lastData.firstName);
     $('#gender').val(lastData.gender);

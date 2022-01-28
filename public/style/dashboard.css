@@ -15,7 +15,6 @@ body {
   padding: 3px;
   margin-left: 50px !important;
   margin: 6px;
-
 }
 .profile-img {
   text-align: center;
@@ -99,6 +98,9 @@ a.profile-edit-btn {
   padding: 14%;
   margin-top: -15%;
 }
+.genderDiv {
+  height: 40px !important;
+}
 .profile-work p {
   font-size: 12px;
   color: #818182;
@@ -120,7 +122,7 @@ a.profile-edit-btn {
 .profile-tab select,
 .profile-tab p {
   font-weight: 600;
-  color: #338275;
+  color: #338275 !important;
 }
 #editProfile:hover {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
@@ -133,12 +135,14 @@ p input.inputUpdate {
   border: none;
   background-color: transparent;
   width: 100%;
-  padding-left: 10px;
+  padding-left: 10px !important;
   padding: 3px;
   transition: all 0.6s linear;
   opacity: 0.8;
 }
-  
+select.inputUpdate {
+  color: #338275 !important;
+}
 select.inputUpdate,
 p input.inputUpdate:hover {
   opacity: 1;
@@ -166,6 +170,8 @@ p input.inputUpdate:hover {
   align-items: flex-end;
   box-shadow: none !important;
 }
-.genderDiv {
-  height: 64px;
+@media (max-width: 600px) {
+  .genderDiv {
+    height: 64px !important;
+  }
 }

@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const { join } = require('path');
+var favicon = require('serve-favicon');
 const config = require('./config/config');
 const { session: { sessionSecret } } = config;
 const session = require('express-session');
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
+app.use(favicon(join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(session({
     secret: sessionSecret,
     key: "user_sid",

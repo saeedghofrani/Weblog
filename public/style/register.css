@@ -20,10 +20,10 @@ body {
 a {
   display: inline-block;
   text-decoration: none;
-  color: #338275;
+  color: #338275 !important;
 }
 p {
-  color: #338275;
+  color: #338275 !important;
 }
 label {
   color: #338275;
@@ -41,7 +41,7 @@ h1 {
 }
 
 section#formHolder {
-  padding: 50px 0;
+  padding: 42px 0 10px 0 ;
 }
 
 .brand {
@@ -354,7 +354,7 @@ footer p a:focus:hover {
 }
 
 .readArticle {
-  color: #000000;
+  color: #000000 !important;
 }
 .readArticle:hover {
   color: #000000;

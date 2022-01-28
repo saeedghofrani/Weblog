@@ -23,7 +23,7 @@
 
                     <!-- Login Form -->
                     <div class="login form-peice">
-                        <form class="login-form" action="/login" method="post">
+                        <form class="login-form" action="/auth/login" method="post">
                             <div class="form-group">
                                 <label for="loginusername">Username</label>
                                 <input type="text" name="username" id="loginemail" required />
@@ -45,9 +45,9 @@
         </section>
 
         <footer>
-            <h5 id="errorLogin" class="text-danger">
-                <%= typeof ERROR != 'undefined' ? ERROR : ''  %>
-            </h5>
+            <div id="errorLogin" class="alert alert-danger <%= typeof ERROR != 'undefined' ? "" : 'd-none' %>" role="alert">
+                <%= typeof ERROR != 'undefined' ? ERROR : '' %>
+              </div>
             <p> <a href="/articles" class="readArticle">read article without account</a></p>
             <p>©2021 Saeed ghofrani Ivari.<a>All rights reserved</a></p>
         </footer>

@@ -10,11 +10,11 @@ const wraper = (mod) => {
                 lastNameValidation(req, res);
                 passwordValidation(req, res);
                 phoneValidation(req, res);
-                emailValidation(req, res);
                 next();
             }
             if (mod === 'update') {
                 res.locals = { error: false, message: [] };
+                console.log(req.body);
                 usernameValidation(req, res);
                 firstNameValidation(req, res);
                 lastNameValidation(req, res);
