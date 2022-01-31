@@ -3,7 +3,7 @@
 
 <head>
     <%- include('./common/header.ejs', {Document: "login" }) %>
-        <link rel="stylesheet" href="/style/login.css">
+        <link rel="stylesheet" href="/style/pass.css">
 </head>
 
 <body>
@@ -23,22 +23,25 @@
 
                     <!-- Login Form -->
                     <div class="login form-peice">
-                        <form class="login-form" action="/auth/login" method="post">
+                        <form class="login-form" action="/auth/pass" method="post">
                             <div class="form-group">
                                 <label for="loginusername">Username</label>
                                 <input type="text" name="username" id="loginemail" required />
                             </div>
                             <div class="form-group">
-                                <label for="loginPassword">Password</label>
-                                <input type="password" name="password" id="loginPassword" required />
-                                <i class="fas fa-eye"></i><i class="fas fa-eye-slash d-none"></i>
+                                <label for="loginPassword">Email</label>
+                                <input type="email" name="email" id="loginPassword" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword">Phone</label>
+                                <input type="phone" name="phone" id="loginPassword" required />
                             </div>
 
                             <div class="CTA">
-                                <input type="submit" value="Login" />
+                                <input type="submit" value="Send" />
                                 <a href="/auth/register">Rigester</a>
                                 |
-                                <a href="/auth/pass">Forget Password</a>
+                                <a href="/auth/login">login</a>
                             </div>
                         </form>
                     </div>
@@ -58,7 +61,7 @@
     </div>
 
     <%- include('./common/scripts.ejs') %>
-        <script src="/script/login.js"></script>
+        <script src="/script/pass.js"></script>
 </body>
 
 </html>

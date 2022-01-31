@@ -124,12 +124,21 @@ a.profile-edit-btn {
   font-weight: 600;
   color: #338275 !important;
 }
+.profile-edit-btn:hover {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  color: black;
+}
 #editProfile:hover {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   color: black;
 }
+.modal-body .inputUpdate {
+  box-shadow: 0px 1px 0px #338275 !important;
+}
 select.inputUpdate,
+.modal-body .inputUpdate,
 p input.inputUpdate {
   outline: none;
   border: none;
@@ -140,10 +149,12 @@ p input.inputUpdate {
   transition: all 0.6s linear;
   opacity: 0.8;
 }
+.modal-body .inputUpdate,
 select.inputUpdate {
   color: #338275 !important;
 }
 select.inputUpdate,
+.modal-body .inputUpdate,
 p input.inputUpdate:hover {
   opacity: 1;
 }
@@ -170,8 +181,11 @@ p input.inputUpdate:hover {
   align-items: flex-end;
   box-shadow: none !important;
 }
+#removeAccount {
+  font-size: 12px;
+}
 @media (max-width: 600px) {
-  .genderDiv {
-    height: 64px !important;
+  .row.genderDiv {
+    height: 640px !important;
   }
 }

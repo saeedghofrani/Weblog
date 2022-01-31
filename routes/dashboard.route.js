@@ -1,19 +1,21 @@
 "use strict";
+//express
 const express = require('express');
 const router = express.Router();
+//session middleware
 const sessionsCheck = require('../middleware/sessionCheck.middleware');
+//validation middleware
 const userValidation = require('../middleware/userValidation.middleware');
-const authorization = require('../middleware/authorization.middleware');
+//duplicate Check middleware
 const duplicate = require('../middleware/duplicateCheck.middleware');
+//controller
 const { dashboard, dashboardProcess } = require('../controller/dashboard.controller.js');
 
 //check session and cookie
 router.use(sessionsCheck.login);
 
-//authorize for dashboard
-router.use(authorization['admin', 'user']);
-
 router.route('/')
     .get(dashboard)
     .put(duplicate.dashboard, userValidation('update'), dashboardProcess);
+
 module.exports = router;

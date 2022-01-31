@@ -3,9 +3,9 @@
 const express = require('express');
 const router = express.Router();
 //controller
-const contact = require('../controller/contact.controller.js');
+const about = require('../controller/about.controller.js');
 
 router.route('/')
-    .get(contact);
+    .get(about);
 
 module.exports = router;

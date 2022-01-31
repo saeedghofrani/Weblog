@@ -8,6 +8,19 @@ $(document).ready(function () {
         gender: $('#gender').val(),
         phone: $('#phone').val(),
     }
+
+    
+    $("#removeAccount").click(function (e) { 
+        e.preventDefault();
+        
+    });
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+      })
+
+
+
+
     $('#editProfile').click(function (e) {
         e.preventDefault();
         $('.inputUpdate').addClass("inputUpdateActive").removeAttr('disabled').removeAttr('readonly');

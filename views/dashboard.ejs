@@ -3,232 +3,273 @@
 
 <head>
     <%- include('./common/header.ejs', {Document: "dashboard" }) %>
-    <link rel="stylesheet" href="/style/dashboard.css">
+        <link rel="stylesheet" href="/style/dashboard.css">
 </head>
 
 <body>
-<%- include('./common/navbar.ejs') %>
-<div class="container emp-profile">
-    <form method="post">
-        <div class="row cont">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="/images/profileAvatar.jpg" alt="profile photo"/>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5 id="fullName">
-                        <%= data.firstName %>
-                        <%= data.lastName %>
-                    </h5>
-                    <h6>
-                        Web Developer and Designer
-                    </h6>
-                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                               aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-12 col-md-2">
-                <a href="/articles" id="Articles" class="profile-edit-btn col-12 text-center">My Article
-                </a>
-                <btn id="editProfile" type="submit" class="profile-edit-btn   col-12 text-center" name="btnAddMore">
-                    Edit Profile
-                </btn>
-                <a href="/auth/logout" id class="profile-edit-btn col-12 text-center">logout
-                </a>
-            </div>
-        </div>
-        <div class="row cont">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">WordPress</a><br/>
-                    <a href="">WooCommerce</a><br/>
-                    <a href="">PHP, .Net</a><br/>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>User Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>
-                                    <input id="username" type="text" name="username"
-                                           value="<%= data.username %>" required disabled readonly
-                                           class="inputUpdate"/>
-                                </p>
-                            </div>
+    <%- include('./common/navbar.ejs') %>
+        <div class="container emp-profile">
+            <form method="post">
+                <div class="row cont">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="/images/profileAvatar.jpg" alt="profile photo" />
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>
-                                    <input id="email" type="email" name="email"
-                                           value="<%= data.email %>" required disabled readonly
-                                           class="inputUpdate"/>
-                                </p>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                            <h5 id="fullName">
+                                <%= data.firstName %>
+                                    <%= data.lastName %>
+                            </h5>
+                            <h6>
+                                KNOWN AS:  <%= data.username %>
+                            </h6>
+                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                        aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="row genderDiv">
-                            <div class="col-md-6">
-                                <label>Gender</label>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <select name="gender" id="gender" disabled readonly class="inputUpdate">
-                                        <% if(data.gender === 'none' ){ %>
-                                            <option id="genderOptional" value="none">Gender
-                                                <small>(optional)</small>
-                                            </option>
-                                            <option value="female">female</option>
-                                            <option value="male">male</option>
-                                        <% } else if (data.gender === 'male' ) { %>
-                                            <option value="male">male</option>
-                                            <option value="female">female</option>
-                                            <option id="genderOptional" value="none">Gender
-                                                <small>(optional)</small>
-                                            </option>
-                                        <% } else if (data.gender === 'female' ) { %>
-                                            <option value="female">female</option>
-                                            <option value="male">male</option>
-                                            <option id="genderOptional" value="none">Gender
-                                                <small>(optional)</small>
-                                            </option>
-                                        <% } %>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <btn id="editProfile" type="submit" class="profile-edit-btn col-12 text-center"
+                            name="btnAddMore">
+                            Edit Profile
+                        </btn>
+                        <a href="/auth/logout" id class="profile-edit-btn col-12 text-center">Logout
+                        </a>
+                        <btn id="removeAccount" type="button" class="profile-edit-btn   col-12 text-center"
+                            data-toggle="modal" data-target="#exampleModalCenter">
+                            Remove Account
+                        </btn>
 
-                                    </select>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Remove Account</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        please tell us why you wanna remove your account
+                                        <br>
+                                        <input id="removeAccountInp" type="text" name="username" class="inputUpdate"
+                                            placeholder="example: slow response" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="/auth/delAccount" class="btn btn-warning">Remove</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Phone</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>
-                                    <input id="phone" type="text" name="phone" value="<%= data.phone %>"
-                                           required disabled readonly class="inputUpdate"/>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>First Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>
-                                    <input id="firstName" type="text" name="firstName"
-                                           value="<%= data.firstName %>" required disabled readonly
-                                           class="inputUpdate"/>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Last Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>
-                                    <input id="lastName" type="text" name="lastName"
-                                           value="<%= data.lastName %>" required disabled readonly
-                                           class="inputUpdate"/>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row btnUpdatesCancel d-none">
-                            <button id="update" class=" btnShow col-md-2">
-                                Update
-                            </button>
-                            <button id="cancel" class=" btnShow col-md-2">
-                                Cancel
-                            </button>
 
+
+
+
+                    </div>
+                </div>
+                <div class="row cont">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>Articles</p>
+                            <a href="/articles" id="Articles" class="col-12 text-center">My Article
+                            </a>
+                            <% if(data.role==='admin' ){ %>
+                                <p>Admin</p>
+                                <a href="/admin" id="Articles" class="col-12 text-center">User Table
+                                </a>
+                                <% } else {%>
+                                    <p>Role</p>
+                                    <a href="" class="col-12 text-center">
+                                        <%= data.role %>
+                                    </a><br />
+                                    <a href="" class="col-12 text-center">
+                                        <%= data.status %>
+                                    </a>
+                                    <% } %>
+                                        <p>Favorite Articles</p>
+                                        <a class="col-12 text-center">Sherlock: The Final Problem</a><br />
+                                        <a class="col-12 text-center">Sherlock: The Great Game</a><br />
+                                        <a class="col-12 text-center">Sherlock: The Reichenbach Fall</a><br />
+                                        <a class="col-12 text-center">Sherlock: His Last Vow</a><br />
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="col-md-1">
-                                <label>Experience</label>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>User Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            <input id="username" type="text" name="username"
+                                                value="<%= data.username %>" required disabled readonly
+                                                class="inputUpdate" />
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            <input id="email" type="email" name="email" value="<%= data.email %>"
+                                                required disabled readonly class="inputUpdate" />
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row genderDiv">
+                                    <div class="col-md-6">
+                                        <label>Gender</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <select name="gender" id="gender" disabled readonly class="inputUpdate">
+                                                <% if(data.gender==='none' ){ %>
+                                                    <option id="genderOptional" value="none">Gender
+                                                        <small>(optional)</small>
+                                                    </option>
+                                                    <option value="female">female</option>
+                                                    <option value="male">male</option>
+                                                    <% } else if (data.gender==='male' ) { %>
+                                                        <option value="male">male</option>
+                                                        <option value="female">female</option>
+                                                        <option id="genderOptional" value="none">Gender
+                                                            <small>(optional)</small>
+                                                        </option>
+                                                        <% } else if (data.gender==='female' ) { %>
+                                                            <option value="female">female</option>
+                                                            <option value="male">male</option>
+                                                            <option id="genderOptional" value="none">Gender
+                                                                <small>(optional)</small>
+                                                            </option>
+                                                            <% } %>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            <input id="phone" type="text" name="phone" value="<%= data.phone %>"
+                                                required disabled readonly class="inputUpdate" />
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>First Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            <input id="firstName" type="text" name="firstName"
+                                                value="<%= data.firstName %>" required disabled readonly
+                                                class="inputUpdate" />
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
+                                            <input id="lastName" type="text" name="lastName"
+                                                value="<%= data.lastName %>" required disabled readonly
+                                                class="inputUpdate" />
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row btnUpdatesCancel d-none">
+                                    <button id="update" class=" btnShow col-md-2">
+                                        Update
+                                    </button>
+                                    <button id="cancel" class=" btnShow col-md-2">
+                                        Cancel
+                                    </button>
+
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Hourly Rate</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>10$/hr</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Total Projects</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>230</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>English Level</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Availability</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>6 months</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Your Bio</label><br/>
-                                <p>Your detail description</p>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label>Experience</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Hourly Rate</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>10$/hr</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Total Projects</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>230</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>English Level</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Availability</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>6 months</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Your Bio</label><br />
+                                        <p>Your detail description</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </form>
+        </div>
+
+        <div class="toast" style="position: absolute; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto">Message</strong>
+                <button id="toastBtn" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+
             </div>
         </div>
-    </form>
-</div>
-
-<div class="toast" style="position: absolute; top: 20px; right: 20px;">
-    <div class="toast-header">
-        <strong class="mr-auto">Message</strong>
-        <button id="toastBtn" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="toast-body">
-
-    </div>
-</div>
-<%- include('./common/scripts.ejs') %>
-<script src="/script/dashboard.js"></script>
+        <%- include('./common/scripts.ejs') %>
+            <script src="/script/dashboard.js"></script>
 </body>
 
 </html>

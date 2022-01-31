@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./common/header.ejs', {Document: "admin" }) %>
+        <link rel="stylesheet" href="/style/dashboard.css">
+        <link rel="stylesheet" href="/style/admin.css">
+</head>
+
+<body>
+    <%- include('./common/navbar.ejs') %>
+        <section class="pricing-section">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-xl-5 col-lg-6 col-md-8">
+                        <div class="section-title text-center title-ex1">
+                            <h2>Pricing Tables</h2>
+                            <p>Inventore cillum soluta inceptos eos platea, soluta class laoreet repellendus imperdiet
+                                optio.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pricing Table starts -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="price-card ">
+                            <h2>Personal</h2>
+                            <p>The standard version</p>
+                            <p class="price"><span>49</span>/ Month</p>
+                            <ul class="pricing-offers">
+                                <li>6 Domain Names</li>
+                                <li>8 E-Mail Address</li>
+                                <li>10GB Disk Space</li>
+                                <li>Monthly Bandwidth</li>
+                                <li>Powerful Admin Panel</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-mid">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="price-card featured">
+                            <h2>Student</h2>
+                            <p>Most popular choice</p>
+                            <p class="price"><span>69</span>/ Month</p>
+                            <ul class="pricing-offers">
+                                <li>6 Domain Names</li>
+                                <li>8 E-Mail Address</li>
+                                <li>10GB Disk Space</li>
+                                <li>Monthly Bandwidth</li>
+                                <li>Powerful Admin Panel</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-mid">Buy Now</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="price-card ">
+                            <h2>Business</h2>
+                            <p>For the whole team</p>
+                            <p class="price"><span>89</span>/ Month</p>
+                            <ul class="pricing-offers">
+                                <li>6 Domain Names</li>
+                                <li>8 E-Mail Address</li>
+                                <li>10GB Disk Space</li>
+                                <li>Monthly Bandwidth</li>
+                                <li>Powerful Admin Panel</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-mid">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="m-5 table-responsive-sm container">
+            <table class="table table-hover table-success table-striped  text-center">
+                <thead>
+                    <tr class="header">
+                        <th scope="col">#</th>
+                        <th>|</th>
+                        <th scope="col">First name</th>
+                        <th>|</th>
+                        <th scope="col">Last name</th>
+                        <th>|</th>
+                        <th scope="col">Username</th>
+                        <th>|</th>
+                        <th scope="col">Gender</th>
+                        <th>|</th>
+                        <th scope="col">status</th>
+                        <th>|</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody class="userTable">
+                    <% for( let i=0; i < users.length; i++ ) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= i+1 %>
+                            </th>
+                            <td>|</td>
+                            <td>
+                                <%= users[i].firstName %>
+                            </td>
+                            <td>|</td>
+                            <td>
+                                <%= users[i].lastName %>
+                            </td>
+                            <td>|</td>
+                            <td>
+                                <%= users[i].username %>
+                            </td>
+                            <td>|</td>
+                            <td>
+                                <%= users[i].gender %>
+                            </td>
+                            <td>|</td>
+                            <td>
+                                <%= users[i].status %>
+                            </td>
+                            <td>|</td>
+                            <td>
+                                <%= users[i].email %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" id="addAdmin" data-toggle="modal"
+                data-target="#exampleModalCenter">
+                Add Admin
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add Admin</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 row">
+                            <input id="firstName" type="text" name="firstName" class="inputUpdate"
+                                placeholder="firstName" />
+                        </div>
+                        <br>
+                        <div class="col-md-12 row">
+                            <input id="lastName" type="text" name="lastName" class="inputUpdate"
+                                placeholder="lastName" />
+                        </div>
+                        <br>
+                        <div class="col-md-12 row">
+                            <input id="username" type="text" name="username" class="inputUpdate"
+                                placeholder="username" />
+                        </div>
+                        <br>
+                        <div class="col-md-12 row">
+                            <input id="password" type="text" name="password" class="inputUpdate"
+                                placeholder="password" />
+                        </div>
+                        <br>
+                        <div class="col-md-12 row">
+                            <input id="phone" type="phone" name="phone" class="inputUpdate" placeholder="phone" />
+                        </div>
+                        <div id="errorAdminError" class="alert alert-danger d-none mt-4" role="alert">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer col-12">
+                        <button type="button" class="btn btn-primary col-12" id="addAdmin">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('./common/scripts.ejs') %>
+            <script src="/script/admin.js"></script>
+</body>
+
+</html>

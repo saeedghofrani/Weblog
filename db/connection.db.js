@@ -1,6 +1,10 @@
+// Module dependencies.
 const mongoose = require("mongoose");
+// require config file
 const config = require("../config/config.js");
+//get database data from config
 const { db: { host, port, name } } = config;
+//connection string for mongoose
 const connectionString = `mongodb://${host}:${port}/${name}`;
 
 // let connectionString = "mongodb://127.0.0.1:27017/myapp";
@@ -13,6 +17,7 @@ mongoose.connect(connectionString)
             console.log(err); process.exit(1);
         }
     });
+// give connection to variable
 const db = mongoose.connection;
 
 // database on error event
