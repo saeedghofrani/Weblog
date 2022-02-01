@@ -33,7 +33,7 @@ const UserSchema = new Schema({
         trim: true,
         minlength: [5, 'invalid phone'],
         required: [true, 'Username is required'],
-        unique: true
+        unique: true,
     },
     gender: {
         type: String,
@@ -48,7 +48,6 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Phone number is required'],
         trim: true,
-        unique: true,
         validate: {
             validator: function (v) {
                 return validator.isMobilePhone(v);
@@ -81,6 +80,8 @@ const UserSchema = new Schema({
 
 //uniqu validator
 UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
+
+// UserSchema.set('validateBeforeSave', false);
 
 //hashing password hook
 UserSchema.pre('save', function async(next) {
