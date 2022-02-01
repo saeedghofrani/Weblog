@@ -186,6 +186,6 @@ p input.inputUpdate:hover {
 }
 @media (max-width: 600px) {
   .row.genderDiv {
-    height: 640px !important;
+    height: 64px !important;
   }
 }

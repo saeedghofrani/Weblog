@@ -41,7 +41,7 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
         phone,
     } = request.body;
     //update user by id 
-    const updatedUser = await User.findOneAndUpdate(user._id, data, { new: true }).lean();
+    const updatedUser = await User.findOneAndUpdate(user._id, data, { new: true, validateBeforeSave: false }).lean();
 
     //error handling for MODEL.findOneAndUpdate
     if (!updatedUser)

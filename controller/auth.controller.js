@@ -89,7 +89,7 @@ const pass = (request, response, _next) => {
 const passProcces = (request, response, next) => {
 
 };
-
+//delete user acount
 const delAccount = safeCall(async (request, response, _next) => {
     // get user data from session
     const user = request.session.user;

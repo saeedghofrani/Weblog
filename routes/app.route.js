@@ -18,6 +18,6 @@ router.use('/home', homeRouter);
 router.use('/articles', articlesRouter);
 router.use('/contact', contactRouter);
 router.use('/admin', adminRouter);
-router.use('about', abouteRouter);
+router.use('/about', abouteRouter);
 
 module.exports = router;

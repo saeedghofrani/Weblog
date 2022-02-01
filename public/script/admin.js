@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('#addAdmin').click(function (e) {
-        let count = $('tr').length;
         e.preventDefault();
         const data = {
             username: $('#username').val(),
@@ -9,7 +8,7 @@ $(document).ready(function () {
             firstName: $('#firstName').val(),
             gender: $('#gender').val(),
             phone: $('#phone').val(),
-            role: $('#role').val(),
+            role: 'admin',
             password: $('#password').val(),
             status: $('#status').val(),
         }
@@ -18,48 +17,52 @@ $(document).ready(function () {
             url: "/admin",
             data,
             success: function (response) {
-                addAdmin(response.data, count);
-                count++;
+                addAdmin(response.data);
                 $("#exampleModalCenter").modal('hide');
             },
             error: function (xhr, textStatus, errorThrown) {
                 $('#errorAdminError').removeClass('d-none');
                 $('#errorAdminError').html(xhr.responseText);
+                setTimeout(function () {
+                    $('#errorAdminError').addClass('d-none');
+                    $('#errorAdminError').html('');
+                }, 5000);
             }
         });
     });
 });
 
-function addAdmin(record, count) {
-    $('.userTable').append(`
-    <tr>
-    <th scope="row">
-        ${count}
-    </th>
-    <td>|</td>
-    <td>
-    ${record.firstName}
-    </td>
-    <td>|</td>
-    <td>
-    ${record.lastName}
-    </td>
-    <td>|</td>
-    <td>
-    ${record.username}
-    </td>
-    <td>|</td>
-    <td>
-    ${record.gender}
-    </td>
-    <td>|</td>
-    <td>
-    ${record.status}
-    </td>
-    <td>|</td>
-    <td>
-    ${record.email}
-    </td>
-    </tr>`
+function addAdmin(record) {
+    $('#appendDiv').append(`<div class="col-12 col-sm-6 col-md-5 col-lg-4 my-2">
+    <div class="price-card featured admin">
+        <h2>
+            ${record.role}
+        </h2>
+        <p>
+            ${record.username}
+        </p>
+        <ul class="pricing-offers">
+            <li>
+                ${record.firstName}
+            </li>
+            <li>
+                ${record.lastName}
+            </li>
+            <li>
+                ${record.email}
+            </li>
+            <li>
+                ${record.phone}
+            </li>
+            <li>
+                ${record.gender}
+            </li>
+            <li>
+                ${record.status}
+            </li>
+        </ul>
+        <!-- <a href="#" class="btn btn-primary btn-mid">Buy Now</a> -->
+    </div>
+</div>`
     );
 }

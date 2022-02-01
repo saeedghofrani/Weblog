@@ -1,4 +1,4 @@
 const aboute = (_request, response, _next) => {
-    response.render('aboute');
+    response.render('about');
 };
 module.exports = aboute;
