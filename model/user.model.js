@@ -85,7 +85,6 @@ UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
 //hashing password hook
 UserSchema.pre('save', function async(next) {
     const user = this._doc;
-    console.log(user);
     if (this.isNew || this.isModified('password')) {
         const salt = bcrypt.genSalt(10);
         salt.then(salt => { return bcrypt.hash(user.password, salt); })

@@ -21,6 +21,7 @@ const dashboard = (request, response, _next) => {
 // update user dashboard
 const dashboardProcess = safeCall(async (request, response, _next) => {
     //validation error handler
+
     if (response.locals.error)
         return response.status(400).send({
             success: false,
@@ -40,24 +41,34 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
         gender,
         phone,
     } = request.body;
-    //update user by id 
-    const updatedUser = await User.findOneAndUpdate(user._id, data, { new: true, validateBeforeSave: false }).lean();
 
-    //error handling for MODEL.findOneAndUpdate
-    if (!updatedUser)
-        return response.status(400).send({
-            success: false,
-            message: 'user update was unsuccessfully.',
+    //update user by id 
+    try {
+        const updatedUser = await User.findOneAndUpdate(user._id, data, { new: true }).lean();
+
+        //error handling for MODEL.findOneAndUpdate
+        if (!updatedUser)
+            return response.status(400).send({
+                success: false,
+                message: 'user update was unsuccessfully.',
+                data: updatedUser
+            });
+        //update session 
+        request.session.user = updatedUser;
+        // send succes message with user
+        return response.status(200).send({
+            success: true,
+            message: 'user updated successfully.',
             data: updatedUser
         });
-    //update session 
-    request.session.user = updatedUser;
-    // send succes message with user
-    return response.status(200).send({
-        success: true,
-        message: 'user updated successfully.',
-        data: updatedUser
-    });
+    } catch (error) {
+        response.status(400).send({
+            success: false,
+            message: error,
+            data: null
+        });
+    }
+
 });
 
 module.exports = {
