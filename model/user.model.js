@@ -1,8 +1,14 @@
+/**
+ * Module dependencies.
+ */
 const mongoose = require('mongoose');
 const validator = require('validator');
-const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcryptjs');
+
+// mongoose plugin dependencie
+const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
+
 const UserSchema = new Schema({
     firstName: {
         type: String,
@@ -81,8 +87,6 @@ const UserSchema = new Schema({
 //uniqu validator
 UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
 
-// UserSchema.set('validateBeforeSave', false);
-
 //hashing password hook
 UserSchema.pre('save', function async(next) {
     const user = this._doc;
@@ -93,4 +97,18 @@ UserSchema.pre('save', function async(next) {
             .catch(err => next(err));
     }
 });
+
+
+// hash password for update User Password
+UserSchema.pre('findByIdAndUpdate', function async(next) {
+    const userPassword = this._update.password
+    if (userPassword) {
+        this._update.password = await bcrypt.hash(this._update.password, 10)
+        const salt = bcrypt.genSalt(10);
+        salt.then(salt => { return bcrypt.hash(userPassword, salt); })
+            .then(hash => { userPassword = hash; return next(); })
+            .catch(err => next(err));
+    }
+});
+
 module.exports = mongoose.model('User', UserSchema);

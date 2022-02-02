@@ -43,32 +43,23 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
     } = request.body;
 
     //update user by id 
-    try {
-        console.log(data);
-        const updatedUser = await User.findByIdAndUpdate(user._id, data, { new: true }).lean();
+    const updatedUser = await User.findByIdAndUpdate(user._id, data, { new: true }).lean();
 
-        //error handling for MODEL.findOneAndUpdate
-        if (!updatedUser)
-            return response.status(400).send({
-                success: false,
-                message: 'user update was unsuccessfully.',
-                data: updatedUser
-            });
-        //update session 
-        request.session.user = updatedUser;
-        // send succes message with user
-        return response.status(200).send({
-            success: true,
-            message: 'user updated successfully.',
+    //error handling for MODEL.findOneAndUpdate
+    if (!updatedUser)
+        return response.status(400).send({
+            success: false,
+            message: 'user update was unsuccessfully.',
             data: updatedUser
         });
-    } catch (error) {
-        response.status(400).send({
-            success: false,
-            message: error,
-            data: null
-        });
-    }
+    //update session 
+    request.session.user = updatedUser;
+    // send succes message with user
+    return response.status(200).send({
+        success: true,
+        message: 'user updated successfully.',
+        data: updatedUser
+    });
 
 });
 

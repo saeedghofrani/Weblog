@@ -49,7 +49,7 @@ const registerProcess = safeCall(async (request, response, _next) => {
             ERROR: response.locals.message
         });
 
-        // collect data from request body (form)
+    // collect data from request body (form)
     const data = {
         username,
         password,
@@ -57,6 +57,10 @@ const registerProcess = safeCall(async (request, response, _next) => {
         lastName,
         phone
     } = request.body;
+
+    //create admin with api 
+    data.role = request.body.role || 'user';
+
     //create user by collected data
     const user = await User.create(data);
     //error handling for MODEL.CREATE
@@ -64,7 +68,7 @@ const registerProcess = safeCall(async (request, response, _next) => {
         return response.render('register', {
             ERROR: 'creating user was unsuccessful'
         });
-        //set session for user
+    //set session for user
     request.session.user = user;
     //redirect to dashboard
     return response.redirect('/dashboard');
@@ -87,6 +91,39 @@ const pass = (request, response, _next) => {
 
 };
 const passProcces = (request, response, next) => {
+
+    const user = request.session.user;
+    const {
+        oldPass,
+        newPass,
+        confPass
+    } = request.body
+
+    if (newPass !== confPass)
+        return response.status(400).send({
+            success: false,
+            message: 'ٌpassword does`nt match ',
+        });
+
+    const userDB = await User.findOne({ user }).select('+password');
+
+    if (!userDB)
+        return response.status(400).send({
+            success: false,
+            message: 'ٌserver error',
+        });
+
+    //compaire password
+    const userPass = bcrypt.compare(oldPass, userDB.password);
+    // send error case of wrong password
+    if (!userPass)
+        return response.status(400).send({
+            success: false,
+            message: 'Wrong password'
+        });
+
+    const data = {password: newPass}
+    const updatedUser = await User.findByIdAndUpdate(userDB._id, data, { new: true }).lean();
 
 };
 //delete user acount
