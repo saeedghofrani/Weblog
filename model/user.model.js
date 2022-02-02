@@ -99,16 +99,36 @@ UserSchema.pre('save', function async(next) {
 });
 
 
-// hash password for update User Password
-UserSchema.pre('findByIdAndUpdate', function async(next) {
-    const userPassword = this._update.password
-    if (userPassword) {
-        this._update.password = await bcrypt.hash(this._update.password, 10)
-        const salt = bcrypt.genSalt(10);
-        salt.then(salt => { return bcrypt.hash(userPassword, salt); })
-            .then(hash => { userPassword = hash; return next(); })
-            .catch(err => next(err));
-    }
-});
+// // hash password for update User Password
+// UserSchema.pre('findOneAndUpdate', function async(next) {
+//     // const userPassword = this._update.password
+//     // console.log("data base logs");
+//     // console.log(userPassword);
+//     // console.log("data base log");
+//     // console.log(this);
+//     // if (userPassword) {
+//     //     const salt = bcrypt.genSalt(10);
+//     //     salt.then(salt => { return bcrypt.hash(userPassword, salt); })
+//     //         .then(hash => { userPassword = hash; return next(); })
+//     //         .catch(err => next(err));
+//     // }
+//         const info = this;
+//         if (info._update.password) {
+//             bcrypt.genSalt(10, (err, salt) => {
+//                 if (err) {
+//                     return next(err);
+//                 }
+//                 bcrypt.hash(info._update.password, salt, (err, hash) => {
+//                     if (err) {
+//                         return next(err);
+//                     }
+//                     info._update.password = hash;
+//                     return next();
+//                 })
+//             })
+//         } else {
+//             return next();
+//         }
+// });
 
 module.exports = mongoose.model('User', UserSchema);

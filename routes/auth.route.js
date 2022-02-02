@@ -33,8 +33,8 @@ router.route('/register')
     .post(duplicate.register, userValidator('create'), registerProcess);
 
 //forget password router
-router.route('/pass')
-    .get(pass)
-    .post(passProcces);
+// router.route('/pass')
+//     .get(pass)
+//     .post(passProcces);
 
 module.exports = router;

@@ -276,14 +276,13 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/auth/pass" method="post">
                         <div class="modal-body">
                             <div class="col-md-12">
                                 <span class="col-12 h6 p-0m-0 text-center">
                                     Old Password
                                 </span>
                                 <p class="col-12 mt-2">
-                                    <input id="firstName" type="password" name="firstName" required disabled readonly
+                                    <input id="oldPass" type="password" name="oldPass" required disabled readonly
                                         class="inputUpdate" />
                                 </p>
                             </div>
@@ -295,7 +294,7 @@
                                     New Password
                                 </span>
                                 <p class="col-12 mt-2">
-                                    <input id="firstName" type="password" name="firstName" required disabled readonly
+                                    <input id="newPass" type="password" name="newPass" required disabled readonly
                                         class="inputUpdate" />
                                 </p>
                             </div>
@@ -307,7 +306,7 @@
                                     Confirm Password
                                 </span>
                                 <p class="col-12 mt-2">
-                                    <input id="firstName" type="password" name="firstName" required disabled readonly
+                                    <input id="confPass" type="password" name="confPass" required disabled readonly
                                         class="inputUpdate" />
                                 </p>
                             </div>
@@ -315,13 +314,13 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="" class=" btnShow col-md-2">
+                            <button id="updatePass" type="" class=" btnShow col-md-2">
                                 Save
                             </button>
+                            <div id="errorpass" class="alert alert-danger d-none"
+                                role="alert">
+                            </div>
                         </div>
-                    </form>
-
-
                 </div>
             </div>
         </div>
