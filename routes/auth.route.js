@@ -11,6 +11,11 @@ const duplicate = require('../middleware/duplicateCheck.middleware');
 //controller
 const { login, loginProcess, register, registerProcess, logout, pass, passProcces, delAccount } = require('../controller/auth.controller.js');
 
+//forget password router
+router.route('/pass')
+    .get(pass)
+    .post(passProcces);
+
 //remove acount 
 router.route('/delAccount')
     .get(delAccount);
@@ -32,9 +37,5 @@ router.route('/register')
     .get(register)
     .post(duplicate.register, userValidator('create'), registerProcess);
 
-//forget password router
-// router.route('/pass')
-//     .get(pass)
-//     .post(passProcces);
 
 module.exports = router;

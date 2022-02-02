@@ -1,38 +1,38 @@
 $(document).ready(function () {
 
-    // $("#updatePass").click(function (e) {
-    //     e.preventDefault();
-    //     const data = {
-    //         oldPass: $("#oldPass").val(),
-    //         newPass: $("#newPass").val(),
-    //         confPass: $("#confPass").val(),
-    //     }
-    //     $.ajax({
-    //         type: "Post",
-    //         url: "/auth/pass",
-    //         data,
-    //         success: function (response) {
-    //             $('#errorpass').removeClass('d-none');
-    //             $('#errorpass').removeClass('alert-danger');
-    //             $('#errorpass').addClass('alert-success');
-    //             $('#errorpass').html(response.message);
-    //             setTimeout(function () {
-    //                 $('#errorpass').addClass('d-none');
-    //                 $('#errorpass').addClass('alert-danger');
-    //                 $('#errorpass').removeClass('alert-success');
-    //                 $('#errorpass').html('');
-    //             }, 5000);
-    //         },
-    //         error: function (xhr, textStatus, errorThrown) {
-    //             $('#errorpass').removeClass('d-none');
-    //             $('#errorpass').html(xhr.responseText);
-    //             setTimeout(function () {
-    //                 $('#errorpass').addClass('d-none');
-    //                 $('#errorpass').html('');
-    //             }, 5000);
-    //         }
-    //     });
-    // });
+    $("#updatePass").click(function (e) {
+        e.preventDefault();
+        const data = {
+            oldPass: $("#oldPass").val(),
+            newPass: $("#newPass").val(),
+            confPass: $("#confPass").val(),
+        }
+        $.ajax({
+            type: "Post",
+            url: "/auth/pass",
+            data,
+            success: function (response) {
+                $('#errorpass').removeClass('d-none');
+                $('#errorpass').removeClass('alert-danger');
+                $('#errorpass').addClass('alert-success');
+                $('#errorpass').html(response.message);
+                setTimeout(function () {
+                    $('#errorpass').addClass('d-none');
+                    $('#errorpass').addClass('alert-danger');
+                    $('#errorpass').removeClass('alert-success');
+                    $('#errorpass').html('');
+                }, 5000);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $('#errorpass').removeClass('d-none');
+                $('#errorpass').html(xhr.responseText);
+                setTimeout(function () {
+                    $('#errorpass').addClass('d-none');
+                    $('#errorpass').html('');
+                }, 5000);
+            }
+        });
+    });
 
 
 

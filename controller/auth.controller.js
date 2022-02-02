@@ -17,7 +17,6 @@ const loginProcess = safeCall(async (request, response, _next) => {
     const { username, password } = request.body;
     // find user by username and get password
     const user = await User.findOne({ username }).select('+password');
-    console.log(user);
     // send error case of wrong username 
     if (!user)
         return response.render('login', {
@@ -26,7 +25,6 @@ const loginProcess = safeCall(async (request, response, _next) => {
 
     //compaire password
     const userPass = await bcrypt.compare(password, user.password);
-    console.log(userPass);
     // send error case of wrong password
     if (!userPass)
         return response.render('login', {
@@ -87,57 +85,66 @@ const logout = (request, response, _next) => {
 
 };
 
-// //re
-// const pass = (request, response, _next) => {
 
-//     response.render('pass');
+//re
+const pass = (request, response, _next) => {
 
-// };
+    response.render('pass');
 
-// const passProcces = async (request, response, next) => {
+};
 
-//     const { oldPass, newPass, confPass } = request.body;
+const passProcces = async (request, response, next) => {
 
-//     if (newPass !== confPass)
-//         return response.status(400).send({
-//             success: false,
-//             message: 'password don`t match',
-//         });
+    const { oldPass, newPass, confPass } = request.body;
 
-//     const user = request.session.user;
+    if (newPass !== confPass)
+        return response.status(400).send({
+            success: false,
+            message: 'password don`t match',
+        });
 
-//     const userTarget = await User.findById(user._id).select('+password');
+    const user = request.session.user;
 
-//     if (!userTarget)
-//         return response.status(400).send({
-//             success: false,
-//             message: 'update was unsuccesfull',
-//         });
+    const userTarget = await User.findById(user._id).select('+password');
 
-//     const passUpdate = await User.findOneAndUpdate({ _id: userTarget._id }, { password: newPass })
+    if (!userTarget)
+    return response.status(400).send({
+        success: false,
+        message: 'update was unsuccesfull',
+    });
 
-//     if (!passUpdate)
-//         return response.status(400).send({
-//             success: false,
-//             message: 'update was succesfull',
-//         });
+    const userPass = await bcrypt.compare(oldPass, userTarget.password);
 
-//     return response.status(200).send({
-//         success: true,
-//         message: 'update was succesfull',
-//     });
-// };
+    if (!userPass)
+        return response.status(400).send({
+            success: false,
+            message: 'wrong password',
+        });
 
-// //delete user acount
-// const delAccount = safeCall(async (request, response, _next) => {
-//     // get user data from session
-//     const user = request.session.user;
-//     //delete user by id
-//     await User.findByIdAndDelete(user._id);
-//     //redirect to logout 
-//     response.redirect('/auth/logout');
+    const passUpdate = await User.findOneAndUpdate({ _id: userTarget._id }, { password: newPass })
 
-// });
+    if (!passUpdate)
+        return response.status(400).send({
+            success: false,
+            message: 'update was succesfull',
+        });
+
+    return response.status(200).send({
+        success: true,
+        message: 'update was succesfull',
+    });
+};
+
+//delete user acount
+const delAccount = safeCall(async (request, response, _next) => {
+    // get user data from session
+    const user = request.session.user;
+    //delete user by id
+    await User.findByIdAndDelete(user._id);
+    //redirect to logout 
+    response.redirect('/auth/logout');
+
+});
 
 module.exports = {
     login,
@@ -145,7 +152,7 @@ module.exports = {
     register,
     registerProcess,
     logout,
-    // pass,
-    // passProcces,
+    pass,
+    passProcces,
     delAccount
 };
