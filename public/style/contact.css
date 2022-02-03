@@ -18,6 +18,10 @@ body {
     padding-bottom: 100px;
 }
 
+form {
+    color: black !important;
+}
+
 textarea, 
 input {
     border-radius: 0 !important;
@@ -72,7 +76,7 @@ input:focus {
 .form-control,
 textarea {
     max-width: 400px;
-    color: #fff;
+    color: rgb(0, 0, 0);
     letter-spacing: 1px;
 }
 

@@ -68,7 +68,7 @@ const UserSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['active', 'suspend', 'inactive'],
+        enum: ['active', 'inactive'],
         default: 'active'
     },
     email: {
@@ -88,7 +88,7 @@ const UserSchema = new Schema({
 UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
 
 //hashing password hook
-UserSchema.pre('save', function async(next) {
+UserSchema.pre('save', async function (next) {
     const user = this._doc;
     if (this.isNew || this.isModified('password')) {
         const salt = bcrypt.genSalt(10);
@@ -98,37 +98,9 @@ UserSchema.pre('save', function async(next) {
     }
 });
 
-
-// hash password for update User Password
-UserSchema.pre('findOneAndUpdate', function async(next) {
-    // const userPassword = this._update.password
-    // console.log("data base logs");
-    // console.log(userPassword);
-    // console.log("data base log");
-    // console.log(this);
-    // if (userPassword) {
-    //     const salt = bcrypt.genSalt(10);
-    //     salt.then(salt => { return bcrypt.hash(userPassword, salt); })
-    //         .then(hash => { userPassword = hash; return next(); })
-    //         .catch(err => next(err));
-    // }
-        const info = this;
-        if (info._update.password) {
-            bcrypt.genSalt(10, (err, salt) => {
-                if (err) {
-                    return next(err);
-                }
-                bcrypt.hash(info._update.password, salt, (err, hash) => {
-                    if (err) {
-                        return next(err);
-                    }
-                    info._update.password = hash;
-                    return next();
-                })
-            })
-        } else {
-            return next();
-        }
-});
+UserSchema.pre(/^find/, function async(next) {
+    this.find({ status: { $ne: "inactive" } });
+    next();
+})
 
 module.exports = mongoose.model('User', UserSchema);

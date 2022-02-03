@@ -4,10 +4,10 @@ const createError = require('http-errors');
 // wraper for diffrent senarios
 const wraper = (mod) => {
     return userValidation = async (req, res, next) => {
-        try {
+        try {               
+             res.locals = { error: false, message: [] };
             // create validation
             if (mod === 'create') {
-                res.locals = { error: false, message: [] };
                 //username validation
                 usernameValidation(req, res);
                 //first name validation
@@ -22,7 +22,6 @@ const wraper = (mod) => {
             }
             //update validation
             if (mod === 'update') {
-                res.locals = { error: false, message: [] };
                 //username validation
                 usernameValidation(req, res);
                 //first name validation
@@ -33,6 +32,11 @@ const wraper = (mod) => {
                 phoneValidation(req, res);
                 //email validation
                 emailValidation(req, res);
+                next();
+            }
+            //update password validation
+            if (mod === 'pass') {
+                passwordValidation(req, res);
                 next();
             }
         } catch (error) {

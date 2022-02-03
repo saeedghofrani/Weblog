@@ -50,59 +50,6 @@
                 </div>
             </div>
         </section>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Add Admin</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-md-12 row">
-                            <input id="firstName" type="text" name="firstName" class="inputUpdate"
-                                placeholder="firstName" />
-                        </div>
-                        <br>
-                        <div class="col-md-12 row">
-                            <input id="lastName" type="text" name="lastName" class="inputUpdate"
-                                placeholder="lastName" />
-                        </div>
-                        <br>
-                        <div class="col-md-12 row">
-                            <input id="username" type="text" name="username" class="inputUpdate"
-                                placeholder="username" />
-                        </div>
-                        <br>
-                        <div class="col-md-12 row">
-                            <input id="password" type="text" name="password" class="inputUpdate"
-                                placeholder="password" />
-                        </div>
-                        <br>
-                        <div class="col-md-12 row">
-                            <input id="phone" type="phone" name="phone" class="inputUpdate" placeholder="phone" />
-                        </div>
-                        <div id="errorAdminError" class="alert alert-danger d-none mt-4" role="alert">
-
-                        </div>
-                    </div>
-                    <div class="modal-footer col-12">
-                        <button type="button" class="btn btn-primary col-12" id="addAdmin">Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <span>
-            <button type="button" class="btn btn-primary" id="addAdmin" data-toggle="modal"
-                data-target="#exampleModalCenter">
-                Add Admin
-            </button>
-        </span>
         <%- include('./common/scripts.ejs') %>
             <script src="/script/admin.js"></script>
 </body>

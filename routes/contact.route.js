@@ -3,9 +3,10 @@
 const express = require('express');
 const router = express.Router();
 //controller
-const contact = require('../controller/contact.controller.js');
+const { contact, contactProcces } = require('../controller/contact.controller.js');
 
 router.route('/')
-    .get(contact);
+    .get(contact)
+    .post(contactProcces);
 
 module.exports = router;

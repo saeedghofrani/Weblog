@@ -1,5 +1,6 @@
 // Module dependencies.
 const bcrypt = require('bcryptjs');
+const { findByIdAndUpdate } = require('../model/user.model');
 //user model
 const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
@@ -58,9 +59,6 @@ const registerProcess = safeCall(async (request, response, _next) => {
         phone
     } = request.body;
 
-    //create admin with api 
-    data.role = request.body.role || 'user';
-
     //create user by collected data
     const user = await User.create(data);
     //error handling for MODEL.CREATE
@@ -87,48 +85,68 @@ const logout = (request, response, _next) => {
 
 
 //re
-const pass = (request, response, _next) => {
+const pass = (_request, response, _next) => {
 
     response.render('pass');
 
 };
 
-const passProcces = async (request, response, next) => {
+//change password controller
+const passProcces = async (request, response, _next) => {
+    //collect data
+    const { oldPass, password, confPass } = request.body;
 
-    const { oldPass, newPass, confPass } = request.body;
+    //validation error handler 
+    if (response.locals.error)
+        return response.status(400).send({
+            success: false,
+            message: response.locals.message,
+        });
 
-    if (newPass !== confPass)
+    //check confirm password
+    if (password !== confPass)
         return response.status(400).send({
             success: false,
             message: 'password don`t match',
         });
 
+    //get user from session
     const user = request.session.user;
 
+    //find user and get password
     const userTarget = await User.findById(user._id).select('+password');
-
+    console.log(userTarget);
+    //error handling for MODEL.FINDBYID
     if (!userTarget)
-    return response.status(400).send({
-        success: false,
-        message: 'update was unsuccesfull',
-    });
+        return response.status(400).send({
+            success: false,
+            message: 'update was unsuccesfull',
+        });
 
+    //compaire password of user
     const userPass = await bcrypt.compare(oldPass, userTarget.password);
 
+    //error handling for BCRYPT.COMPAIRE
     if (!userPass)
         return response.status(400).send({
             success: false,
             message: 'wrong password',
         });
 
-    const passUpdate = await User.findOneAndUpdate({ _id: userTarget._id }, { password: newPass })
+    //set user password to new password
+    userTarget.password = password;
 
-    if (!passUpdate)
+    //save password on user database
+    const savedUser = await userTarget.save();
+
+    //error handling for MODEL.SAVE
+    if (!savedUser)
         return response.status(400).send({
             success: false,
             message: 'update was succesfull',
         });
 
+    //send success message
     return response.status(200).send({
         success: true,
         message: 'update was succesfull',
@@ -146,6 +164,18 @@ const delAccount = safeCall(async (request, response, _next) => {
 
 });
 
+const inactivate = safeCall(async (request, response, _next) => {
+
+    //get user from session
+    const user = request.session.user;
+
+    const inActiveUser = await User.findByIdAndUpdate(user._id, { status: "inactive" });
+
+    if (!inActiveUser)
+        return response.render('error', { error: { message: "there was something wrong" }, stats: 500 });
+
+    response.redirect('/auth/logout');
+});
 module.exports = {
     login,
     loginProcess,
@@ -154,5 +184,6 @@ module.exports = {
     logout,
     pass,
     passProcces,
-    delAccount
+    delAccount,
+    inactivate
 };

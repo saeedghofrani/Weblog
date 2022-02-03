@@ -3,14 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
-// validation middleware
-const userValidation = require('../middleware/userValidation.middleware');
-
 // controller
-const { admin, adminProcess } = require('../controller/admin.controller.js');
-
-//duplicate Check middleware
-const duplicateCheck = require('../middleware/duplicateCheck.middleware');
+const { admin } = require('../controller/admin.controller.js');
 
 // session middleware
 const sessionsCheck = require("../middleware/sessionCheck.middleware");
@@ -25,5 +19,4 @@ router.use(authorization(['admin']));
 
 router.route('/')
     .get(admin)
-    .post(duplicateCheck.admin, userValidation('create'), adminProcess);
 module.exports = router;

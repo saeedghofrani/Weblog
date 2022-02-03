@@ -4,9 +4,10 @@ $(document).ready(function () {
         e.preventDefault();
         const data = {
             oldPass: $("#oldPass").val(),
-            newPass: $("#newPass").val(),
+            password: $("#newPass").val(),
             confPass: $("#confPass").val(),
         }
+        console.log(data);
         $.ajax({
             type: "Post",
             url: "/auth/pass",

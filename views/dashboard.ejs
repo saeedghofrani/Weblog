@@ -63,9 +63,13 @@
                                         <br>
                                         <input id="removeAccountInp" type="text" name="username" class="inputUpdate"
                                             placeholder="example: slow response" />
+                                        <div id="errorpass" class="alert alert-success col-12 mt-2 mb-0" role="alert">
+                                            Hey you also can inactivate your account &#128512;
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="/auth/delAccount" class="btn btn-warning">Remove</a>
+                                        <a href="/auth/delAccount" class="btn btn-danger">Remove</a>
+                                        <a href="/auth/inActive" class="btn btn-success">Inactivate</a>
                                     </div>
                                 </div>
                             </div>
@@ -277,52 +281,51 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                        <div class="modal-body">
-                            <div class="col-md-12">
-                                <span class="col-12 h6 p-0m-0 text-center">
-                                    Old Password
-                                </span>
-                                <p class="col-12 mt-2">
-                                    <input id="oldPass" type="password" name="oldPass" required disabled readonly
-                                        class="inputUpdate" />
-                                </p>
-                            </div>
-
-                            <br>
-
-                            <div class="col-md-12">
-                                <span class="col-12 h6 p-0m-0 text-center">
-                                    New Password
-                                </span>
-                                <p class="col-12 mt-2">
-                                    <input id="newPass" type="password" name="newPass" required disabled readonly
-                                        class="inputUpdate" />
-                                </p>
-                            </div>
-
-                            <br>
-
-                            <div class="col-md-12">
-                                <span class="col-12 h6 p-0m-0 text-center">
-                                    Confirm Password
-                                </span>
-                                <p class="col-12 mt-2">
-                                    <input id="confPass" type="password" name="confPass" required disabled readonly
-                                        class="inputUpdate" />
-                                </p>
-                            </div>
-
-
+                    <div class="modal-body ">
+                        <div class="col-md-12">
+                            <span class="col-12 h6 p-0m-0 text-center">
+                                Old Password
+                            </span>
+                            <p class="col-12 mt-2">
+                                <input id="oldPass" type="password" name="oldPass" required disabled readonly
+                                    class="inputUpdate" />
+                            </p>
                         </div>
-                        <div class="modal-footer">
-                            <button id="updatePass" type="" class="col-12 btnShow">
-                                Save
-                            </button>
-                            <br>
-                            <div id="errorpass" class="alert alert-danger d-none col-12"
-                                role="alert">
-                            </div>
+
+                        <br>
+
+                        <div class="col-md-12">
+                            <span class="col-12 h6 p-0m-0 text-center">
+                                New Password
+                            </span>
+                            <p class="col-12 mt-2">
+                                <input id="newPass" type="password" name="newPass" required disabled readonly
+                                    class="inputUpdate" />
+                            </p>
                         </div>
+
+                        <br>
+
+                        <div class="col-md-12">
+                            <span class="col-12 h6 p-0m-0 text-center">
+                                Confirm Password
+                            </span>
+                            <p class="col-12 mt-2">
+                                <input id="confPass" type="password" name="confPass" required disabled readonly
+                                    class="inputUpdate" />
+                            </p>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="updatePass" type="" class="col-12 btnShow">
+                            Save
+                        </button>
+                        <br>
+                        <div id="errorpass" class="alert alert-danger d-none col-12" role="alert">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

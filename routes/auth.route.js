@@ -9,12 +9,16 @@ const userValidator = require('../middleware/userValidation.middleware');
 // duplicate Check middleware
 const duplicate = require('../middleware/duplicateCheck.middleware');
 //controller
-const { login, loginProcess, register, registerProcess, logout, pass, passProcces, delAccount } = require('../controller/auth.controller.js');
+const { login, loginProcess, register, registerProcess, logout, pass, passProcces, delAccount, inactivate } = require('../controller/auth.controller.js');
 
 //forget password router
 router.route('/pass')
     .get(pass)
-    .post(passProcces);
+    .post(userValidator('pass'), passProcces);
+
+//inactavate user router
+router.route('/inActive')
+    .get(inactivate);
 
 //remove acount 
 router.route('/delAccount')
