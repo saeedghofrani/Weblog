@@ -4,9 +4,9 @@
         const User = require('../model/user.model');
         const config = require('../config/config');
         console.log(config.admin);
-        const createddAdmin = await User.create(config.admin);
-        if (createddAdmin) {
-            console.log('admin created ' + `${createddAdmin}`);
+        const createdAdmin = await User.create(config.admin);
+        if (createdAdmin) {
+            console.log('admin created ' + `${createdAdmin}`);
             return process.exit(1);
         }
         console.log('create admin failed');

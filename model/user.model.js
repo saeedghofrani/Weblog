@@ -91,10 +91,10 @@ UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
 UserSchema.pre('save', async function (next) {
     const user = this._doc;
     if (this.isNew || this.isModified('password')) {
-        const salt = bcrypt.genSalt(10);
-        salt.then(salt => { return bcrypt.hash(user.password, salt); })
-            .then(hash => { user.password = hash; return next(); })
-            .catch(err => next(err));
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(user.password, salt);
+        user.password = hash;
+        return next();
     }
 });
 

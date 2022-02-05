@@ -1,6 +1,5 @@
 // Module dependencies.
 const bcrypt = require('bcryptjs');
-const { findByIdAndUpdate } = require('../model/user.model');
 //user model
 const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
@@ -115,7 +114,6 @@ const passProcces = async (request, response, _next) => {
 
     //find user and get password
     const userTarget = await User.findById(user._id).select('+password');
-    console.log(userTarget);
     //error handling for MODEL.FINDBYID
     if (!userTarget)
         return response.status(400).send({
