@@ -7,21 +7,17 @@ $(document).ready(function () {
             password: $("#newPass").val(),
             confPass: $("#confPass").val(),
         }
-        console.log(data);
         $.ajax({
-            type: "Post",
+            type: "PUT",
             url: "/auth/pass",
             data,
             success: function (response) {
-                $('#errorpass').removeClass('d-none');
-                $('#errorpass').removeClass('alert-danger');
-                $('#errorpass').addClass('alert-success');
-                $('#errorpass').html(response.message);
+                $('#successpass').removeClass('d-none');
+                $('#successpass').html(response.message);
                 setTimeout(function () {
-                    $('#errorpass').addClass('d-none');
-                    $('#errorpass').addClass('alert-danger');
-                    $('#errorpass').removeClass('alert-success');
-                    $('#errorpass').html('');
+                    $('#successpass').addClass('d-none');
+                    $('#successpass').html('');
+                    noraml();
                 }, 5000);
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -30,12 +26,19 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $('#errorpass').addClass('d-none');
                     $('#errorpass').html('');
+                    noraml()
                 }, 5000);
+
             }
         });
     });
 
 
+    function noraml() {
+        $("#oldPass").val('');
+        $("#newPass").val('');
+        $("#confPass").val('');
+    };
 
 
 
@@ -43,9 +46,6 @@ $(document).ready(function () {
 
 
 
-
-
-    console.log($('#gender').val());
     let lastData = {
         username: $('#username').val(),
         email: $('#email').val(),

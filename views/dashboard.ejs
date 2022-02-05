@@ -13,7 +13,11 @@
                 <div class="row cont">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="/images/profileAvatar.jpg" alt="profile photo" />
+                            <img id="" src="/images/profileAvatar.jpg" alt="profile photo" />
+                            <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -63,7 +67,7 @@
                                         <br>
                                         <input id="removeAccountInp" type="text" name="username" class="inputUpdate"
                                             placeholder="example: slow response" />
-                                        <div id="errorpass" class="alert alert-success col-12 mt-2 mb-0" role="alert">
+                                        <div id="errorpasssss" class="alert alert-success col-12 mt-2 mb-0" role="alert">
                                             Hey you also can inactivate your account &#128512;
                                         </div>
                                     </div>
@@ -324,6 +328,8 @@
                         </button>
                         <br>
                         <div id="errorpass" class="alert alert-danger d-none col-12" role="alert">
+                        </div>
+                        <div id="successpass" class="alert alert-success d-none col-12" role="alert">
                         </div>
                     </div>
                 </div>

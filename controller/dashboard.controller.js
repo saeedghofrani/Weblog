@@ -9,7 +9,7 @@ const dashboard = (request, response, _next) => {
     const data = {
         firstName,
         lastName,
-        username,
+        username, 
         password,
         gender,
         phone

@@ -9,13 +9,16 @@ const userValidation = require('../middleware/userValidation.middleware');
 //duplicate Check middleware
 const duplicate = require('../middleware/duplicateCheck.middleware');
 //controller
-const { dashboard, dashboardProcess } = require('../controller/dashboard.controller.js');
+const { dashboard, dashboardProcess, avatarProcess } = require('../controller/dashboard.controller.js');
+//upload Avatar
+const uploadAvatar = require('../')
 
 //check session and cookie
 router.use(sessionsCheck.login);
 
 router.route('/')
     .get(dashboard)
-    .put(duplicate.dashboard, userValidation('update'), dashboardProcess);
+    .put(duplicate.dashboard, userValidation('update'), dashboardProcess)
+    .patch(avatarProcess);
 
 module.exports = router;
