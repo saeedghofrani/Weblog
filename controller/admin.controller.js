@@ -38,7 +38,25 @@ const resetPass = safeCall(async (request, response, _next) => {
     });
 });
 
+const deleteUser = safeCall(async (request, response, _next) => {
+    const user = await User.findByIdAndDelete(request.body.id);
+
+    if (!user)
+        return response.status(400).send({
+            success: false,
+            message: 'delete user was unsuccesfull',
+        });
+
+    //send success message
+    return response.status(200).send({
+        success: true,
+        message: 'delete was succesfull',
+    });
+
+});
+
 module.exports = {
     admin,
-    resetPass
+    resetPass,
+    deleteUser
 };

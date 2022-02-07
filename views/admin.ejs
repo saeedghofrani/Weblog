@@ -13,7 +13,7 @@
             <div class="container">
                 <div id="appendDiv" class="row">
                     <% for( let i=0; i < users.length; i++ ) { %>
-                        <div class="col-12 col-sm-6 col-md-5 col-lg-4 my-2">
+                        <div class="col-12 col-sm-6 col-md-5 col-lg-4 my-2 <%= users[i]._id %>">
                             <div class="price-card featured<% if (users[i].role === 'admin') { %>
                                     admin
                                 <% } %>">
@@ -43,7 +43,10 @@
                                         <span class="text-muted">Status:</span>  <%= users[i].status %>
                                     </li>
                                     <li class="col-12 ">
-                                        <button class="col-12 button-37 resetPass" userId="<%= users[i]._id %>">reset password</button>
+                                        <button class="col-12 button-37 resetPass" userId="<%= users[i]._id %>">Reset Password</button>
+                                    </li>
+                                    <li class="col-12 ">
+                                        <button class="col-12 button-37 deleteUser" userId="<%= users[i]._id %>">Remove User</button>
                                     </li>
                                 </ul>
                             </div>

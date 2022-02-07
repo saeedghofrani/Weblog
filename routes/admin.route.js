@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 // controller
-const { admin, resetPass } = require('../controller/admin.controller.js');
+const { admin, resetPass, deleteUser } = require('../controller/admin.controller.js');
 
 // session middleware
 const sessionsCheck = require("../middleware/sessionCheck.middleware");
@@ -20,4 +20,5 @@ router.use(authorization(['admin']));
 router.route('/')
     .get(admin)
     .patch(resetPass)
+    .delete(deleteUser)
 module.exports = router;

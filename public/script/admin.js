@@ -1,6 +1,25 @@
 $(document).ready(function () {
 
-
+    $(".deleteUser").click(function (e) { 
+        var id = $(this).attr("userid");
+        e.preventDefault();
+        $.ajax({
+            type: "delete",
+            url: "/admin",
+            data: {id},
+            success: function (response) {
+                $('div').remove(`.${id}`);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $('.toast-body').removeClass('text-danger');
+                $('.toast-body').addClass('text-danger');
+                $('.toast-body').css('border', '1px solid red');
+                $('.toast-body').css('font-size', 16);
+                $('.toast-body').text(xhr.responseText);
+                $('.toast').toast("show");
+            }
+        });
+    });
 
 
     $(".resetPass").click(function (e) { 
@@ -19,7 +38,7 @@ $(document).ready(function () {
                 $('.toast').toast("show");
             },
             error: function (xhr, textStatus, errorThrown) {
-                $('.toast-body').removeClass('text-danger');
+                $('.toast-body').removeClass('text-success');
                 $('.toast-body').addClass('text-danger');
                 $('.toast-body').css('border', '1px solid red');
                 $('.toast-body').css('font-size', 16);
