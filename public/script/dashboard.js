@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+
+
+    
     $("#updatePass").click(function (e) {
         e.preventDefault();
         const data = {

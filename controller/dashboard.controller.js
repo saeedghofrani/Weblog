@@ -3,6 +3,7 @@ const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
 
+const upload = require('../utils/multerInitializer.utils');
 // render dashboard page
 const dashboard = (request, response, _next) => {
     //collect data from session
@@ -12,7 +13,8 @@ const dashboard = (request, response, _next) => {
         username,
         password,
         gender,
-        phone
+        phone,
+        avatar
     } = request.session.user;
 
     return response.render('dashboard', { data: data });
@@ -63,10 +65,24 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 
 });
 
-const avatarProcess = (request, response, next) => {
+const avatarProcess = safeCall(async (request, response, next) => {
+    const avatar = upload.single('avatar');
+
+    avatar(request, response, async function (err) {
+        if (err)
+            return response.render('error', { error: { message: "internal error", status: 500 } });
+            
+        user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true });
+        request.session.user = user;
+        if (!user) {
+            return response.render('error', { error: { message: "internal error", status: 500 } });
+        }
+        response.redirect('/dashboard');
+    })
 
 
-}
+
+});
 
 module.exports = {
     dashboard,

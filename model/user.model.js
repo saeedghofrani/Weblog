@@ -81,6 +81,10 @@ const UserSchema = new Schema({
             message: '{VALUE} is not a valid email!'
         },
         default: 'example@gmail.com'
+    },
+    avatar: {
+        type: String,
+        default: '/images/profileAvatar.jpg'
     }
 }, { timestamps: true });
 

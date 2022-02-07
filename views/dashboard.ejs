@@ -9,15 +9,17 @@
 <body>
     <%- include('./common/navbar.ejs') %>
         <div class="container emp-profile">
-            <form method="post">
+            <section>
                 <div class="row cont">
                     <div class="col-md-4">
-                        <form action="/profile" method="post" enctype="multipart/form-data">
+                        <form action="/dashboard" enctype="multipart/form-data" method="post">
                             <div class="profile-img">
-                                <img id="" src="/images/profileAvatar.jpg" alt="profile photo" />
+                                <img id="" src=" /images/avatars/<%= data.avatar %>" alt="profile photo" />
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="file" />
+                                    <input type="file" name="avatar" />
+                                    <br>
+                                    <input class="avatarbtn col-12" type="submit" value="APPLY" />
                                 </div>
                             </div>
                         </form>
@@ -271,7 +273,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </section>
         </div>
 
 

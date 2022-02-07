@@ -19,6 +19,6 @@ router.use(sessionsCheck.login);
 router.route('/')
     .get(dashboard)
     .put(duplicate.dashboard, userValidation('update'), dashboardProcess)
-    .patch(avatarProcess);
+    .post(avatarProcess);
 
 module.exports = router;
