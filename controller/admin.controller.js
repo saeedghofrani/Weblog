@@ -11,6 +11,12 @@ const admin = safeCall(async (request, response, _next) => {
 
 });
 
+const resetPass = safeCall(async (request, response, _next) => {
+console.log('.sssssss');
+
+});
+
 module.exports = {
-    admin
+    admin,
+    resetPass
 };

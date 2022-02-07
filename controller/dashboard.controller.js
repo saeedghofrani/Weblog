@@ -9,7 +9,7 @@ const dashboard = (request, response, _next) => {
     const data = {
         firstName,
         lastName,
-        username, 
+        username,
         password,
         gender,
         phone
@@ -63,7 +63,13 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 
 });
 
+const avatarProcess = (request, response, next) => {
+
+
+}
+
 module.exports = {
     dashboard,
-    dashboardProcess
+    dashboardProcess,
+    avatarProcess
 };

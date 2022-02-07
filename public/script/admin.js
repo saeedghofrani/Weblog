@@ -1,4 +1,23 @@
 $(document).ready(function () {
+
+
+
+
+    $("#resetPass").click(function (e) { 
+        e.preventDefault();
+        console.log('ssssssss');
+        $.ajax({
+            type: "patch",
+            url: "/admin",
+            data: 'sasa',
+            success: function (response) {
+                
+            }
+        });
+    });
+
+
+
     $('#addAdmin').click(function (e) {
         e.preventDefault();
         const data = {

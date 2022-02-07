@@ -12,13 +12,15 @@
             <form method="post">
                 <div class="row cont">
                     <div class="col-md-4">
-                        <div class="profile-img">
-                            <img id="" src="/images/profileAvatar.jpg" alt="profile photo" />
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
+                        <form action="/profile" method="post" enctype="multipart/form-data">
+                            <div class="profile-img">
+                                <img id="" src="/images/profileAvatar.jpg" alt="profile photo" />
+                                <div class="file btn btn-lg btn-primary">
+                                    Change Photo
+                                    <input type="file" name="file" />
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
@@ -67,7 +69,8 @@
                                         <br>
                                         <input id="removeAccountInp" type="text" name="username" class="inputUpdate"
                                             placeholder="example: slow response" />
-                                        <div id="errorpasssss" class="alert alert-success col-12 mt-2 mb-0" role="alert">
+                                        <div id="errorpasssss" class="alert alert-success col-12 mt-2 mb-0"
+                                            role="alert">
                                             Hey you also can inactivate your account &#128512;
                                         </div>
                                     </div>

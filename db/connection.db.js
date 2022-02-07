@@ -14,10 +14,10 @@ const connectionString = `mongodb://${host}:${port}/${name}`;
 // let connectionString = "mongodb://127.0.0.1:27017/myapp";
 // mongoose.connect(connectionString);
 process.on("uncaughtException", (err) => {
-    console.log("UNCAUGHT EXCEPTION, APP SHUTTING NOW!!");
+    console.log("UNCAUGHT EXCEPTION, APP SHUTTING DOWN NOW!!");
     console.log(err.message, err.name);
     process.exit(1);
-  });
+});
 /**
  * 
  */
