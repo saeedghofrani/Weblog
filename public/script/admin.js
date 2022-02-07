@@ -3,13 +3,28 @@ $(document).ready(function () {
 
 
 
-    $("#resetPass").click(function (e) { 
+    $(".resetPass").click(function (e) { 
+        var id = $(this).attr("userid");
         e.preventDefault();
         $.ajax({
             type: "patch",
             url: "/admin",
+            data: {id},
             success: function (response) {
-                
+                $('.toast-body').removeClass('text-danger');
+                $('.toast-body').css('font-size', 16);
+                $('.toast-body').css('border', '1px solid green');
+                $('.toast-body').addClass('text-success');
+                $('.toast-body').text(response.message);
+                $('.toast').toast("show");
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $('.toast-body').removeClass('text-danger');
+                $('.toast-body').addClass('text-danger');
+                $('.toast-body').css('border', '1px solid red');
+                $('.toast-body').css('font-size', 16);
+                $('.toast-body').text(xhr.responseText);
+                $('.toast').toast("show");
             }
         });
     });

@@ -43,16 +43,29 @@
                                         <span class="text-muted">Status:</span>  <%= users[i].status %>
                                     </li>
                                     <li class="col-12 ">
-                                        <button id="resetPass" class="col-12 button-37 ">reset password</button>
+                                        <button class="col-12 button-37 resetPass" userId="<%= users[i]._id %>">reset password</button>
                                     </li>
                                 </ul>
-                                <!-- <a href="#" class="btn btn-primary btn-mid">Buy Now</a> -->
                             </div>
                         </div>
                         <% } %>
                 </div>
             </div>
         </section>
+
+
+        <div class="toast" style="position: absolute; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto">Message</strong>
+                <button id="toastBtn" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+
+            </div>
+        </div>
+        
         <%- include('./common/scripts.ejs') %>
             <script src="/script/admin.js"></script>
 </body>

@@ -12,8 +12,30 @@ const admin = safeCall(async (request, response, _next) => {
 });
 
 const resetPass = safeCall(async (request, response, _next) => {
-console.log('.sssssss');
+    const user = await User.findById(request.body.id).select('+password');
 
+    if (!user)
+        return response.status(400).send({
+            success: false,
+            message: 'reset password was unsuccesfull',
+        });
+
+    //validateBeforeSave
+    user.password = user.phone;
+    const savedUser = await user.save({ validateBeforeSave: false });
+
+    //error handling for MODEL.SAVE
+    if (!savedUser)
+        return response.status(400).send({
+            success: false,
+            message: 'reset password was unsuccesfull',
+        });
+
+    //send success message
+    return response.status(200).send({
+        success: true,
+        message: 'reset password was succesfull',
+    });
 });
 
 module.exports = {
