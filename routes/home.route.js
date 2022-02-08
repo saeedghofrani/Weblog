@@ -7,5 +7,5 @@ const home = require('../controller/home.controller.js');
 
 router.route('/')
     .get(home);
-    
+
 module.exports = router;

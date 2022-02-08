@@ -85,7 +85,6 @@ const logout = (request, response, _next) => {
 
 //re
 const pass = (_request, response, _next) => {
-
     response.render('pass');
 
 };
@@ -167,13 +166,17 @@ const inactivate = safeCall(async (request, response, _next) => {
     //get user from session
     const user = request.session.user;
 
+    //inactivate user
     const inActiveUser = await User.findByIdAndUpdate(user._id, { status: "inactive" });
 
+    //error handling for MODEL.findByIdAndUpdate
     if (!inActiveUser)
         return response.render('error', { error: { message: "there was something wrong" }, stats: 500 });
 
+    //redirect to logout
     response.redirect('/auth/logout');
 });
+
 module.exports = {
     login,
     loginProcess,

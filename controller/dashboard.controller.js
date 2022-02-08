@@ -64,13 +64,19 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 
 });
 
+//update avatar
 const avatarProcess = safeCall(async (request, response, next) => {
 
+    //update user by avatar
     user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true });
+    //session user
     request.session.user = user;
+
+    //error handling for MODEL.findOneAndUpdate
     if (!user) {
         return response.render('error', { error: { message: "internal error", status: 500 } });
     }
+    //redirect to dashboard
     response.redirect('/dashboard');
 
 });

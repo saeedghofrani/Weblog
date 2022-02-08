@@ -85,4 +85,12 @@ app.use((err, req, res, _next) => {
     res.status(err.status || 404);
     res.render('error', { error: { message: "page has gone missing", status: err.status || 404 } });
 });
+
+//uncaught Exception handler
+process.on("uncaughtException", (err) => {
+    console.log("UNCAUGHT EXCEPTION, APP SHUTTING DOWN NOW!!");
+    console.log(err.message, err.name);
+    process.exit(1);
+});
+
 module.exports = app;

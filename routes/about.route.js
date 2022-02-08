@@ -6,6 +6,7 @@ const router = express.Router();
 const about = require('../controller/about.controller.js');
 
 router.route('/')
+    //about page
     .get(about);
 
 module.exports = router;

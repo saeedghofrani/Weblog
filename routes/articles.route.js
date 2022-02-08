@@ -4,9 +4,8 @@ const express = require('express');
 const router = express.Router();
 // controller
 const { articles, article, myArticle, addArticlePage, addArticleProcess } = require('../controller/articles.controller.js');
-
-const upload = require('../utils/multerInitializer.utils');
-
+//multer middleware
+const upload = require('../utils/multerInitializer.utils');s
 // session middleware
 const sessionsCheck = require("../middleware/sessionCheck.middleware");
 

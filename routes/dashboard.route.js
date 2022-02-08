@@ -17,8 +17,14 @@ const upload = require('../utils/multerInitializer.utils');
 router.use(sessionsCheck.login);
 
 router.route('/')
+
+    //dashboard page
     .get(dashboard)
+
+    //update user data
     .put(duplicate.dashboard, userValidation('update'), dashboardProcess)
+    
+    //update avatar
     .post(upload.single('avatar'), avatarProcess);
 
 module.exports = router;
