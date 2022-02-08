@@ -11,7 +11,7 @@ const duplicate = require('../middleware/duplicateCheck.middleware');
 //controller
 const { dashboard, dashboardProcess, avatarProcess } = require('../controller/dashboard.controller.js');
 //upload Avatar
-const uploadAvatar = require('../')
+const upload = require('../utils/multerInitializer.utils');
 
 //check session and cookie
 router.use(sessionsCheck.login);
@@ -19,6 +19,6 @@ router.use(sessionsCheck.login);
 router.route('/')
     .get(dashboard)
     .put(duplicate.dashboard, userValidation('update'), dashboardProcess)
-    .post(avatarProcess);
+    .post(upload.single('avatar'), avatarProcess);
 
 module.exports = router;

@@ -3,16 +3,52 @@
 
 <head>
     <%- include('./common/header.ejs', {Document: "Articles" }) %>
-    <link rel="stylesheet" href="/style/articles.css">
+        <link rel="stylesheet" href="/style/articles.css">
 </head>
 
 <body>
-<%- include('./common/navbar.ejs') %>
-<p>
-    <%= data %>
-</p>
-<%- include('./common/scripts.ejs') %>
-<script src="/script/articles.js"></script>
+    <%- include('./common/navbar.ejs') %>
+        <ul class="card-list">
+            <% for( let i=0; i < data.length; i++ ) { %>
+                <div class="blog-card col-9 col-md-6 col-xl-5 m-3">
+                    <div class="meta">
+                        <div class="photo" style="background-image: url(/images/profileAvatar.jpg)">
+                        </div>
+                        <ul class="details">
+                            <li class="author">John Doe</li>
+                            <li class="date">
+                                <%= data[i].title %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="description">
+                        <h1>
+                            <%= data[i].title %>
+                        </h1>
+                        <h2>Opening a door to the future</h2>
+                        <p>
+                            lorem sadakdkjsdk lkajdlfjla kf;lkawefjidlkfjas;ldk jlakdsjc ;lakdjsflk ajsdlkfj nmnkj
+                            wel;kad;lkc
+                            ;sadjf;lsdkjbvlk jasdlk jhfkaj asdlkf jhlakd jshf kjashdfj jad fjas dfkjsd ajf sd
+                        </p>
+                        <p class="read-more">
+                            <a href="articles/<%= data[i]._id%>">Read More</a>
+                        </p>
+                    </div>
+                </div>
+                <% } %>
+        </ul>
+        <button class="btn btn-primary">
+            add article
+        </button>
+        <a class="btn btn-primary" href="/articles/setup">
+            add article
+        </a>
+        <button class="btn btn-primary">
+            add article
+        </button>
+        <%- include('./common/scripts.ejs') %>
+            <script src="/script/articles.js"></script>
 </body>
 
 </html>

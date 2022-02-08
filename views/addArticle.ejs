@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./common/header.ejs', {Document: "Articles" }) %>
+        <link rel="stylesheet" href="/style/addArticle.css">
+        <script src='https://cdn.tiny.cloud/1/lxw57gbnf0nc56h7ubi7ww1hzme9xycx4k965qh1fzrwr9b1/tinymce/5/tinymce.min.js'
+            referrerpolicy="origin">
+            </script>
+</head>
+
+<body>
+    <%- include('./common/navbar.ejs') %>
+
+        <div class="p-5">
+            <form action="/articles/setup" method="post" enctype="multipart/form-data"
+                class="form-horizontal row justify-content-center">
+                <input type="file" name="articlePicture" class="form-control-file col-12 col-md-5 mb-5"
+                    id="exampleFormControlFile1">
+                <input type="text" placeholder="title" name="title" class="col-12 col-md-5 mb-5">
+                <textarea id="mytextarea" name="content">
+                start writing your article
+        </textarea>
+                <input type="submit" value="add article">
+            </form>
+        </div>
+
+        <%- include('./common/scripts.ejs') %>
+            <script src="/script/addArticle.js"></script>
+</body>
+
+</html>

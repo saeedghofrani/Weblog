@@ -23,13 +23,37 @@ const article = safeCall(async (request, response, _next) => {
 });
 
 const myArticle = safeCall(async (request, response, _next) => {
-
     const user = request.session.user;
-    
+    const myArticle = await Article.find({ author: user._id });
+    console.log(myArticle);
+    response.render('article', { data: myArticle });
 });
 
-module.exports = { 
-    articles, 
-    article, 
-    myArticle 
+const addArticlePage = (request, response, _next) => {
+    response.render('addArticle')
+}
+
+const addArticleProcess = safeCall(async (request, response, _next) => {
+
+    const data = {
+        title: request.body.title,
+        content: request.body.content,
+        image: request.file.filename,
+        author: request.session.user._id
+    }
+    const article = await Article.create(data);
+    if (!article) {
+        response.send('error');
+    }
+    response.redirect('/articles/myArticle');
+
+});
+
+
+module.exports = {
+    articles,
+    article,
+    myArticle,
+    addArticlePage,
+    addArticleProcess
 };

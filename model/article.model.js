@@ -21,10 +21,14 @@ const articleSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    // author: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // },
+    coment: {
+        type: [[String]],
+        default: [['none', '']]
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 }, { timestamps: true });
 module.exports = mongoose.model('Article', articleSchema);
