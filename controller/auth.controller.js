@@ -90,7 +90,7 @@ const pass = (_request, response, _next) => {
 };
 
 //change password controller
-const passProcces = async (request, response, _next) => {
+const passProcces = safeCall(async (request, response, _next) => {
     //collect data
     const { oldPass, password, confPass } = request.body;
 
@@ -112,7 +112,7 @@ const passProcces = async (request, response, _next) => {
     const user = request.session.user;
 
     //find user and get password
-    const userTarget = await User.findById(user._id).select('+password');
+    const userTarget = await User.findOne(user).select('+password');
     //error handling for MODEL.FINDBYID
     if (!userTarget)
         return response.status(400).send({
@@ -148,7 +148,7 @@ const passProcces = async (request, response, _next) => {
         success: true,
         message: 'update was succesfull',
     });
-};
+});
 
 //delete user acount
 const delAccount = safeCall(async (request, response, _next) => {

@@ -5,7 +5,7 @@ const router = express.Router();
 // controller
 const { articles, article, myArticle, addArticlePage, addArticleProcess } = require('../controller/articles.controller.js');
 //multer middleware
-const upload = require('../utils/multerInitializer.utils');s
+const upload = require('../utils/multerInitializer.utils');
 // session middleware
 const sessionsCheck = require("../middleware/sessionCheck.middleware");
 

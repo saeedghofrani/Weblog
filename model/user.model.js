@@ -89,7 +89,7 @@ const UserSchema = new Schema({
 }, { timestamps: true });
 
 //uniqu validator
-UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
+// UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
 
 //hashing password hook
 UserSchema.pre('save', async function (next) {

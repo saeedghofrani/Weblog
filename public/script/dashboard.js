@@ -75,6 +75,7 @@ $(document).ready(function () {
         $('.inputUpdate').addClass("inputUpdateActive").removeAttr('disabled').removeAttr('readonly');
         $('.btnUpdatesCancel').removeClass('d-none');
     });
+    
     $('#toastBtn').click(function (e) {
         e.preventDefault();
         $('.toast').toast("hide");
