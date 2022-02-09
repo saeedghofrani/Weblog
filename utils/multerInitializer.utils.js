@@ -40,5 +40,15 @@ const avatarStorage = multer.diskStorage({
 const uploadAvatar = multer({
     storage: avatarStorage,
     fileFilter
-})
-module.exports = uploadAvatar;
+});
+
+const articlePictureStorage = multer.diskStorage({
+    destination: destination(path.join(__dirname, '../public/images/article')),
+    filename: filename('articlePicture')
+});
+const uploadarticlePicture = multer({
+    storage: articlePictureStorage,
+    fileFilter
+});
+
+module.exports = { uploadAvatar, uploadarticlePicture };

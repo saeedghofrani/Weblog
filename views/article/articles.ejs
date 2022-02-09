@@ -2,20 +2,30 @@
 <html lang="en">
 
 <head>
-    <%- include('./common/header.ejs', {Document: "Articles" }) %>
+    <%- include('../common/header.ejs', {Document: "Articles" }) %>
         <link rel="stylesheet" href="/style/articles.css">
 </head>
 
 <body>
-    <%- include('./common/navbar.ejs') %>
+    <%- include('../common/navbar.ejs') %>
+        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark m-3">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
+                    efficiently about what's most interesting in this post's contents.</p>
+                <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+            </div>
+        </div>
         <ul class="card-list">
             <% for( let i=0; i < data.length; i++ ) { %>
                 <div class="blog-card col-9 col-md-6 col-xl-5 m-3">
                     <div class="meta">
-                        <div class="photo" style="background-image: url(/images/profileAvatar.jpg)">
+                        <div class="photo" style="background-image: url(/images/article/<%=data[i].image %>) ">
                         </div>
                         <ul class="details">
-                            <li class="author">John Doe</li>
+                            <li class="author">
+                                <%= data[i].author.username %>
+                            </li>
                             <li class="date">
                                 <%= data[i].title %>
                             </li>
@@ -25,11 +35,9 @@
                         <h1>
                             <%= data[i].title %>
                         </h1>
-                        <h2>Opening a door to the future</h2>
+                        <h2>Category: any</h2>
                         <p>
-                            lorem sadakdkjsdk lkajdlfjla kf;lkawefjidlkfjas;ldk jlakdsjc ;lakdjsflk ajsdlkfj nmnkj
-                            wel;kad;lkc
-                            ;sadjf;lsdkjbvlk jasdlk jhfkaj asdlkf jhlakd jshf kjashdfj jad fjas dfkjsd ajf sd
+                            <%= data[i].description %>
                         </p>
                         <p class="read-more">
                             <a href="articles/<%= data[i]._id%>">Read More</a>
@@ -38,16 +46,7 @@
                 </div>
                 <% } %>
         </ul>
-        <button class="btn btn-primary">
-            add article
-        </button>
-        <a class="btn btn-primary" href="/articles/setup">
-            add article
-        </a>
-        <button class="btn btn-primary">
-            add article
-        </button>
-        <%- include('./common/scripts.ejs') %>
+        <%- include('../common/scripts.ejs') %>
             <script src="/script/articles.js"></script>
 </body>
 

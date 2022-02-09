@@ -177,6 +177,44 @@ const inactivate = safeCall(async (request, response, _next) => {
     response.redirect('/auth/logout');
 });
 
+//reset password without login
+const resetPassword = safeCall(async (request, response, _next) => {
+    //collect data from request
+    const { username, email, phone } = request.body;
+
+    //find user by username
+    const user = await User.findOne({ username }).select('+password');
+
+    //check for accurate username
+    if (!user)
+        return response.render('pass',
+            {
+                ERROR: "wrong username"
+            });
+
+    //check for accurate phone number
+    if (user.phone !== phone)
+        return response.render('pass',
+            {
+                ERROR: "wrong phone number"
+            });
+
+    //change user password to phoe number
+    user.password = user.phone;
+    const savedUser = await user.save({ validateBeforeSave: false });
+
+    //error handling for MODEL.SAVE
+    if (!savedUser)
+        return response.render('pass',
+            {
+                ERROR: "reset password failed"
+            });
+
+    //redirec to login page
+    return response.redirect('/auth/login');
+
+});
+
 module.exports = {
     login,
     loginProcess,
@@ -186,5 +224,6 @@ module.exports = {
     pass,
     passProcces,
     delAccount,
-    inactivate
+    inactivate,
+    resetPassword
 };
