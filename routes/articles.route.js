@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 // controller
-const { articles, article, myArticle, addArticlePage, addArticleProcess } = require('../controller/articles.controller.js');
+const { articles, article, myArticle, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage } = require('../controller/articles.controller.js');
 //multer middleware
 const upload = require('../utils/multerInitializer.utils').uploadarticlePicture;
 // session middleware
@@ -16,11 +16,15 @@ router.route('/')
 // get users articles
 router.route('/myArticle')
     .get(sessionsCheck.login, myArticle)
-    .delete(sessionsCheck.login, delMyArticle);
+
+router.route('/updateArticle/:id')
+    .get(sessionsCheck.login, updateArticlePage);
 
 router.route('/setup')
     .get(sessionsCheck.login, addArticlePage)
-    .post(sessionsCheck.login, upload.single('articlePicture'), addArticleProcess);
+    .post(sessionsCheck.login, upload.single('articlePicture'), addArticleProcess)
+    .patch(sessionsCheck.login, updateArticleProcess)
+    .delete(sessionsCheck.login, delMyArticle);
 
 //get one perticular article
 router.route('/:id')

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../common/header.ejs', {Document: "Articles" }) %>
+        <link rel="stylesheet" href="/style/addArticle.css">
+        <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
+            type="text/css" />
+</head>
+
+<body>
+    <%- include('../common/navbar.ejs') %>
+
+        <div class="p-5">
+            <form action="/articles/setup" method="patch" class="form-horizontal row justify-content-center">
+                <div class="col-12 col-md-1">
+                    <img src="/images/article/<%= data.image %>" alt="article piture" class="img-responsive col">
+                </div>
+                <input type="text" placeholder="title" name="title" class="col-12 col-md-5 mb-5"
+                    value="<%= data.title %> ">
+                <input type="text" placeholder="description" name="description" class="col-12 mb-5"
+                    value="<%= data.description %> ">
+                <textarea id="mytextarea" name="content">
+                <%= data.content %> 
+        </textarea>
+                <input type="text" value="<%= data._id %>" class="d-none" name="id">
+                <input type="submit" class="btn btn-primary mt-5" value="update article">
+            </form>
+        </div>
+
+        <%- include('../common/scripts.ejs') %> 
+            <script type="text/javascript"
+                src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+            <script>
+                new FroalaEditor('textarea');
+            </script>
+</body>
+
+</html>
