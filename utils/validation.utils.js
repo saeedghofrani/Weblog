@@ -4,7 +4,7 @@ const { MongoError } = require('mongodb');
 const usernameValidation = async (req, res) => {
     let { username } = req.body;
     username = username.trim();
-    if (!username || username === 'undefined' || username === 'null' || validator.isEmpty(username) || username.length < 5) {
+    if (!username || validator.isEmpty(username) || username.length < 5) {
         res.locals.error = true;
         res.locals.message.push('invalid username: username most be more than 5 letter and UNIQUE!!');
     }

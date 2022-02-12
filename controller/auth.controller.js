@@ -66,9 +66,9 @@ const registerProcess = safeCall(async (request, response, _next) => {
             ERROR: 'creating user was unsuccessful'
         });
     //set session for user
-    request.session.user = user;
+    // request.session.user = user;
     //redirect to dashboard
-    return response.redirect('/dashboard');
+    return response.redirect('/auth/login');
 });
 
 //logout controller 

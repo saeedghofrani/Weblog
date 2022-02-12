@@ -90,6 +90,7 @@ app.use((err, req, res, _next) => {
 process.on("uncaughtException", (err) => {
     console.log("UNCAUGHT EXCEPTION, APP SHUTTING DOWN NOW!!");
     console.log(err.message, err.name);
+    res.render('error', { error: { message: "internall server error", status: 500 } });
     process.exit(1);
 });
 

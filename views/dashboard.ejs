@@ -14,10 +14,10 @@
                     <div class="col-md-4">
                         <form action="/dashboard" enctype="multipart/form-data" method="post">
                             <div class="profile-img">
-                                <img id="" src=" /images/avatars/<%= data.avatar %>" alt="profile photo" class="img-responsive" />
+                                <img  src=" /images/avatars/<%= data.avatar %>" alt="profile photo" class="img-responsive" />
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
-                                    <input type="file" name="avatar" />
+                                    <input  type="file" name="avatar" id="inputFile" accept="image/*"/>
                                     <br>
                                     <input class="avatarbtn col-12" type="submit" value="APPLY" />
                                 </div>

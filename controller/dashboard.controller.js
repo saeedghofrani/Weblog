@@ -2,6 +2,8 @@
 const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
+// const multer = require('multer');
+// const upload = multer().single('avatar');
 
 // render dashboard page
 const dashboard = (request, response, _next) => {
@@ -67,8 +69,18 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 //update avatar
 const avatarProcess = safeCall(async (request, response, next) => {
 
+    // upload(req, res, function (err) {
+    //     if (err instanceof multer.MulterError) {
+    //         return response.render('error', { error: { message: "internal error", status: 500 } });
+    //     } else if (err) {
+    //         return response.render('error', { error: { message: "internal error", status: 500 } });
+    //     }
+    //     next();
+    // });
+
     //update user by avatar
     user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true });
+
     //session user
     request.session.user = user;
 

@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
-
-
+    $('#inputFile').change(function (e) { 
+        e.preventDefault();
+        console.log(e.target.files[0]);
+    });
     
     $("#updatePass").click(function (e) {
         e.preventDefault();
