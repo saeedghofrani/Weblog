@@ -4,40 +4,50 @@ const Article = require('../model/article.model');
 const safeCall = require('../utils/safeCall.utils');
 
 //render article page 
-const articles = safeCall(async (_request, response, _next) => {
+const articles = safeCall(async (request, response, _next) => {
 
-    //collect data from database 
-    const articles = await Article.find({}).populate('author').sort({ createdAt: -1 });
-    //colect most visit Count articles
-    const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(4);
+    const condition = request.params.condition;
 
-    return response.render('./article/articles', { data: articles, topArticle: visitCount });
-
-});
-
-//render an article page
-const article = safeCall(async (request, response, _next) => {
-
-    //get article id from request params
-    const id = request.params.id;
-    //find article from database
-    const article = await Article.findById(id).populate('author');
-
-    //render article page
-    if (request.session.user && request.session.user.username !== article.author.username || !request.session.user) {
-        article.visitCount++;
-        article.save();
+    //all article
+    if (condition === 'all') {
+        //collect data from database sort bt createdAt
+        const articles = await Article.find({}).populate('author').sort({ createdAt: -1 });
+        //colect most visit Count articles 
+        const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(4);
+        //render artile page sorted 
+        return response.render('./article/articles', { data: articles, topArticle: visitCount });
     }
 
-    return response.render('./article/article', { data: article });
+    //my article
+    if (condition === 'myArticle') {
+        //collect user data from session
+        const user = request.session.user;
+        if (!user) {
+            return response.redirect('/auth/login');
+        }
+        //find article writed by user
+        const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
+        ///render article page with data
+        response.render('./article/myArticles', { data: myArticle });
+    }
 
+    else {
+
+        //get article id from request params
+        const id = request.params.condition;
+        //find article from database
+        const article = await Article.findById(id).populate('author');
+        //add visit count of article 
+        if (request.session.user && request.session.user.username !== article.author.username || !request.session.user) {
+            article.visitCount++;
+            article.save();
+        }
+        //render article page 
+        return response.render('./article/article', { data: article });
+
+    }
 });
 
-const myArticle = safeCall(async (request, response, _next) => {
-    const user = request.session.user;
-    const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
-    response.render('./article/myArticles', { data: myArticle });
-});
 
 const addArticlePage = (request, response, _next) => {
     response.render('./article/addArticle')
@@ -105,8 +115,6 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
 
 module.exports = {
     articles,
-    article,
-    myArticle,
     addArticlePage,
     addArticleProcess,
     delMyArticle,

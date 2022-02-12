@@ -1,10 +1,72 @@
 $(document).ready(function () {
 
-    $('#inputFile').change(function (e) { 
+    let image = $('#avatarImage').attr('src');
+    $('#avatarImage').click(function (e) {
         e.preventDefault();
-        console.log(e.target.files[0]);
+        $('#inputFile').trigger('click');
     });
-    
+
+
+    $('#inputFile').change(function (e) {
+        e.preventDefault();
+        var input = this;
+        var url = $(this).val();
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#avatarImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+
+            $('#avatarSubmit').trigger('submit');
+
+        }
+        else {
+            alert('Please select image file (jpg, jpeg, png)');
+            $('#avatarImage').attr('src', image);
+        }
+    });
+
+    $('#avatarSubmit').submit(function (e) {
+        e.preventDefault();
+        var data = new FormData($('#avatarForm')[0]);
+        $.ajax({
+            url: '/dashboard',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: data,
+            success: function (response) {
+                $('#successpass').removeClass('d-none');
+                $('#successpass').html(response.message);
+                setTimeout(function () {
+                    $('#successpass').addClass('d-none');
+                    $('#successpass').html('');
+                    noraml();
+                }, 5000);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('update avatar unsuccessful')
+                $('#avatarImage').attr('src', image);
+                $('#errorpass').removeClass('d-none');
+                $('#errorpass').html(xhr.responseText);
+                setTimeout(function () {
+                    $('#errorpass').addClass('d-none');
+                    $('#errorpass').html('');
+                    noraml()
+                }, 5000);
+
+            }
+        });
+    });
+
+
+
+
+
+
     $("#updatePass").click(function (e) {
         e.preventDefault();
         const data = {
@@ -77,7 +139,7 @@ $(document).ready(function () {
         $('.inputUpdate').addClass("inputUpdateActive").removeAttr('disabled').removeAttr('readonly');
         $('.btnUpdatesCancel').removeClass('d-none');
     });
-    
+
     $('#toastBtn').click(function (e) {
         e.preventDefault();
         $('.toast').toast("hide");

@@ -12,14 +12,13 @@
             <section>
                 <div class="row cont">
                     <div class="col-md-4">
-                        <form action="/dashboard" enctype="multipart/form-data" method="post">
+                        <form action="/dashboard" enctype="multipart/form-data" method="post" id="avatarForm">
                             <div class="profile-img">
-                                <img  src=" /images/avatars/<%= data.avatar %>" alt="profile photo" class="img-responsive" />
+                                <img  src=" /images/avatars/<%= data.avatar %>" alt="profile photo" class="img-responsive" id="avatarImage"/>
                                 <div class="file btn btn-lg btn-primary">
-                                    Change Photo
-                                    <input  type="file" name="avatar" id="inputFile" accept="image/*"/>
+                                    <input  type="file" name="avatar" id="inputFile" accept="image/*" class="d-none" />
                                     <br>
-                                    <input class="avatarbtn col-12" type="submit" value="APPLY" />
+                                    <input class="avatarbtn d-none" type="submit" value="" id="avatarSubmit"/>
                                 </div>
                             </div>
                         </form>

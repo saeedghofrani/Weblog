@@ -43,7 +43,7 @@
                                 <!-- <%= topArticle[i].author.username %> -->
                               </li>
                               <li class="date">
-                                <%= topArticle[i].title %>
+                                <%= topArticle[i].createdAt %>
                               </li>
                             </ul>
                           </div>
@@ -56,7 +56,7 @@
                               <%= topArticle[i].description %>
                             </p>
                             <p class="read-more">
-                              <a href="articles/<%= topArticle[i]._id%>">Read More</a>
+                              <a href="/articles/<%= topArticle[i]._id%>">Read More</a>
                             </p>
                           </div>
                         </div>
@@ -88,7 +88,7 @@
                   <%= data[i].author.username %>
                 </li>
                 <li class="date">
-                  <%= data[i].title %>
+                  <%= data[i].createdAt %>
                 </li>
               </ul>
             </div>
@@ -101,7 +101,7 @@
                 <%= data[i].description %>
               </p>
               <p class="read-more">
-                <a href="articles/<%= data[i]._id%>">Read More</a>
+                <a href="/articles/<%= data[i]._id%>">Read More</a>
               </p>
             </div>
           </div>

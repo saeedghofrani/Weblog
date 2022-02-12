@@ -77,10 +77,18 @@ const avatarProcess = safeCall(async (request, response, next) => {
 
     //error handling for MODEL.findOneAndUpdate
     if (!user) {
-        return response.render('error', { error: { message: "internal error", status: 500 } });
+        return response.status(400).send({
+            success: false,
+            message: 'user update was unsuccessfully.',
+            data: null
+        });
     }
     //redirect to dashboard
-    response.redirect('/dashboard');
+    return response.status(200).send({
+        success: true,
+        message: 'user updated successfully.',
+        data: null
+    });
 
 });
 
