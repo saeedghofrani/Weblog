@@ -2,52 +2,116 @@
 <html lang="en">
 
 <head>
-    <%- include('../common/header.ejs', {Document: "Articles" }) %>
-        <link rel="stylesheet" href="/style/articles.css">
+
+  <%- include('../common/header.ejs', {Document: "Articles" }) %>
+    <link rel="stylesheet" href="/style/articles.css">
+
 </head>
 
-<body>
-    <%- include('../common/navbar.ejs') %>
-        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark m-3">
-            <div class="col-md-6 px-0">
-                <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-                    efficiently about what's most interesting in this post's contents.</p>
-                <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-            </div>
-        </div>
-        <ul class="card-list">
-            <% for( let i=0; i < data.length; i++ ) { %>
-                <div class="blog-card col-9 col-md-6 col-xl-5 m-3">
-                    <div class="meta">
-                        <div class="photo" style="background-image: url(/images/article/<%=data[i].image %>) ">
+<body class="px-5">
+
+  <%- include('../common/navbar.ejs') %>
+
+    <section class="pt-5 pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <h3 class="mb-3">4 TOP ARTICLE</h3>
+          </div>
+          <div class="col-6 text-right">
+            <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+              <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+              <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="col-12">
+            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row">
+                    <% for( let i=0; i < 2; i++ ) { %>
+                      <div class="col-12 col-md-6">
+                        <div class="blog-card m-3">
+                          <div class="meta">
+                            <div class="photo"
+                              style="background-image: url(/images/article/<%=topArticle[i].image %>) ">
+                            </div>
+                            <ul class="details">
+                              <li class="author">
+                                <!-- <%= topArticle[i].author.username %> -->
+                              </li>
+                              <li class="date">
+                                <%= topArticle[i].title %>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="description">
+                            <h1>
+                              <%= topArticle[i].title %>
+                            </h1>
+                            <h2>Category: any</h2>
+                            <p>
+                              <%= topArticle[i].description %>
+                            </p>
+                            <p class="read-more">
+                              <a href="articles/<%= topArticle[i]._id%>">Read More</a>
+                            </p>
+                          </div>
                         </div>
-                        <ul class="details">
-                            <li class="author">
-                                <%= data[i].author.username %>
-                            </li>
-                            <li class="date">
-                                <%= data[i].title %>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="description">
-                        <h1>
-                            <%= data[i].title %>
-                        </h1>
-                        <h2>Category: any</h2>
-                        <p>
-                            <%= data[i].description %>
-                        </p>
-                        <p class="read-more">
-                            <a href="articles/<%= data[i]._id%>">Read More</a>
-                        </p>
-                    </div>
+                      </div>
+                      <% } %>
+                  </div>
                 </div>
-                <% } %>
-        </ul>
-        <%- include('../common/scripts.ejs') %>
-            <script src="/script/articles.js"></script>
+                <div class="carousel-item">
+                  <div class="row">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr>
+    <div class="border-container  pillar-container">
+      <ul class="card-list">
+        <% for( let i=0; i < data.length; i++ ) { %>
+          <div class="blog-card col-9 col-md-6 col-xl-5 m-3">
+            <div class="meta">
+              <div class="photo" style="background-image: url(/images/article/<%=data[i].image %>) ">
+              </div>
+              <ul class="details">
+                <li class="author">
+                  <%= data[i].author.username %>
+                </li>
+                <li class="date">
+                  <%= data[i].title %>
+                </li>
+              </ul>
+            </div>
+            <div class="description">
+              <h1>
+                <%= data[i].title %>
+              </h1>
+              <h2>Category: any</h2>
+              <p>
+                <%= data[i].description %>
+              </p>
+              <p class="read-more">
+                <a href="articles/<%= data[i]._id%>">Read More</a>
+              </p>
+            </div>
+          </div>
+          <% } %>
+      </ul>
+    </div>
+
+
+    <%- include('../common/scripts.ejs') %>
+      <script src="/script/articles.js"></script>
 </body>
 
 </html>

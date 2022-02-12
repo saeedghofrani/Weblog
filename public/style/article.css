@@ -1,0 +1,12 @@
+.head {
+    box-shadow: 0px 1px 0px #338275 !important;
+    width: 100%;
+};
+p.oneArticleData {
+    background-color: red !important;
+    border: 10px solid black !important;
+    box-shadow: 0px 1px 0px #338275 !important; 
+}
+.content {
+    border: 1px solid black !important;
+}

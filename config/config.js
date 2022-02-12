@@ -13,7 +13,7 @@ const development = {
     //database variable (DBhost, DBport, DBname)
     db: {
         host: process.env.DEV_DB_HOST || 'localhost',
-        port: 27019,
+        port: process.env.DEV_DB_PORT || 27017,
         name: process.env.DEV_DB_NAME || 'ESTER'
     },
     //session secret key 

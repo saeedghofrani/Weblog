@@ -2,35 +2,51 @@
 <html lang="en">
 
 <head>
-    <%- include('../common/header.ejs', {Document: "Articles" }) %>
+
+    <%- include('../common/header.ejs', {Document: "Update Article" }) %>
         <link rel="stylesheet" href="/style/addArticle.css">
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
             type="text/css" />
+
 </head>
+
 
 <body>
     <%- include('../common/navbar.ejs') %>
-
         <div class="p-5">
-            <form action="/articles/setup" method="patch" class="form-horizontal row justify-content-center">
-                <div class="col-12 col-md-1">
-                    <img src="/images/article/<%= data.image %>" alt="article piture" class="img-responsive col">
-                </div>
-                <input type="text" placeholder="title" name="title" class="col-12 col-md-5 mb-5"
+            <form action="/articles/setup" method="patch" enctype="multipart/form-data" class="">
+
+
+                <p class="text-success head col-12 m-1 p-2">image</p>
+                <input type="file" placeholder="title" name="image" id="formFile"
+                    class=" form-control col-12 col-md-12 m-0 mb-1" value="<%= data.title %> ">
+
+                <p class="text-success head col-12 m-1 p-2">TITLE</p>
+                <input type="text" placeholder="title" name="title" class="col-12 col-md-12 m-0 mb-1"
                     value="<%= data.title %> ">
-                <input type="text" placeholder="description" name="description" class="col-12 mb-5"
+
+                <p class="text-success head col-12 m-1 p-2">DESCRIPTION</p>
+                <input type="text" placeholder="description" name="description" class="col-12 m-0 mb-3"
                     value="<%= data.description %> ">
+
                 <textarea id="mytextarea" name="content">
                 <%= data.content %> 
         </textarea>
+
                 <input type="text" value="<%= data._id %>" class="d-none" name="id">
+
                 <input type="submit" class="btn btn-primary mt-5" value="update article">
+
             </form>
         </div>
 
-        <%- include('../common/scripts.ejs') %> 
+
+
+        <%- include('../common/scripts.ejs') %>
+
             <script type="text/javascript"
                 src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
             <script>
                 new FroalaEditor('textarea');
             </script>

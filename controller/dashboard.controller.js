@@ -69,15 +69,6 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 //update avatar
 const avatarProcess = safeCall(async (request, response, next) => {
 
-    // upload(req, res, function (err) {
-    //     if (err instanceof multer.MulterError) {
-    //         return response.render('error', { error: { message: "internal error", status: 500 } });
-    //     } else if (err) {
-    //         return response.render('error', { error: { message: "internal error", status: 500 } });
-    //     }
-    //     next();
-    // });
-
     //update user by avatar
     user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true });
 

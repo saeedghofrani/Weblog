@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <%- include('../common/header.ejs', {Document: "Articles" }) %>
+    <%- include('../common/header.ejs', {Document: "ADD ARTICLE " }) %>
         <link rel="stylesheet" href="/style/addArticle.css">
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
             type="text/css" />
@@ -12,18 +12,28 @@
     <%- include('../common/navbar.ejs') %>
 
         <div class="p-5">
-            <form action="/articles/setup" method="post" enctype="multipart/form-data"
-                class="form-horizontal row justify-content-center">
-                <input type="file" name="articlePicture" class="form-control-file col-12 col-md-5 mb-5"
-                    id="exampleFormControlFile1">
-                <input type="text" placeholder="title" name="title" class="col-12 col-md-5 mb-5">
-                <input type="text" placeholder="description" name="description" class="col-12 mb-5">
+            <form action="/articles/setup" method="post"  enctype="multipart/form-data" class="">
+
+
+                <p class="text-success head col-12 m-1 p-2">image</p>
+                <input type="file" name="articlePicture" id="formFile" class=" form-control col-12 col-md-12 m-0 mb-1">
+
+                <p class="text-success head col-12 m-1 p-2">TITLE</p>
+                <input type="text" name="title" class="col-12 col-md-12 m-0 mb-1">
+
+                <p class="text-success head col-12 m-1 p-2">DESCRIPTION</p>
+                <input type="text" name="description" class="col-12 m-0 mb-3">
+
                 <textarea id="mytextarea" name="content">
-                start writing your article
-        </textarea>
+    </textarea>
+
+                <input type="text" class="d-none" name="id">
+
                 <input type="submit" class="btn btn-primary mt-5" value="add article">
+
             </form>
         </div>
+
 
         <%- include('../common/scripts.ejs') %>
             <script src="/script/addArticle.js"></script>

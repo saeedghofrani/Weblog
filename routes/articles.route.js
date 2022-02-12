@@ -23,7 +23,7 @@ router.route('/updateArticle/:id')
 router.route('/setup')
     .get(sessionsCheck.login, addArticlePage)
     .post(sessionsCheck.login, upload.single('articlePicture'), addArticleProcess)
-    .patch(sessionsCheck.login, updateArticleProcess)
+    .patch(sessionsCheck.login, upload.single('articlePicture'), updateArticleProcess)
     .delete(sessionsCheck.login, delMyArticle);
 
 //get one perticular article

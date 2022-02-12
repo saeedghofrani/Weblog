@@ -3,36 +3,44 @@
 
 <head>
     <%- include('../common/header.ejs', {Document: "Articles" }) %>
-        <link rel="stylesheet" href="/style/articles.css">
+        <link rel="stylesheet" href="/style/article.css">
 </head>
 
 <body>
     <%- include('../common/navbar.ejs') %>
 
 
-        <div class="container">
-            <div class="row justify-content-center align-content-center no-wrap p-3">
-                <div class="col-12 col-md-3">
-                    <img src="/images/article/<%= data.image %> " alt="" class="img-responsive img-centered col-12 ">
-                </div>
-                <div class="col-12 col-md-9">
-                    <p class="">
+        <div class="container col-12">
+
+            <img src="/images/article/<%= data.image %> " class="img-fluid col-12" style="max-height:400px;" alt="Responsive image">
+
+            <div class="row justify-content-start align-content-center no-wrap p-3 col-12" >
+
+                <div class="col-12 col-md-12">
+                    <p class="text-success head col-12 m-1 p-2">TITLE</p>
+                    <p class=" p-2 oneArticleData">
                         <%= data.title %>
                     </p>
-                    <p class="">
+                    <p class="text-success head col-12 m-1 p-2">DESCRIPTION</p> 
+                    <p class=" p-2 oneArticleData">
                         <%= data.description %>
                     </p>
-                    <p class="">
-                        <%= data.author.username %>
+                    <p class="text-success head col-12 m-1 p-2">AUTHOR</p> 
+                    <p class=" p-2 oneArticleData">
+                       <%= data.author.username %>
                     </p>
                 </div>
             </div>
-            <div class="p-2 mt-2">
+
+            <div class="p-2 mt-2 content">
                 <%= data.content %>
             </div>
+
         </div>
+
+
         <%- include('../common/scripts.ejs') %>
-            <script src="/script/articles.js"></script>
+            <script src="/script/article.js"></script>
 </body>
 
 </html>

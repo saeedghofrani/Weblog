@@ -5,9 +5,13 @@ const safeCall = require('../utils/safeCall.utils');
 
 //render article page 
 const articles = safeCall(async (_request, response, _next) => {
+
     //collect data from database 
     const articles = await Article.find({}).populate('author').sort({ createdAt: -1 });
-    return response.render('./article/articles', { data: articles });
+    //colect most visit Count articles
+    const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(4);
+
+    return response.render('./article/articles', { data: articles, topArticle: visitCount });
 
 });
 
@@ -18,9 +22,10 @@ const article = safeCall(async (request, response, _next) => {
     const id = request.params.id;
     //find article from database
     const article = await Article.findById(id).populate('author');
+
     //render article page
     if (request.session.user && request.session.user.username !== article.author.username || !request.session.user) {
-        article.visitCount++
+        article.visitCount++;
         article.save();
     }
 
@@ -85,12 +90,16 @@ const updateArticlePage = safeCall(async (request, response, _next) => {
 });
 
 const updateArticleProcess = safeCall(async (request, response, _next) => {
+
     const data = {
         title: request.body.title,
         content: request.body.content,
-        description: request.body.description
+        description: request.body.description,
+        image: request.file.filename,
     };
+
     await Article.findByIdAndUpdate(request.body.id, data);
+
     return response.redirect('/articles/myArticle')
 });
 
