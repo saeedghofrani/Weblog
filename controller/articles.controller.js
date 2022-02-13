@@ -50,7 +50,7 @@ const articles = safeCall(async (request, response, _next) => {
 
 
 const addArticlePage = (request, response, _next) => {
-    response.render('./article/addArticle')
+    response.render('./article/addArticle');
 }
 
 const addArticleProcess = safeCall(async (request, response, _next) => {

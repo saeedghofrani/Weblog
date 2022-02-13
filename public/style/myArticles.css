@@ -1,6 +1,25 @@
+.upRE {
+  background-color: #338275 !important;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff !important;
+}
+
+.upRE:hover {
+  background-color: #338275 !important;
+  box-shadow: rgba(0, 0, 0, 0.503) 0 2px 4px 0;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff !important;
+  cursor: pointer;
+}
+
+
 .button-37 {
-  background-color: #13aa52;
-  border: 1px solid #13aa52;
+  background-color: #338275;
+  border: 1px solid #338275;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
   box-sizing: border-box;
@@ -25,8 +44,8 @@
 }
 
 a.btn {
-  background-color: #13aa52;
-  border: 1px solid #13aa52;
+  background-color: #338275;
+  border: 1px solid #338275;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
   box-sizing: border-box;
@@ -44,8 +63,8 @@ a.btn {
 }
 
 a.btn:hover {
-  background-color: #0f783b;
-  border: 1px solid #13aa52;
+  background-color: #338275;
+  border: 1px solid #338275;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
   box-sizing: border-box;

@@ -1,3 +1,49 @@
+.Top4 {
+    color: #1b515e;
+}
+body {
+  cursor: default;
+}
+.lineDown {
+  color: #1b515e;
+  background-color: #1b515e;  
+  width: 100%;
+  height: 2px;
+  box-shadow:10px 10px 10px #1b515e;
+}
+.movingBtn {
+  background-color: #1b515e;
+  border: none;
+  outline: none;
+}
+.movingBtn:hover {
+  background-color: #338275;
+  border: none;
+}
+.movingBtn:active {
+  background-color: #338275;
+  border: none !important;
+  outline: none !important;
+}
+.movingBtn:focus {
+  background-color: #1b515e;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+h1 {
+  color: #1b515e;
+}
+.readMore {
+  color: #338275 !important;
+  text-decoration: none;
+}
+.readMore:hover {
+  color: #1b515e !important;
+  text-decoration: none;
+}
+
 .card-list {
   padding: 10px;
   display: flex;
@@ -6,6 +52,7 @@
   justify-content: center;
   align-items: center;
 }
+
 img {
   max-height: 500px;
 }
@@ -151,6 +198,8 @@ img {
 .blog-card:hover .details {
   left: 0%;
 }
+
+
 @media (min-width: 640px) {
   .blog-card {
     flex-direction: row;

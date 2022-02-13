@@ -3,16 +3,12 @@
 
 <head>
     <%- include('../common/header.ejs', {Document: "My Articles" }) %>
-    <link rel="stylesheet" href="/style/articles.css">
+        <link rel="stylesheet" href="/style/articles.css">
         <link rel="stylesheet" href="/style/myArticles.css">
 </head>
 
-<body>
+<body class="px-5">
     <%- include('../common/navbar.ejs') %>
-
-    <a class="button-37 btn ms-5" href="/articles/setup">
-        add article
-    </a>
 
         <ul class="card-list">
             <% for( let i=0; i < data.length; i++ ) { %>
@@ -29,7 +25,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="description">
+                    <div class="description row align-items-center">
                         <h1>
                             <%= data[i].title %>
                         </h1>
@@ -38,9 +34,12 @@
                             <%= data[i].description %>
                         </p>
                         <p class="read-more mt-4 d-flex justify-content-between">
-                            <a class=" btn btn-primary mx-2" href="/articles/updateArticle/<%= data[i]._id%>">Update</a>
-                            <a class=" btn btn-primary removeArticle mx-2" articleid="<%= data[i]._id%>">Remove</a>
-                            <a class=" d-flex align-items-center"href="http://localhost:3000/articles/<%= data[i]._id%>">Read More</a>
+                            <a class=" mx-2 upRE"
+                                href="/articles/updateArticle/<%= data[i]._id%>">Update</a>
+                            <a class=" removeArticle mx-2 upRE"
+                                articleid="<%= data[i]._id%>">Remove</a>
+                            <a class=" d-flex align-items-center readMore"
+                                href="http://localhost:3000/articles/<%= data[i]._id%>">Read More</a>
 
                         </p>
 
@@ -48,6 +47,12 @@
                 </div>
                 <% } %>
         </ul>
+        <div class="lineDown mb-5"></div>
+        <div class="col-12 row justify-content-center">
+            <a class="button-37 btn ms-5 col-1" href="/articles/setup">
+                add article
+            </a>
+        </div>
         <%- include('../common/scripts.ejs') %>
             <script src="/script/MyArticles.js"></script>
 </body>
