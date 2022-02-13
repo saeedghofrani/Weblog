@@ -23,8 +23,14 @@ $(document).ready(function () {
 
         }
         else {
-            alert('Please select image file (jpg, jpeg, png)');
+            // alert('Please select image file (jpg, jpeg, png)');
             $('#avatarImage').attr('src', image);
+            $('.toast-body').removeClass('text-success');
+            $('.toast-body').addClass('text-danger');
+            $('.toast-body').css('border', '1px solid red');
+            $('.toast-body').css('font-size', 16);
+            $('.toast-body').text("Please select image file (jpg, jpeg, png)");
+            $('.toast').toast("show");
         }
     });
 
@@ -39,24 +45,20 @@ $(document).ready(function () {
             cache: false,
             data: data,
             success: function (response) {
-                $('#successpass').removeClass('d-none');
-                $('#successpass').html(response.message);
-                setTimeout(function () {
-                    $('#successpass').addClass('d-none');
-                    $('#successpass').html('');
-                    noraml();
-                }, 5000);
+                $('.toast-body').removeClass('text-success');
+                $('.toast-body').addClass('text-danger');
+                $('.toast-body').css('border', '1px solid red');
+                $('.toast-body').css('font-size', 16);
+                $('.toast-body').text("update avatar successful");
+                $('.toast').toast("show");
             },
             error: function (xhr, textStatus, errorThrown) {
-                alert('update avatar unsuccessful')
-                $('#avatarImage').attr('src', image);
-                $('#errorpass').removeClass('d-none');
-                $('#errorpass').html(xhr.responseText);
-                setTimeout(function () {
-                    $('#errorpass').addClass('d-none');
-                    $('#errorpass').html('');
-                    noraml()
-                }, 5000);
+                $('.toast-body').removeClass('text-success');
+                $('.toast-body').addClass('text-danger');
+                $('.toast-body').css('border', '1px solid red');
+                $('.toast-body').css('font-size', 16);
+                $('.toast-body').text("update avatar was unsuccessful");
+                $('.toast').toast("show");
 
             }
         });

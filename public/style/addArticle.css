@@ -9,3 +9,7 @@ input {
   margin: 10px;
   box-shadow: 0px 1px 0px #338275 !important;
 }
+.container {
+  border: 1px solid black !important;
+  min-height: 300px;
+}

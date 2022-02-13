@@ -4,6 +4,12 @@
 body {
   cursor: default;
 }
+.badge {
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  z-index: 100;
+}
 .lineDown {
   color: #1b515e;
   background-color: #1b515e;  

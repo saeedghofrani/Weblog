@@ -1,21 +1,35 @@
-tinymce.init({
-    selector: 'textarea',
-    height: 500,
-    // theme: 'modern',
-    plugins: 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
-    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-    image_advtab: true,
-    templates: [
-        { title: 'Test template 1', content: 'Test 1' },
-        { title: 'Test template 2', content: 'Test 2' }
-    ],
-    content_css: [
-        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-        '//www.tinymce.com/css/codepen.min.css'
-    ]
-});
-
-
 $(document).ready(function () {
+
+
+    $('#imageContainer').click(function (e) {
+        e.preventDefault();
+        $('#formFile').trigger('click');
+    });
+
+
+    $('#formFile').change(function (e) {
+        e.preventDefault();
+        var input = this;
+        var url = $(this).val();
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imageArticle').attr('src', e.target.result);
+                console.log(e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+            $("#imageArticle").removeClass('d-none');
+            $('.far').addClass('d-none');
+            $('#imageContainer').css('border', "0px solid black");
+            // $('#imageArticle').trigger('submit');
+
+        }
+        else {
+            alert('Please select image file (jpg, jpeg, png)');
+            // $('#imageArticle').attr('src', image);
+        }
+    });
+
 
 });

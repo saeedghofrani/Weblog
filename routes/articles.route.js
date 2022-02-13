@@ -9,9 +9,11 @@ const upload = require('../utils/multerInitializer.utils').uploadarticlePicture;
 // session middleware
 const sessionsCheck = require("../middleware/sessionCheck.middleware");
 
+const articleValidation = require('../middleware/articleValidation.middleware.js');
+
 router.route('/setup')
     .get(sessionsCheck.login, addArticlePage)
-    .post(sessionsCheck.login, upload.single('articlePicture'), addArticleProcess)
+    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation, addArticleProcess)
     .patch(sessionsCheck.login, upload.single('articlePicture'), updateArticleProcess);
 
 router.route('/updateArticle/:id')

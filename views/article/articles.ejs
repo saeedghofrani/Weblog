@@ -19,10 +19,12 @@
             <h3 class="mb-3 Top4">4 TOP ARTICLE</h3>
           </div>
           <div class="col-6 text-right">
-            <a class="btn btn-primary mb-3 mr-1 movingBtn" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+            <a class="btn btn-primary mb-3 mr-1 movingBtn" href="#carouselExampleIndicators2" role="button"
+              data-slide="prev">
               <i class="fa fa-arrow-left"></i>
             </a>
-            <a class="btn btn-primary mb-3  movingBtn" href="#carouselExampleIndicators2" role="button" data-slide="next">
+            <a class="btn btn-primary mb-3  movingBtn" href="#carouselExampleIndicators2" role="button"
+              data-slide="next">
               <i class="fa fa-arrow-right"></i>
             </a>
           </div>
@@ -33,6 +35,9 @@
                   <div class="row">
                     <% for( let i=0; i < 2; i++ ) { %>
                       <div class="col-12 col-md-6 price-card">
+                        <span class=" translate-middle badge rounded-pill bg-danger">
+                          <%=topArticle[i].visitCount %>
+                        </span>
                         <div class="blog-card m-3">
                           <div class="meta">
                             <div class="photo"
@@ -69,6 +74,9 @@
                     <div class="row">
                       <% for( let i=2; i < 4; i++ ) { %>
                         <div class="col-12 col-md-6">
+                          <span class=" translate-middle badge rounded-pill bg-danger">
+                            <%=topArticle[i].visitCount %>
+                          </span>
                           <div class="blog-card m-3">
                             <div class="meta">
                               <div class="photo"
@@ -112,6 +120,9 @@
       <ul class="card-list">
         <% for( let i=0; i < data.length; i++ ) { %>
           <div class="blog-card col-9 col-md-6 col-xl-5 m-3">
+            <span class=" translate-middle badge rounded-pill bg-danger">
+              <%=data[i].visitCount %>
+            </span>
             <div class="meta">
               <div class="photo" style="background-image: url(/images/article/<%=data[i].image %>) ">
               </div>

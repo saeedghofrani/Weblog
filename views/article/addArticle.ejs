@@ -8,24 +8,27 @@
             type="text/css" />
 </head>
 
-<body class="p-5">
+<body class="px-5">
     <%- include('../common/navbar.ejs') %>
 
+    <div class="container d-flex justify-content-center align-items-center" id="imageContainer">
+        <i class='far fa-edit' style='font-size:36px'></i>
+        <img src="" class="img-fluid col-12 d-none" style="max-height:400px;" alt="Responsive image" id="imageArticle">
+    </div>
+
         <div class="p-5">
-            <form action="/articles/setup" method="post"  enctype="multipart/form-data" class="">
+            <form action="/articles/setup" method="post" enctype="multipart/form-data" class="">
 
-
-                <p class="text-success head col-12 m-1 p-2">image</p>
-                <input type="file" name="articlePicture" id="formFile" class=" form-control col-12 col-md-12 m-0 mb-1">
+                <input type="file" name="articlePicture" id="formFile" class=" form-control col-12 col-md-12 m-0 mb-1 d-none" required>
 
                 <p class="text-success head col-12 m-1 p-2">TITLE</p>
-                <input type="text" name="title" class="col-12 col-md-12 m-0 mb-1">
+                <input type="text" name="title" class="col-12 col-md-12 m-0 mb-1" required>
 
                 <p class="text-success head col-12 m-1 p-2">DESCRIPTION</p>
-                <input type="text" name="description" class="col-12 m-0 mb-3">
+                <input type="text" name="description" class="col-12 m-0 mb-3" required>
 
                 <textarea id="mytextarea" name="content">
-    </textarea>
+    </textarea required>
 
                 <input type="text" class="d-none" name="id">
 

@@ -2,9 +2,8 @@
 const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
-// const multer = require('multer');
-// const upload = multer().single('avatar');
-
+const { join } = require('path');
+const fs = require('fs');
 // render dashboard page
 const dashboard = (request, response, _next) => {
     //collect data from session
@@ -70,10 +69,7 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 const avatarProcess = safeCall(async (request, response, next) => {
 
     //update user by avatar
-    user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true });
-
-    //session user
-    request.session.user = user;
+    user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true }).lean();
 
     //error handling for MODEL.findOneAndUpdate
     if (!user) {
@@ -83,6 +79,14 @@ const avatarProcess = safeCall(async (request, response, next) => {
             data: null
         });
     }
+
+    if (request.session.user.avatar !== "profileAvatar.jpg") {
+        //delete old avatar
+        fs.unlinkSync(join(__dirname, "../public/images/avatars", request.session.user.avatar))
+    }
+    //session user
+    request.session.user = user;
+
     //redirect to dashboard
     return response.status(200).send({
         success: true,
