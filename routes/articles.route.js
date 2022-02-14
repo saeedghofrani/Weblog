@@ -14,14 +14,14 @@ const articleValidation = require('../middleware/articleValidation.middleware.js
 router.route('/setup')
     .get(sessionsCheck.login, addArticlePage)
     .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation, addArticleProcess)
-    .patch(sessionsCheck.login, upload.single('articlePicture'), updateArticleProcess);
+    .delete(sessionsCheck.login, delMyArticle);
 
 router.route('/updateArticle/:id')
-    .get(sessionsCheck.login, updateArticlePage);
+    .get(sessionsCheck.login, updateArticlePage)
+    .post(sessionsCheck.login, upload.single('articlePicture'), updateArticleProcess);
 
 //get all article
 router.route('/:condition')
-    .get(articles)
-    .delete(sessionsCheck.login, delMyArticle);
+    .get(articles);
 
 module.exports = router;

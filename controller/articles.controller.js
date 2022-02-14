@@ -31,6 +31,7 @@ const articles = safeCall(async (request, response, _next) => {
         response.render('./article/myArticles', { data: myArticle });
     }
 
+    
     else {
 
         //get article id from request params

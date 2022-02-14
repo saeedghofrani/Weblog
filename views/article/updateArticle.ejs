@@ -13,13 +13,19 @@
 
 <body>
     <%- include('../common/navbar.ejs') %>
-        <div class="p-5">
+
+        <!-- asfdasdfasdfasdf -->
+        <div class="container d-flex justify-content-center align-items-center topDiv" id="imageContainer">
+            <i class='far fa-edit d-none' style='font-size:36px'></i> <span class='choose d-none'> Choose image </span>
+            <img src="/images/article/<%= data.image  %> " class="img-fluid col-12" style="max-height:400px;"
+                alt="Responsive image" id="imageArticle">
+        </div>
+
+        <div class="container p-0">
             <form action="/articles/setup" method="patch" enctype="multipart/form-data" class="">
 
-
-                <p class="text-success head col-12 m-1 p-2">image</p>
-                <input type="file" placeholder="title" name="image" id="formFile"
-                    class=" form-control col-12 col-md-12 m-0 mb-1" value="<%= data.title %> ">
+                <input type="file" name="articlePicture" id="formFile"
+                    class=" form-control col-12 col-md-12 m-0 mb-1 d-none " required>
 
                 <p class="text-success head col-12 m-1 p-2">TITLE</p>
                 <input type="text" placeholder="title" name="title" class="col-12 col-md-12 m-0 mb-1"
@@ -30,20 +36,29 @@
                     value="<%= data.description %> ">
 
                 <textarea id="mytextarea" name="content">
-                <%= data.content %> 
-        </textarea>
+                    <%= data.content %> 
+            </textarea>
 
                 <input type="text" value="<%= data._id %>" class="d-none" name="id">
 
-                <input type="submit" class="btn btn-primary mt-5" value="update article">
+                <input class="btn btn-primary mt-5" value="update article" id="updateArticleSubmit">
 
             </form>
         </div>
 
-
+        <div class="toast" style="position: absolute; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto">Message</strong>
+                <button id="toastBtn" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
 
         <%- include('../common/scripts.ejs') %>
-
+        <script src="/script/updateArticle.js"></script>
             <script type="text/javascript"
                 src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
 

@@ -14,32 +14,35 @@
             <% for( let i=0; i < data.length; i++ ) { %>
                 <div class="blog-card <%= data[i]._id %>">
                     <div class="meta">
-                        <div class="photo" style="background-image:  url(/images/article/<%=data[i].image %>)"></div>
+                        <div class="photo" style="background-image: url(/images/article/<%=data[i].image %>) ">
+                        </div>
                         <ul class="details">
-                            <li class="author"><a href="#">
-                                    <%= data[i].author.username %>
-                                </a></li>
+                            <li class="author">
+                                <%= data[i].author.username %>
+                            </li>
                             <li class="date">
                                 <%= data[i].createdAt %>
                             </li>
                         </ul>
                     </div>
                     <div class="description">
-                        <span class=" translate-middle badge rounded-pill bg-danger">
-                            <%=data[i].visitCount %>
-                        </span>
                         <h1>
                             <%= data[i].title %>
                         </h1>
-                        <h2>Category: Any</h2>
-                        <p>
+                        <h2>Category: any</h2>
+                        <p class="col-12 ">
                             <%= data[i].description %>
                         </p>
-                        <p class="read-more">
-                            <a class=" mx-2 upRE" href="/articles/updateArticle/<%= data[i]._id%>">Update</a>
-                            <a class=" removeArticle mx-2 upRE" articleid="<%= data[i]._id%>">Remove</a>
-                            <a href="/articles/<%= data[i]._id%>">Read More</a>
+                        <p class="read-more mt-4 d-flex justify-content-around  align-items-between">
+                            <a class=" mx-2 upRE"
+                                href="/articles/updateArticle/<%= data[i]._id%>">Update</a>
+                            <a class=" removeArticle mx-2 upRE"
+                                articleid="<%= data[i]._id%>">Remove</a>
+                            <a class=" d-flex align-items-center readMore"
+                                href="http://localhost:3000/articles/<%= data[i]._id%>">Read More</a>
+
                         </p>
+
                     </div>
                 </div>
                 <% } %>

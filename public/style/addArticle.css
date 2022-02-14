@@ -12,6 +12,7 @@ input {
 }
 body {
   cursor: default;
+  overflow-x: hidden;
 }
 .topDiv {
   margin: auto;
