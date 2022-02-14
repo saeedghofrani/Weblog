@@ -14,7 +14,6 @@
 <body>
     <%- include('../common/navbar.ejs') %>
 
-        <!-- asfdasdfasdfasdf -->
         <div class="container d-flex justify-content-center align-items-center topDiv" id="imageContainer">
             <i class='far fa-edit d-none' style='font-size:36px'></i> <span class='choose d-none'> Choose image </span>
             <img src="/images/article/<%= data.image  %> " class="img-fluid col-12" style="max-height:400px;"
@@ -22,7 +21,7 @@
         </div>
 
         <div class="container p-0">
-            <form action="/articles/setup" method="patch" enctype="multipart/form-data" class="">
+            <form action="/articles/setup" method="patch" enctype="multipart/form-data" class="" id="formAddArticle">
 
                 <input type="file" name="articlePicture" id="formFile"
                     class=" form-control col-12 col-md-12 m-0 mb-1 d-none " required>
@@ -39,7 +38,7 @@
                     <%= data.content %> 
             </textarea>
 
-                <input type="text" value="<%= data._id %>" class="d-none" name="id">
+                <input type="text" value="<%= data._id %>" class="d-none" name="id" id="idInput">
 
                 <input class="btn btn-primary mt-5" value="update article" id="updateArticleSubmit">
 

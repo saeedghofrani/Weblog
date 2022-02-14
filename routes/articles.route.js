@@ -18,10 +18,10 @@ router.route('/setup')
 
 router.route('/updateArticle/:id')
     .get(sessionsCheck.login, updateArticlePage)
-    .post(sessionsCheck.login, upload.single('articlePicture'), updateArticleProcess);
+    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation, updateArticleProcess);
 
 //get all article
 router.route('/:condition')
     .get(articles);
 
-module.exports = router;
+module.exports = router;    

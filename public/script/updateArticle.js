@@ -39,11 +39,11 @@ $(document).ready(function () {
 
 
     $('#updateArticleSubmit').click(function (e) {
-        console.log('ssssssss');
+        let id = $("#idInput").val();
         e.preventDefault();
         var data = new FormData($('#formAddArticle')[0]);
         $.ajax({
-            url: "/articles/setup",
+            url: `/articles/updateArticle/${id}`,
             type: 'POST',
             contentType: false,
             processData: false,
@@ -63,6 +63,7 @@ $(document).ready(function () {
             }
         });
     });
+
 
 
 });

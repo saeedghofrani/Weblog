@@ -31,7 +31,7 @@ const articles = safeCall(async (request, response, _next) => {
         response.render('./article/myArticles', { data: myArticle });
     }
 
-    
+
     else {
 
         //get article id from request params
@@ -120,6 +120,13 @@ const updateArticlePage = safeCall(async (request, response, _next) => {
 
 const updateArticleProcess = safeCall(async (request, response, _next) => {
 
+    if (response.locals.error)
+        return response.status(400).send({
+            success: false,
+            message: response.locals.message,
+            data: null
+        });
+
     const data = {
         title: request.body.title,
         content: request.body.content,
@@ -127,9 +134,18 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
         image: request.file.filename,
     };
 
-    await Article.findByIdAndUpdate(request.body.id, data);
+    const updatedArticle = await Article.findByIdAndUpdate(request.params.id, data);
 
-    return response.redirect('/articles/myArticle')
+    if (!updatedArticle)
+        return response.status(400).send({
+            success: false,
+            message: 'update article was unsuccesfull',
+        });
+
+    response.status(200).send({
+        success: true,
+        message: 'delete article was succesfull',
+    });
 });
 
 module.exports = {
