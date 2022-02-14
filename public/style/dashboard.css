@@ -2,6 +2,13 @@ body {
   font-size: 16px;
 }
 
+.imageText {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .profile-img .file {
   position: relative;
   overflow: hidden;

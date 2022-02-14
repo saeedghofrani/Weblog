@@ -5,5 +5,6 @@ const articleValidation = (req, res, next) => {
     descriptionValidation(req, res);
     contentValidation(req, res);
     imageValidation(req, res);
+    next();
 };
 module.exports = articleValidation;

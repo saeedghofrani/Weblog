@@ -8,15 +8,15 @@
 
 </head>
 
-<body class="px-5">
+<body class="">
 
   <%- include('../common/navbar.ejs') %>
 
-    <section class="pt-5 pb-3 sectionTopArticle">
+    <section class="pt-2 pb-3 sectionTopArticle">
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <h3 class="mb-3 Top4">4 TOP ARTICLE</h3>
+            <h3 class="mb-3 Top4">TOP 2 ARTICLE</h3>
           </div>
           <div class="col-6 text-right">
             <a class="btn btn-primary mb-3 mr-1 movingBtn" href="#carouselExampleIndicators2" role="button"
@@ -33,76 +33,70 @@
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <div class="row">
-                    <% for( let i=0; i < 2; i++ ) { %>
-                      <div class="col-12 col-md-6 price-card">
-                        <span class=" translate-middle badge rounded-pill bg-danger">
-                          <%=topArticle[i].visitCount %>
-                        </span>
-                        <div class="blog-card m-3">
-                          <div class="meta">
-                            <div class="photo"
-                              style="background-image: url(/images/article/<%=topArticle[i].image %>) ">
-                            </div>
-                            <ul class="details">
-                              <li class="author">
+                    <% for( let i=0; i < 1; i++ ) { %>
+                      <div class="blog-card">
+                        <div class="meta">
+                          <div class="photo" style="background-image:  url(/images/article/<%=topArticle[i].image %>)">
+                          </div>
+                          <ul class="details">
+                            <li class="author"><a href="#">
                                 <%= topArticle[i].author.username %>
-                              </li>
-                              <li class="date">
-                                <%= topArticle[i].createdAt %>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="description row align-items-center">
-                            <h1>
-                              <%= topArticle[i].title %>
-                            </h1>
-                            <h2>Category: any</h2>
-                            <p>
-                              <%= topArticle[i].description %>
-                            </p>
-                            <p class="read-more">
-                              <a class="readMore" href="/articles/<%= topArticle[i]._id%>">Read More</a>
-                            </p>
-                          </div>
+                              </a></li>
+                            <li class="date">
+                              <%= topArticle[i].createdAt %>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="description">
+                          <span class=" translate-middle badge rounded-pill bg-danger">
+                            <%=topArticle[i].visitCount %>
+                          </span>
+                          <h1>
+                            <%= topArticle[i].title %>
+                          </h1>
+                          <h2>Category: Any</h2>
+                          <p>
+                            <%= topArticle[i].description %>
+                          </p>
+                          <p class="read-more">
+                            <a href="/articles/<%= topArticle[i]._id%>">Read More</a>
+                          </p>
                         </div>
                       </div>
                       <% } %>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <div class="row">
+                  <div class="">
                     <div class="row">
-                      <% for( let i=2; i < 4; i++ ) { %>
-                        <div class="col-12 col-md-6">
-                          <span class=" translate-middle badge rounded-pill bg-danger">
-                            <%=topArticle[i].visitCount %>
-                          </span>
-                          <div class="blog-card m-3">
-                            <div class="meta">
-                              <div class="photo"
-                                style="background-image: url(/images/article/<%=topArticle[i].image %>) ">
-                              </div>
-                              <ul class="details">
-                                <li class="author">
+                      <% for( let i=1; i < 2; i++ ) { %>
+                        <div class="blog-card">
+                          <div class="meta">
+                            <div class="photo"
+                              style="background-image:  url(/images/article/<%=topArticle[i].image %>)"></div>
+                            <ul class="details">
+                              <li class="author"><a href="#">
                                   <%= topArticle[i].author.username %>
-                                </li>
-                                <li class="date">
-                                  <%= topArticle[i].createdAt %>
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="description row align-items-center">
-                              <h1>
-                                <%= topArticle[i].title %>
-                              </h1>
-                              <h2>Category: any</h2>
-                              <p>
-                                <%= topArticle[i].description %>
-                              </p>
-                              <p class="read-more">
-                                <a class="readMore" href="/articles/<%= topArticle[i]._id%>">Read More</a>
-                              </p>
-                            </div>
+                                </a></li>
+                              <li class="date">
+                                <%= topArticle[i].createdAt %>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="description">
+                            <span class=" translate-middle badge rounded-pill bg-danger">
+                              <%=topArticle[i].visitCount %>
+                            </span>
+                            <h1>
+                              <%= topArticle[i].title %>
+                            </h1>
+                            <h2>Category: Any</h2>
+                            <p>
+                              <%= topArticle[i].description %>
+                            </p>
+                            <p class="read-more">
+                              <a href="/articles/<%= topArticle[i]._id%>">Read More</a>
+                            </p>
                           </div>
                         </div>
                         <% } %>
@@ -115,36 +109,39 @@
         </div>
       </div>
     </section>
+
+
     <div class="lineDown"></div>
+
+
     <div class="border-container  pillar-container">
-      <ul class="card-list">
+      <ul class="card-list row justify-content-center">
         <% for( let i=0; i < data.length; i++ ) { %>
-          <div class="blog-card col-9 col-md-6 col-xl-5 m-3">
-            <span class=" translate-middle badge rounded-pill bg-danger">
-              <%=data[i].visitCount %>
-            </span>
+          <div class="blog-card">
             <div class="meta">
-              <div class="photo" style="background-image: url(/images/article/<%=data[i].image %>) ">
-              </div>
+              <div class="photo" style="background-image:  url(/images/article/<%=data[i].image %>)"></div>
               <ul class="details">
-                <li class="author">
-                  <%= data[i].author.username %>
-                </li>
+                <li class="author"><a href="#">
+                    <%= data[i].author.username %>
+                  </a></li>
                 <li class="date">
                   <%= data[i].createdAt %>
                 </li>
               </ul>
             </div>
-            <div class="description row align-items-center">
+            <div class="description">
+              <span class=" translate-middle badge rounded-pill bg-danger">
+                <%=data[i].visitCount %>
+              </span>
               <h1>
                 <%= data[i].title %>
               </h1>
-              <h2>Category: any</h2>
+              <h2>Category: Any</h2>
               <p>
                 <%= data[i].description %>
               </p>
               <p class="read-more">
-                <a class="readMore" href="/articles/<%= data[i]._id%>">Read More</a>
+                <a href="/articles/<%= data[i]._id%>">Read More</a>
               </p>
             </div>
           </div>

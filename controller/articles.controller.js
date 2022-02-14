@@ -55,6 +55,14 @@ const addArticlePage = (request, response, _next) => {
 
 const addArticleProcess = safeCall(async (request, response, _next) => {
 
+    if (response.locals.error)
+        return response.status(400).send({
+            success: false,
+            message: response.locals.message,
+            data: null
+        });
+
+    //collect user data from session
     const data = {
         title: request.body.title,
         content: request.body.content,
@@ -64,10 +72,20 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
     };
 
     const article = await Article.create(data);
+
     if (!article) {
-        response.send('error');
+        return response.status(500).send({
+            success: false,
+            message: 'Article not created',
+            data: null
+        });
     }
-    response.redirect('/articles/myArticle');
+
+    return response.status(200).send({
+        success: true,
+        message: 'Article created',
+        data: null
+    });
 
 });
 

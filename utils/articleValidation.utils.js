@@ -1,11 +1,12 @@
 const titleValidation = (req, res) => {
-    if (!req.body.title || req.body.title.trim().length > 30 || req.body.title.trim().length < 5) {
+    if (!req.body.title || req.body.title.trim().length > 100 || req.body.title.trim().length < 5) {
         res.locals.error = true;
         res.locals.message.push('title is required and most be more than 5 less then 30 characters');
     }
 };
 const descriptionValidation = (req, res) => {
-    if (!req.body.description || req.body.description.trim().length > 40 || req.body.description.trim().length < 130) {
+    console.log(req.body);
+    if (!req.body.description || req.body.description.trim().length < 100 || req.body.description.trim().length > 200) {
         res.locals.error = true;
         res.locals.message.push('description is required and most be more than 40 less then 130 characters');
     }

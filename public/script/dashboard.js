@@ -45,8 +45,8 @@ $(document).ready(function () {
             cache: false,
             data: data,
             success: function (response) {
-                $('.toast-body').removeClass('text-success');
-                $('.toast-body').addClass('text-danger');
+                $('.toast-body').addClass('text-success');
+                $('.toast-body').removeClass('text-danger');
                 $('.toast-body').css('border', '1px solid red');
                 $('.toast-body').css('font-size', 16);
                 $('.toast-body').text("update avatar successful");

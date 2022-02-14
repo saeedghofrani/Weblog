@@ -11,20 +11,22 @@
 <body class="px-5">
     <%- include('../common/navbar.ejs') %>
 
-    <div class="container d-flex justify-content-center align-items-center" id="imageContainer">
-        <i class='far fa-edit' style='font-size:36px'></i>
-        <img src="" class="img-fluid col-12 d-none" style="max-height:400px;" alt="Responsive image" id="imageArticle">
-    </div>
+        <div class="container d-flex justify-content-center align-items-center topDiv" id="imageContainer">
+            <i class='far fa-edit' style='font-size:36px'></i> <span class='choose'> Choose image </span>
+            <img src="" class="img-fluid col-12 d-none" style="max-height:400px;" alt="Responsive image"
+                id="imageArticle">
+        </div>
 
-        <div class="p-5">
-            <form action="/articles/setup" method="post" enctype="multipart/form-data" class="">
+        <div class="container p-0">
+            <form action="/articles/setup" method="post" enctype="multipart/form-data" class="" id="formAddArticle">
 
-                <input type="file" name="articlePicture" id="formFile" class=" form-control col-12 col-md-12 m-0 mb-1 d-none" required>
+                <input type="file" name="articlePicture" id="formFile"
+                    class=" form-control col-12 col-md-12 m-0 mb-1 d-none " required>
 
-                <p class="text-success head col-12 m-1 p-2">TITLE</p>
+                <p class="text-success head col-12 m-1 p-2 ps-0 ms-0">TITLE</p>
                 <input type="text" name="title" class="col-12 col-md-12 m-0 mb-1" required>
 
-                <p class="text-success head col-12 m-1 p-2">DESCRIPTION</p>
+                <p class="text-success head col-12 m-1 p-2 ps-0 ms-0">DESCRIPTION</p>
                 <input type="text" name="description" class="col-12 m-0 mb-3" required>
 
                 <textarea id="mytextarea" name="content">
@@ -32,11 +34,22 @@
 
                 <input type="text" class="d-none" name="id">
 
-                <input type="submit" class="btn btn-primary mt-5" value="add article">
+                <input type="button" class="btn btn-primary m-0 mt-3" value="add article" id="addArticleSubmit">
 
             </form>
         </div>
+        
+        <div class="toast" style="position: absolute; top: 20px; right: 20px;">
+            <div class="toast-header">
+                <strong class="mr-auto">Message</strong>
+                <button id="toastBtn" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
 
+            </div>
+        </div>
 
         <%- include('../common/scripts.ejs') %>
             <script src="/script/addArticle.js"></script>

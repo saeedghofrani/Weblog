@@ -78,21 +78,21 @@ app.use('/', appRouter);
 /**
  * error handler
  */
-app.use((_req, _res, next) => { next(createError(404)); });
-app.use((err, req, res, _next) => {
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-    res.status(err.status || 404);
-    res.render('error', { error: { message: "page has gone missing", status: err.status || 404 } });
+// app.use((_req, _res, next) => { next(createError(404)); });
+// app.use((err, req, res, _next) => {
+//     res.locals.message = err.message;
+//     res.locals.error = req.app.get('env') === 'development' ? err : {};
+//     res.status(err.status || 404);
+//     res.render('error', { error: { message: "page has gone missing", status: err.status || 404 } });
 
-    // uncaught Exception handler
-    process.on("uncaughtException", (err) => {
-        console.log("UNCAUGHT EXCEPTION, APP SHUTTING DOWN NOW!!");
-        console.log(err.message, err.name);
-        res.render('error', { error: { message: "internall server error", status: 500 } });
-        process.exit(1);
-    });
-});
+//     // uncaught Exception handler
+//     process.on("uncaughtException", (err) => {
+//         console.log("UNCAUGHT EXCEPTION, APP SHUTTING DOWN NOW!!");
+//         console.log(err.message, err.name);
+//         res.render('error', { error: { message: "internall server error", status: 500 } });
+//         process.exit(1);
+//     });
+// });
 
 
 module.exports = app;

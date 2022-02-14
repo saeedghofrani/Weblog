@@ -21,14 +21,47 @@ $(document).ready(function () {
             reader.readAsDataURL(input.files[0]);
             $("#imageArticle").removeClass('d-none');
             $('.far').addClass('d-none');
+            $('.choose').addClass("d-none");
             $('#imageContainer').css('border', "0px solid black");
             // $('#imageArticle').trigger('submit');
 
         }
         else {
-            alert('Please select image file (jpg, jpeg, png)');
+            $('.toast-body').removeClass('text-success');
+            $('.toast-body').addClass('text-danger');
+            $('.toast-body').css('border', '1px solid red');
+            $('.toast-body').css('font-size', 16);
+            $('.toast-body').text('please select an image to load');
+            $('.toast').toast("show");
             // $('#imageArticle').attr('src', image);
         }
+    });
+
+
+    $('#addArticleSubmit').click(function (e) {
+        console.log('ssssssssssssss');
+        e.preventDefault();
+        var data = new FormData($('#formAddArticle')[0]);
+        $.ajax({
+            url: "/articles/setup",
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: data,
+            success: function (response) {
+                window.location.href = "/articles/myArticle";
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $('.toast-body').removeClass('text-success');
+                $('.toast-body').addClass('text-danger');
+                $('.toast-body').css('border', '1px solid red');
+                $('.toast-body').css('font-size', 16);
+                $('.toast-body').text(xhr.responseText);
+                $('.toast').toast("show");
+
+            }
+        });
     });
 
 

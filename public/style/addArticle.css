@@ -8,8 +8,31 @@ input {
   opacity: 1;
   margin: 10px;
   box-shadow: 0px 1px 0px #338275 !important;
+  transition: all 0.8 linear;
 }
-.container {
+body {
+  cursor: default;
+}
+.topDiv {
+  margin: auto;
   border: 1px solid black !important;
   min-height: 300px;
+}
+.container {
+  margin: auto;
+}
+.formContainer {
+  border: 1px solid black !important;
+}
+input[type="button"] {
+  background-color: #3f8478 !important;
+  border: none;
+  transition: all 0.8 linear;
+}
+input[type="button"]:hover {
+  background-color: #338275 !important;
+  border: none;
+}
+input:focus {
+  box-shadow: 0px 2px 0px #338275 !important;
 }
