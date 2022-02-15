@@ -82,7 +82,7 @@ const avatarProcess = safeCall(async (request, response, next) => {
 
     if (request.session.user.avatar !== "profileAvatar.jpg") {
         //delete old avatar
-        fs.unlinkSync(join(__dirname, "../public/images/avatars", request.session.user.avatar))
+        fs.unlinkSync(join(__dirname, "../public/images/avatars", request.session.user.avatar));
     }
     //session user
     request.session.user = user;

@@ -6,7 +6,7 @@ const titleValidation = (req, res) => {
 };
 const descriptionValidation = (req, res) => {
     console.log(req.body);
-    if (!req.body.description || req.body.description.trim().length < 100 || req.body.description.trim().length > 200) {
+    if (!req.body.description || req.body.description.trim().length < 40 || req.body.description.trim().length > 200) {
         res.locals.error = true;
         res.locals.message.push('description is required and most be more than 40 less then 130 characters');
     }

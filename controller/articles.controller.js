@@ -3,12 +3,15 @@ const Article = require('../model/article.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
 
+const { join } = require('path');
+const fs = require('fs');
+
 //render article page 
 const articles = safeCall(async (request, response, _next) => {
-
+    //get condition from param
     const condition = request.params.condition;
 
-    //all article
+    //get all article
     if (condition === 'all') {
         //collect data from database sort bt createdAt
         const articles = await Article.find({}).populate('author').sort({ createdAt: -1 });
@@ -18,10 +21,11 @@ const articles = safeCall(async (request, response, _next) => {
         return response.render('./article/articles', { data: articles, topArticle: visitCount });
     }
 
-    //my article
+    //get users article
     if (condition === 'myArticle') {
         //collect user data from session
         const user = request.session.user;
+        //check for session
         if (!user) {
             return response.redirect('/auth/login');
         }
@@ -49,13 +53,14 @@ const articles = safeCall(async (request, response, _next) => {
     }
 });
 
-
+//render add article page
 const addArticlePage = (request, response, _next) => {
     response.render('./article/addArticle');
 }
 
+//add article procces 
 const addArticleProcess = safeCall(async (request, response, _next) => {
-
+    //validation for aticle input
     if (response.locals.error)
         return response.status(400).send({
             success: false,
@@ -71,9 +76,9 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
         image: request.file.filename,
         author: request.session.user._id
     };
-
+    //create article
     const article = await Article.create(data);
-
+    //error handling for create
     if (!article) {
         return response.status(500).send({
             success: false,
@@ -81,7 +86,7 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
             data: null
         });
     }
-
+    //send success message
     return response.status(200).send({
         success: true,
         message: 'Article created',
@@ -112,14 +117,17 @@ const delMyArticle = safeCall(async (request, response, _next) => {
     });
 
 });
-
+//update article page 
 const updateArticlePage = safeCall(async (request, response, _next) => {
+
     const article = await Article.findById(request.params.id);
+
     response.render('./article/updateArticle', { data: article });
 });
-
+//update article process
 const updateArticleProcess = safeCall(async (request, response, _next) => {
 
+    //validation for update article
     if (response.locals.error)
         return response.status(400).send({
             success: false,
@@ -134,18 +142,25 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
         image: request.file.filename,
     };
 
+    //update article
     const updatedArticle = await Article.findByIdAndUpdate(request.params.id, data);
 
+    //delete old avatar
+    fs.unlinkSync(join(__dirname, "../public/images/article", updatedArticle.image));
+
+    //error handling for findByIdAndUpdate
     if (!updatedArticle)
         return response.status(400).send({
             success: false,
             message: 'update article was unsuccesfull',
         });
 
+    //send success message
     response.status(200).send({
         success: true,
         message: 'delete article was succesfull',
     });
+
 });
 
 module.exports = {

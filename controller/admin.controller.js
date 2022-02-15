@@ -7,13 +7,16 @@ const User = require('../model/user.model');
 const admin = safeCall(async (request, response, _next) => {
     //collect users from database
     const users = await User.find({});
+
     response.render('admin', { users });
 
 });
 
 const resetPass = safeCall(async (request, response, _next) => {
+    //collect users from database + password 
     const user = await User.findById(request.body.id).select('+password');
 
+    //error handling for find by id
     if (!user)
         return response.status(400).send({
             success: false,
@@ -39,8 +42,9 @@ const resetPass = safeCall(async (request, response, _next) => {
 });
 
 const deleteUser = safeCall(async (request, response, _next) => {
+    //collect users from database by id
     const user = await User.findByIdAndDelete(request.body.id);
-
+    //error handling for find by id and delete 
     if (!user)
         return response.status(400).send({
             success: false,

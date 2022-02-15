@@ -20,7 +20,7 @@
                             <li class="author">
                                 <%= data[i].author.username %>
                             </li>
-                            <li class="date">
+                            <li class="date data<%=i    %> ">
                                 <%= data[i].createdAt %>
                             </li>
                         </ul>
@@ -50,7 +50,7 @@
         <div class="lineDown mb-5"></div>
         <div class="col-12 row justify-content-center">
             <a class="button-37 btn ms-5 col-1 mb-5" href="/articles/setup">
-                add article
+                Add Article
             </a>
         </div>
         <%- include('../common/scripts.ejs') %>

@@ -43,7 +43,7 @@
                               <li class="author"><a href="#">
                                   <%= topArticle[i].author.username %>
                                 </a></li>
-                              <li class="date">
+                              <li class="date" id="date1">
                                 <%= topArticle[i].createdAt %>
                               </li>
                             </ul>
@@ -79,7 +79,7 @@
                                 <li class="author"><a href="#">
                                     <%= topArticle[i].author.username %>
                                   </a></li>
-                                <li class="date">
+                                <li class="date" id="date2">
                                   <%= topArticle[i].createdAt %>
                                 </li>
                               </ul>
@@ -125,7 +125,7 @@
                   <li class="author"><a href="#">
                       <%= data[i].author.username %>
                     </a></li>
-                  <li class="date">
+                  <li class='date data<%=i%> '>
                     <%= data[i].createdAt %>
                   </li>
                 </ul>
