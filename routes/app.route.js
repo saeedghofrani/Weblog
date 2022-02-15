@@ -1,17 +1,23 @@
+//express
 const express = require('express');
 const router = express.Router();
-const loginRouter = require('./login.route.js');
-const registerRouter = require('./register.route.js');
+
+//Junction Box
 const dashboardRouter = require('./dashboard.route.js');
 const homeRouter = require('./home.route.js');
-const logoutRouter = require('./logout.route.js');
 const articlesRouter = require('./articles.route.js');
 const contactRouter = require('./contact.route.js');
-router.use('/login', loginRouter);
-router.use('/register', registerRouter);
+const authRouter = require('./auth.route.js');
+const adminRouter = require('./admin.route.js');
+const abouteRouter = require('./about.route.js');
+
+//route and address
+router.use('/auth', authRouter);
 router.use('/dashboard', dashboardRouter);
-router.use('/logout', logoutRouter);
 router.use('/home', homeRouter);
 router.use('/articles', articlesRouter);
 router.use('/contact', contactRouter);
+router.use('/admin', adminRouter);
+router.use('/about', abouteRouter);
+
 module.exports = router;

@@ -1,4 +1,20 @@
 $(document).ready(function () {
+
+    $('i.fas.fa-eye').click(function (e) {
+        console.log('ssss');
+        $('i.fas.fa-eye').addClass('d-none');
+        $('i.fas.fa-eye-slash').removeClass('d-none');
+        $('#loginPassword').attr('type', 'text');
+    });
+    $('i.fas.fa-eye-slash').click(function (e) {
+        $('i.fas.fa-eye-slash').addClass('d-none');
+        $('i.fas.fa-eye').removeClass('d-none');
+        $('#loginPassword').attr('type', 'password');
+    });
+
+
+
+
     'use strict';
     var usernameError = true,
         emailError = true,

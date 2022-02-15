@@ -1,0 +1,83 @@
+.upRE {
+  background-color: #338275 !important;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff !important;
+}
+
+.upRE:hover {
+  background-color: #338275 !important;
+  box-shadow: rgba(0, 0, 0, 0.503) 0 2px 4px 0;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff !important;
+  cursor: pointer;
+}
+
+
+.button-37 {
+  background-color: #338275;
+  border: 1px solid #338275;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  touch-action: manipulation;
+}
+
+.button-37:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+a.btn {
+  background-color: #338275;
+  border: 1px solid #338275;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  outline: none;
+  outline: 0;
+  padding: 7px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  touch-action: manipulation;
+}
+
+a.btn:hover {
+  background-color: #338275;
+  border: 1px solid #338275;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  outline: none;
+  outline: 0;
+  padding: 7px;
+  text-align: center;
+  transition: transform 150ms, box-shadow 150ms;
+  touch-action: manipulation;
+  box-shadow: #094824 0 3px 9px 0 !important;
+  transform: translateY(-2px) !important;
+}

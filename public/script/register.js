@@ -1,6 +1,21 @@
 /*global $, document, window, setTimeout, navigator, console, location*/
 $(document).ready(function () {
 
+
+    $('i.fas.fa-eye').click(function (e) {
+        console.log('ssss');
+        $('i.fas.fa-eye').addClass('d-none');
+        $('i.fas.fa-eye-slash').removeClass('d-none');
+        $('#password').attr('type', 'text');
+    });
+    $('i.fas.fa-eye-slash').click(function (e) {
+        $('i.fas.fa-eye-slash').addClass('d-none');
+        $('i.fas.fa-eye').removeClass('d-none');
+        $('#password').attr('type', 'password');
+    });
+
+
+    
     'use strict';
 
     var usernameError = true,
@@ -29,7 +44,7 @@ $(document).ready(function () {
             if ($(this).val().length === 0) {
                 $(this).siblings('span.error').text('Please type your username').fadeIn().parent('.form-group').addClass('hasError');
                 usernameError = true;
-            } else if ($(this).val().length > 1 && $(this).val().length <= 5) {
+            } else if ($(this).val().length <= 5) {
                 $(this).siblings('span.error').text('Please type at least 6 characters').fadeIn().parent('.form-group').addClass('hasError');
                 usernameError = true;
             } else {

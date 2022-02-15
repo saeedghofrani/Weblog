@@ -1,7 +1,12 @@
 "use strict";
+//express
 const express = require('express');
 const router = express.Router();
-const contact = require('../controller/contact.controller.js');
+//controller
+const { contact, contactProcces } = require('../controller/contact.controller.js');
+
 router.route('/')
-    .get(contact);
+    .get(contact)
+    .post(contactProcces);
+
 module.exports = router;

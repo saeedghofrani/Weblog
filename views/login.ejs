@@ -23,7 +23,7 @@
 
                     <!-- Login Form -->
                     <div class="login form-peice">
-                        <form class="login-form" action="/login" method="post">
+                        <form class="login-form" action="/auth/login" method="post">
                             <div class="form-group">
                                 <label for="loginusername">Username</label>
                                 <input type="text" name="username" id="loginemail" required />
@@ -31,11 +31,14 @@
                             <div class="form-group">
                                 <label for="loginPassword">Password</label>
                                 <input type="password" name="password" id="loginPassword" required />
+                                <i class="fas fa-eye"></i><i class="fas fa-eye-slash d-none"></i>
                             </div>
 
                             <div class="CTA">
                                 <input type="submit" value="Login" />
-                                <a href="/register">Rigester</a>
+                                <a href="/auth/register">Rigester</a>
+                                |
+                                <a href="/auth/pass">Forget Password</a>
                             </div>
                         </form>
                     </div>
@@ -45,10 +48,11 @@
         </section>
 
         <footer>
-            <h5 id="errorLogin" class="text-danger">
-                <%= ERROR %>
-            </h5>
-            <p> <a href="/articles">read article without account</a></p>
+            <div id="errorLogin" class="alert alert-danger <%= typeof ERROR != 'undefined' ? "" : 'd-none' %>"
+                role="alert">
+                <%= typeof ERROR !='undefined' ? ERROR : '' %>
+            </div>
+            <p> <a href="/articles/all" class="readArticle">read article without account</a></p>
             <p>©2021 Saeed ghofrani Ivari.<a>All rights reserved</a></p>
         </footer>
     </div>

@@ -1,6 +1,55 @@
 body {
   font-size: 16px;
+  overflow-x: hidden;
+  transition: all 1s linear !important;
 }
+img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.profile-img:hover img {
+  opacity: 0.5;
+}
+.profile-img:hover .imageText {
+  opacity: 1;
+}
+.imageText {
+  cursor: pointer;
+  position: absolute;
+  color: black;
+  font-weight: bolder;
+  top: 50%;
+  left: 50%;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+}
+
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  margin:0;
+  background: #212529b8;
+}
+.profile-img .file input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+.avatarbtn {
+  border: none;
+  color: white;
+  opacity: 1 !important;   
+  z-index: 20;
+  background-color: transparent;
+}
+
 .emp-profile {
   width: 90%;
   height: auto;
@@ -15,7 +64,6 @@ body {
   padding: 3px;
   margin-left: 50px !important;
   margin: 6px;
-
 }
 .profile-img {
   text-align: center;
@@ -31,18 +79,14 @@ body {
   position: relative;
   overflow: hidden;
   margin-top: -20%;
+  margin-bottom: 0 !important;
   width: 100%;
   border: none;
   border-radius: 0;
   font-size: 15px;
   background: #21252900;
 }
-.profile-img .file input {
-  position: absolute;
-  opacity: 0;
-  right: 0;
-  top: 0;
-}
+
 .profile-head h5 {
   color: #284742;
 }
@@ -93,15 +137,18 @@ a.profile-edit-btn {
 }
 .profile-head .nav-tabs .nav-link.active {
   border: none;
-  border-bottom: 2px solid #0062cc;
+  border-bottom: 2px solid #1b515e;
 }
 .profile-work {
   padding: 14%;
   margin-top: -15%;
 }
+.genderDiv {
+  height: 40px !important;
+}
 .profile-work p {
   font-size: 12px;
-  color: #818182;
+  color: #1b515e;
   font-weight: 600;
   margin-top: 10%;
 }
@@ -120,26 +167,39 @@ a.profile-edit-btn {
 .profile-tab select,
 .profile-tab p {
   font-weight: 600;
-  color: #338275;
+  color: #338275 !important;
+}
+.profile-edit-btn:hover {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  color: black;
 }
 #editProfile:hover {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   color: black;
 }
+.modal-body .inputUpdate {
+  box-shadow: 0px 1px 0px #338275 !important;
+}
 select.inputUpdate,
+.modal-body .inputUpdate,
 p input.inputUpdate {
   outline: none;
   border: none;
   background-color: transparent;
   width: 100%;
-  padding-left: 10px;
+  padding-left: 10px !important;
   padding: 3px;
   transition: all 0.6s linear;
   opacity: 0.8;
 }
-  
+.modal-body .inputUpdate,
+select.inputUpdate {
+  color: #338275 !important;
+}
 select.inputUpdate,
+.modal-body .inputUpdate,
 p input.inputUpdate:hover {
   opacity: 1;
 }
@@ -165,4 +225,12 @@ p input.inputUpdate:hover {
   justify-content: flex-end;
   align-items: flex-end;
   box-shadow: none !important;
+}
+#removeAccount {
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  .row.genderDiv {
+    height: 64px !important;
+  }
 }

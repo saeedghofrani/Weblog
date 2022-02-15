@@ -1,12 +1,27 @@
 "use strict";
+//express
 const express = require('express');
 const router = express.Router();
-const {articles, article, myArticle} = require('../controller/articles.controller.js');
+// controller
+const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage } = require('../controller/articles.controller.js');
+//multer middleware
+const upload = require('../utils/multerInitializer.utils').uploadarticlePicture;
+// session middleware
 const sessionsCheck = require("../middleware/sessionCheck.middleware");
-router.route('/')
+
+const articleValidation = require('../middleware/articleValidation.middleware.js');
+
+router.route('/setup')
+    .get(sessionsCheck.login, addArticlePage)
+    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation('create'), addArticleProcess)
+    .delete(sessionsCheck.login, delMyArticle);
+
+router.route('/updateArticle/:id')
+    .get(sessionsCheck.login, updateArticlePage)
+    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation('update'), updateArticleProcess);
+
+//get all article
+router.route('/:condition')
     .get(articles);
-// router.route('/myArticle')
-//     .get(sessionsCheck.login, myArticle);
-router.route('/:id')
-    .get(article);
-module.exports = router;
+
+module.exports = router;    
