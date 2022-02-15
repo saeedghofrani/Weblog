@@ -18,7 +18,7 @@ const contentValidation = (req, res) => {
     }
 };
 const imageValidation = (req, res) => {
-    if (!req.file.filename) {
+    if (!req.file) {
         res.locals.error = true;
         res.locals.message.push('image is required');
     }

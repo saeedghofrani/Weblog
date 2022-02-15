@@ -13,12 +13,12 @@ const articleValidation = require('../middleware/articleValidation.middleware.js
 
 router.route('/setup')
     .get(sessionsCheck.login, addArticlePage)
-    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation, addArticleProcess)
+    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation('create'), addArticleProcess)
     .delete(sessionsCheck.login, delMyArticle);
 
 router.route('/updateArticle/:id')
     .get(sessionsCheck.login, updateArticlePage)
-    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation, updateArticleProcess);
+    .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation('update'), updateArticleProcess);
 
 //get all article
 router.route('/:condition')

@@ -17,6 +17,10 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 }
+.description {
+  overflow: auto;
+  overflow-wrap: break-word;
+}
 .movingBtn {
   background-color: #1b515e;
   border: none;

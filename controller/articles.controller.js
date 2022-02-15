@@ -135,26 +135,28 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
             data: null
         });
 
-    const data = {
-        title: request.body.title,
-        content: request.body.content,
-        description: request.body.description,
-        image: request.file.filename,
-    };
-
-    //update article
-    const updatedArticle = await Article.findByIdAndUpdate(request.params.id, data);
-
-    //delete old avatar
-    fs.unlinkSync(join(__dirname, "../public/images/article", updatedArticle.image));
+    let article = await Article.findById(request.params.id);
 
     //error handling for findByIdAndUpdate
-    if (!updatedArticle)
+    if (!article)
         return response.status(400).send({
             success: false,
             message: 'update article was unsuccesfull',
         });
 
+    const passImage = article.image
+    console.log(passImage);
+
+    article.title = request.body.title
+    article.content = request.body.content
+    article.description = request.body.description
+    article.image = article.image
+
+    if (request.file) {
+        article.image = request.file.filename;
+        article.save();
+        fs.unlinkSync(join(__dirname, "../public/images/article", passImage));
+    }
     //send success message
     response.status(200).send({
         success: true,
