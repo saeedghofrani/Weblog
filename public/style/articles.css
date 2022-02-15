@@ -17,6 +17,10 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+
+
+
 .description {
   overflow: auto;
   overflow-wrap: break-word;
@@ -51,6 +55,17 @@ h1 {
   top: 25px;
   right: 0px;
   z-index: 100;
+}
+
+.favorit {
+  background-color: #ffffff !important;
+  color: #1b515e;
+  font-size:17px;
+  position: absolute;
+  top: 50px;
+  right: -21px;
+  z-index: 100;
+  cursor: pointer;
 }
 
 .lineDown {

@@ -52,6 +52,10 @@
                             <span class=" translate-middle badge rounded-pill bg-danger">
                               <%=topArticle[i].visitCount %>
                             </span>
+                            <span class=" translate-middle badge rounded-pill bg-danger favorit">
+                              <i class="fa fa-star-o"></i>
+                              <i class='fas fa-star d-none'></i>
+                            </span>
                             <h1>
                               <%= topArticle[i].title %>
                             </h1>
@@ -87,6 +91,10 @@
                             <div class="description">
                               <span class=" translate-middle badge rounded-pill bg-danger">
                                 <%=topArticle[i].visitCount %>
+                              </span>
+                              <span class=" translate-middle badge rounded-pill bg-danger favorit">
+                                <i class="fa fa-star-o"></i>
+                                <i class='fas fa-star d-none'></i>
                               </span>
                               <h1>
                                 <%= topArticle[i].title %>
@@ -134,6 +142,11 @@
                 <span class=" translate-middle badge rounded-pill bg-danger">
                   <%=data[i].visitCount %>
                 </span>
+                <span class=" translate-middle badge rounded-pill bg-danger favorit">
+                  <i class="fa fa-star-o"></i>
+                  <i class='fas fa-star d-none'></i>
+                </span>
+
                 <h1>
                   <%= data[i].title %>
                 </h1>

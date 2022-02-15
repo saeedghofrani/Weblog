@@ -1,12 +1,26 @@
 body {
   font-size: 16px;
   overflow-x: hidden;
+  transition: all 1s linear !important;
 }
-
+img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.profile-img:hover img {
+  opacity: 0.5;
+}
+.profile-img:hover .imageText {
+  opacity: 1;
+}
 .imageText {
+  cursor: pointer;
   position: absolute;
-  top: 100%;
+  color: black;
+  font-weight: bolder;
+  top: 50%;
   left: 50%;
+  opacity: 0.5;
   transform: translate(-50%, -50%);
 }
 
@@ -123,7 +137,7 @@ a.profile-edit-btn {
 }
 .profile-head .nav-tabs .nav-link.active {
   border: none;
-  border-bottom: 2px solid #0062cc;
+  border-bottom: 2px solid #1b515e;
 }
 .profile-work {
   padding: 14%;
@@ -134,7 +148,7 @@ a.profile-edit-btn {
 }
 .profile-work p {
   font-size: 12px;
-  color: #818182;
+  color: #1b515e;
   font-weight: 600;
   margin-top: 10%;
 }

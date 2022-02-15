@@ -6,7 +6,7 @@ $(document).ready(function () {
         d.getFullYear();
 
     $('#date1').text(datestring);
-/////////////////////////////////////////
+    /////////////////////////////////////////
     var d = $('#date2').text()
     d = new Date(d);
 
@@ -14,7 +14,7 @@ $(document).ready(function () {
         d.getFullYear();
 
     $('#date2').text(datestring);
-//////////////////////
+    //////////////////////
     var d = $('.date').length
     for (var i = 0; i < d; i++) {
         x = $(`li.date.data${i}`).text()
@@ -22,9 +22,28 @@ $(document).ready(function () {
 
         var datestring = ("0" + x.getDate()).slice(-2) + "-" + ("0" + (x.getMonth() + 1)).slice(-2) + "-" +
             x.getFullYear();
-    
-            $(`li.date.data${i}`).text(datestring);
+
+        $(`li.date.data${i}`).text(datestring);
     }
-   
+
+    $('.fa-star-o').click(function (e) {
+        e.preventDefault();
+
+        if ($(this).hasClass('fa-star-o')) {
+            $(this).removeClass('fa');
+            $(this).removeClass('fa-star-o');
+            $(this).addClass("fas");
+            $(this).addClass("fa-star");
+        }
+        else {
+            $(this).addClass('fa');
+            $(this).addClass('fa-star-o');
+            $(this).removeClass("fas");
+            $(this).removeClass("fa-star");
+        }
+
+
+    });
+
 
 });

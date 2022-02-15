@@ -5,6 +5,10 @@ $(document).ready(function () {
         e.preventDefault();
         $('#inputFile').trigger('click');
     });
+    $('.imageText').click(function (e) {
+        e.preventDefault();
+        $('#inputFile').trigger('click');
+    });
 
 
     $('#inputFile').change(function (e) {
