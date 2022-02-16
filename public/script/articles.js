@@ -27,23 +27,58 @@ $(document).ready(function () {
     }
 
     $('.fa-star-o').click(function (e) {
+
         e.preventDefault();
+        let star;
+        let id = $(this).attr("artId");
 
         if ($(this).hasClass('fa-star-o')) {
             $(this).removeClass('fa');
             $(this).removeClass('fa-star-o');
             $(this).addClass("fas");
             $(this).addClass("fa-star");
+            star = 1;
         }
+
         else {
             $(this).addClass('fa');
             $(this).addClass('fa-star-o');
             $(this).removeClass("fas");
             $(this).removeClass("fa-star");
+            star = 0;
         }
 
+        $.ajax({
+            type: "POST",
+            url: `/articles/favorit/${id}`,
+            data: { data: `${star}` },
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr) {
+                console.log(xhr.status);
+            }
+        });
 
     });
+
+    let articleIdLength = $('.ArticleId').length;
+
+    let spanFavorit = $('.fa-star-o').length;
+
+    for (let i = 0; i < articleIdLength; i++) {
+        for (let j = 0; j < spanFavorit; i++) {
+            console.log($(".fa-star-o").attr('artId')[i]);
+            console.log($('.ArticleId')[j].text()); 
+            if ($(".fa-star-o")[i].attr('artId') === $('.ArticleId')[j].text()) {
+                $(".fa-star-o").removeClass('fa')
+                    .removeClass('fa-star-o')
+                    .addClass("fas")
+                    .addClass("fa-star");
+            }
+        }
+    }
+
 
 
 });

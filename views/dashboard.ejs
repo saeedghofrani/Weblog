@@ -108,11 +108,10 @@
                                         <%= data.status %>
                                     </a>
                                     <% } %>
-                                        <p>Favorite Articles</p>
-                                        <a class="col-12 text-center">Sherlock: The Final Problem</a><br />
-                                        <a class="col-12 text-center">Sherlock: The Great Game</a><br />
-                                        <a class="col-12 text-center">Sherlock: The Reichenbach Fall</a><br />
-                                        <a class="col-12 text-center">Sherlock: His Last Vow</a><br />
+                                    <p>Favorite Articles</p>
+                                    <% for( let i = 0; i < favorites.length; i++ ) { %>
+                                        <a class="col-12 text-center"><%= favorites[i].title %> </a><br />
+                                    <% } %>
                         </div>
                     </div>
                     <div class="col-md-8">

@@ -16,7 +16,7 @@ const loginProcess = safeCall(async (request, response, _next) => {
     // get user pass from request
     const { username, password } = request.body;
     // find user by username and get password
-    const user = await User.findOne({ username }).select('+password');
+    const user = await User.findOne({ username }).select('+password').populate('favorites');
     // send error case of wrong username 
     if (!user)
         return response.render('login', {

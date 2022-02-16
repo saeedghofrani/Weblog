@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 // controller
-const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage } = require('../controller/articles.controller.js');
+const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage, favorit } = require('../controller/articles.controller.js');
 //multer middleware
 const upload = require('../utils/multerInitializer.utils').uploadarticlePicture;
 // session middleware
@@ -16,9 +16,12 @@ router.route('/setup')
     .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation('create'), addArticleProcess)
     .delete(sessionsCheck.login, delMyArticle);
 
-router.route('/updateArticle/:id')
+router.route('/updateArticle/:id') 
     .get(sessionsCheck.login, updateArticlePage)
     .post(sessionsCheck.login, upload.single('articlePicture'), articleValidation('update'), updateArticleProcess);
+
+router.route('/favorit/:id')
+    .post(favorit)
 
 //get all article
 router.route('/:condition')

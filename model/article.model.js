@@ -23,9 +23,12 @@ const articleSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    favorit: {
+        type: Number,
+        default: 0
+    },
     coment: {
-        type: [[String]],
-        default: [['none', '']]
+        type: [[String, mongoose.SchemaTypes.ObjectId]]
     },
     author: {
         type: Schema.Types.ObjectId,

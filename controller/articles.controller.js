@@ -1,5 +1,6 @@
 //aticle model
 const Article = require('../model/article.model');
+const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
 
@@ -16,8 +17,12 @@ const articles = safeCall(async (request, response, _next) => {
         //collect data from database sort bt createdAt
         const articles = await Article.find({}).populate('author').sort({ createdAt: -1 });
         //colect most visit Count articles 
-        const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(4);
+        const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(2);
         //render artile page sorted 
+        if (request.session) {
+            console.log(request.session.user);
+            return response.render('./article/articles', { data: articles, topArticle: visitCount, user: request.session.user });
+        }
         return response.render('./article/articles', { data: articles, topArticle: visitCount });
     }
 
@@ -145,7 +150,6 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
         });
 
     const passImage = article.image
-    console.log(passImage);
 
     article.title = request.body.title
     article.content = request.body.content
@@ -165,11 +169,48 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
 
 });
 
+const favorit = safeCall(async (request, response, next) => {
+
+    const id = request.params.id;
+
+    const article = await Article.findById(id);
+
+    if (!request.session) {
+        return response.status(401).send({
+            success: false,
+            message: 'please login first',
+        })
+    }
+
+    const user = request.session.user;
+
+    if (request.body.data === "1") {
+        article.favorit++;
+        const updatedUer = await User.findByIdAndUpdate(user._id, { "$push": { "favorites": article._id } }, { new: true }).populate('favorites');
+        await article.save();
+        request.session.user = updatedUer;
+        return response.status(200).send({
+            success: true,
+            message: 'article favorit',
+        })
+    }
+
+    article.favorit--;
+    const updatedUer = await User.findByIdAndUpdate(user._id, { "$pullAll": { "favorites": article._id }}, { new: true }).populate('favorites');
+    await article.save();
+    request.session.user = updatedUer;
+    return response.status(200).send({
+        success: true,
+        message: 'article favorit',
+    })
+});
+
 module.exports = {
     articles,
     addArticlePage,
     addArticleProcess,
     delMyArticle,
     updateArticleProcess,
-    updateArticlePage
+    updateArticlePage,
+    favorit
 };

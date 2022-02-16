@@ -14,8 +14,10 @@ const dashboard = (request, response, _next) => {
         password,
         gender,
         phone,
-        avatar
+        avatar,
+        favorites
     } = request.session.user;
+
 
     return response.render('dashboard', { data: data });
 };
@@ -45,7 +47,7 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
     } = request.body;
 
     //update user by id 
-    const updatedUser = await User.findByIdAndUpdate(user._id, data, { new: true }).lean();
+    const updatedUser = await User.findByIdAndUpdate(user._id, data, { new: true }).populate('favorites').lean();
 
     //error handling for MODEL.findOneAndUpdate
     if (!updatedUser)
