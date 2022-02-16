@@ -28,13 +28,53 @@ nav ul li a {
   font-size: 14px;
   font-weight: bolder;
   text-decoration: none;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+
+nav ul li a:hover span {
+  bottom: 90%;
+  visibility: visible;
+  opacity: 1;
+}
+nav ul li a span {
+  background: transparent;
+  color: #222;
+  font-size: 14px;
+  font-weight: bold;
+  position:  absolute;
+  bottom: 90%;
+  left: -25px;
+  right: -25px;
+  padding: 5px 7px;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all .4s;
+  -moz-transition: all .4s;
+  transition: all .4s;
+}
+nav ul li a span:before {
+  content: '';
+/*   width: 0;
+  height: 0; */
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  position: absolute;
+  bottom: -5px;
+  left: 40px;
+}
+
+
+
 nav ul li a:hover {
   text-decoration: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.503), inset 0 0 1px rgba(0, 0, 0, 0.6);  
   color: rgb(0, 0, 0);
 }
+
 nav a btn {
   padding: 18px;
   font-family: "Open Sans";

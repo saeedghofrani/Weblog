@@ -1,7 +1,8 @@
 body {
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
-    background: linear-gradient(
+    /* background: linear-gradient(
             45deg,
             rgba(30, 61, 53, 0.5) 0%,
             rgba(34, 72, 64, 0.6) 10%,
@@ -14,8 +15,30 @@ body {
             rgb(51, 130, 117, 0.7) 80%,
             rgba(38, 80, 72, 0.6) 90%,
             rgba(32, 66, 59, 0.5) 100%
-    );
+    ); */ 
     padding-bottom: 100px;
+}
+
+form {
+    color: black !important;
+}
+
+textarea, 
+input {
+    border-radius: 0 !important;
+    outline: none;
+    border: none !important;
+    background-color: transparent;
+    width: 100%;
+    padding-left: 10px !important;
+    padding: 3px;
+    transition: all 0.8s linear;
+    opacity: 0.8;
+    box-shadow: 0px 1px 0px #338275 !important;
+}
+textarea:focus,
+input:focus {
+    box-shadow: 0px 2px 0px #1c4841 !important;
 }
 
 #contact {
@@ -28,7 +51,7 @@ body {
     margin: 0 auto;
     padding: 40px 0;
     font: 300 60px 'Oswald', sans-serif;
-    color: #fff;
+    color: #1b515e;
     text-transform: uppercase;
     letter-spacing: 6px;
 }
@@ -54,7 +77,7 @@ body {
 .form-control,
 textarea {
     max-width: 400px;
-    color: #fff;
+    color: rgb(0, 0, 0);
     letter-spacing: 1px;
 }
 
@@ -65,7 +88,7 @@ textarea {
     width: 400px;
     color: white;
     overflow: hidden;
-    background-color: #045404;
+    background-color: #1b515e;
     transition: all .2s ease-in-out;
 }
 
@@ -101,13 +124,13 @@ textarea {
 
 .list-item {
     line-height: 4;
-    color: #aaa;
+    color: #1b515e;
 }
 
 .contact-text {
     font: 300 18px 'Lato', sans-serif;
     letter-spacing: 1.9px;
-    color: #bbb;
+    color: #1b515e;
 }
 
 .place {
@@ -123,13 +146,13 @@ textarea {
 }
 
 .contact-text a {
-    color: #bbb;
+    color: #1b515e !important;
     text-decoration: none;
     transition-duration: 0.2s;
 }
 
 .contact-text a:hover {
-    color: #fff;
+    color: #289167;
     text-decoration: none;
 }
 
@@ -157,7 +180,7 @@ textarea {
     line-height: 60px;
     border-radius: 50%;
     color: #fff;
-    background-color: rgb(27, 27, 27);
+    background-color: #1b515e;
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
@@ -172,12 +195,12 @@ textarea {
     line-height: 60px;
     border-radius: 50%;
     opacity: 0;
-    box-shadow: 0 0 0 1px #fff;
+    box-shadow: 0 0 0 1px #1b515e;
     transition: all .2s ease-in-out;
 }
 
 .social-media-list li:hover {
-    background-color: #fff;
+    background-color: #1b515e2d;
 }
 
 .social-media-list li:hover:after {
@@ -187,7 +210,7 @@ textarea {
 }
 
 .social-media-list li:hover a {
-    color: #000;
+    color: #1b515e;
 }
 
 .copyright {

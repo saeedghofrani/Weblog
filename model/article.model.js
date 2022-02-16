@@ -7,17 +7,14 @@ const articleSchema = new Schema({
     },
     content: {
         type: String,
-        trim: true,
+    },
+    description: {
+        type: String,
     },
     image: {
         type: String,
         default: "https://www.kindpng.com/picc/m/79-792364_write-icon-symbol-design-sign-on-message-graphic.png"
     },
-    // author: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // },
     visitCount: {
         type: Number,
         default: 0
@@ -25,6 +22,15 @@ const articleSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    coment: {
+        type: [[String]],
+        default: [['none', '']]
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 }, { timestamps: true });
 module.exports = mongoose.model('Article', articleSchema);

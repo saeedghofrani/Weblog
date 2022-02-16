@@ -1,7 +1,12 @@
 "use strict";
+//express
 const express = require('express');
 const router = express.Router();
-const logout = require('../controller/logout.controller.js');
+//controller
+const about = require('../controller/about.controller.js');
+
 router.route('/')
-    .get(logout);
+    //about page
+    .get(about);
+
 module.exports = router;
