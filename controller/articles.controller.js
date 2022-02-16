@@ -145,13 +145,13 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
         });
 
     const passImage = article.image
-    console.log(passImage);
-
+    //update article
     article.title = request.body.title
     article.content = request.body.content
     article.description = request.body.description
     article.image = article.image
-
+    
+    //check for image update 
     if (request.file) {
         article.image = request.file.filename;
         article.save();
