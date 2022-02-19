@@ -61,24 +61,15 @@ $(document).ready(function () {
         });
 
     });
-
-    let articleIdLength = $('.ArticleId').length;
-
-    let spanFavorit = $('.fa-star-o').length;
-
-    for (let i = 0; i < articleIdLength; i++) {
-        for (let j = 0; j < spanFavorit; i++) {
-            console.log($(".fa-star-o").attr('artId')[i]);
-            console.log($('.ArticleId')[j].text()); 
-            if ($(".fa-star-o")[i].attr('artId') === $('.ArticleId')[j].text()) {
-                $(".fa-star-o").removeClass('fa')
-                    .removeClass('fa-star-o')
-                    .addClass("fas")
-                    .addClass("fa-star");
-            }
-        }
-    }
-
-
-
+    console.log("href URL" + window.location.href.split("=")[1]);
+    for (let i = 0; i < $('.page-item').length; i++) {
+        let page =  $('.page-item');
+        console.log( page );
+        if ($('.page-item').text()[i] == window.location.href.split("=")[1]) {
+            console.log("the li that should be active" + $('li.page-item')[i]);
+            let page = $('li.page-item')[i + 1];
+            // console.log();
+            // $(selector).addClass(className);
+            page.classList.add('active')
+    }}
 });

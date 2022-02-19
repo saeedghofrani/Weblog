@@ -11,19 +11,20 @@ const fs = require('fs');
 const articles = safeCall(async (request, response, _next) => {
     //get condition from param
     const condition = request.params.condition;
-
+    console.log(condition);
     //get all article
-    if (condition === 'all') {
+    if (condition.split('=')[0] === 'all') {
+        const skip = Number(condition.split('=')[1]) * 5;
+        console.log(skip);
         //collect data from database sort bt createdAt
-        const articles = await Article.find({}).populate('author').sort({ createdAt: -1 });
+        const articles = await Article.find({}).populate('author').sort({ createdAt: -1 }).skip(skip).limit(6);
         //colect most visit Count articles 
-        const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(2);
+        const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 });
         //render artile page sorted 
         if (request.session) {
-            console.log(request.session.user);
-            return response.render('./article/articles', { data: articles, topArticle: visitCount, user: request.session.user });
+            return response.render('./article/articles', { data: articles, topArticle: visitCount, user: request.session.user, count: visitCount.length });
         }
-        return response.render('./article/articles', { data: articles, topArticle: visitCount });
+        return response.render('./article/articles', { data: articles, topArticle: visitCount, count: visitCount.length });
     }
 
     //get users article

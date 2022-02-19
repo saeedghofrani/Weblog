@@ -52,8 +52,7 @@
                             <%=topArticle[i].visitCount %>
                           </span>
                           <span class=" translate-middle badge rounded-pill bg-danger favorit">
-                            <i class="fa fa-star-o"></i>
-                            <i class='fas fa-star d-none'></i>
+                            <i class="fa fa-star-o" artId="<%= data[i]._id%>"></i>
                           </span>
                           <h1>
                             <%= topArticle[i].title %>
@@ -92,8 +91,7 @@
                               <%=topArticle[i].visitCount %>
                             </span>
                             <span class=" translate-middle badge rounded-pill bg-danger favorit">
-                              <i class="fa fa-star-o"></i>
-                              <i class='fas fa-star d-none'></i>
+                              <i class="fa fa-star-o" artId="<%= data[i]._id%>"></i>
                             </span>
                             <h1>
                               <%= topArticle[i].title %>
@@ -142,7 +140,7 @@
                 <%=data[i].visitCount %>
               </span>
               <span class=" translate-middle badge rounded-pill bg-danger favorit">
-                <i class="fa fa-star-o" artId="<%= data[i]._id%>"></i>
+                <i class="fa fa-star-o favoritIcon" artId="<%= data[i]._id%>"></i>
               </span>
 
               <h1>
@@ -160,6 +158,14 @@
           <% } %>
       </ul>
     </div>
+
+    <section class="pagination"   cl aria-label="Page navigation example ">
+      <ul class="pagination justify-content-center ">
+        <% for (let i = 0; i < count/5; i++) { %> 
+        <li class="page-item" aria-current="page"><a class="page-link " href="/articles/all=<%= i %>"><%= i + 1 %> </a></li>
+        <% } %> 
+      </ul>
+    </section>
     
     <% if (user) { %>
       <% for (let index = 0; index < user.favorites.length; index++) { %> 
