@@ -15,7 +15,7 @@ const { login, loginProcess, register, registerProcess, logout, pass, passProcce
 router.route('/pass')
     .get(pass)
     .put(userValidator('pass'), passProcces)
-    .post(resetPassword)
+    .post(resetPassword);
 
 //inactavate user router
 router.route('/inActive')
