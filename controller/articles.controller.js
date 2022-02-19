@@ -36,7 +36,8 @@ const articles = safeCall(async (request, response, _next) => {
             return response.redirect('/auth/login');
         }
         //find article writed by user
-        const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
+        // const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
+        const myArticle = await Article.find({ $or:[ {'author':user._id}, {'CoAuthor':user._id}]}).populate('author').sort({ createdAt: -1 });
         ///render article page with data
         response.render('./article/myArticles', { data: myArticle });
     }
@@ -75,13 +76,19 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
         });
 
     //collect user data from session
-    const data = {
+    let data = {
         title: request.body.title,
         content: request.body.content,
         description: request.body.description,
         image: request.file.filename,
         author: request.session.user._id
     };
+
+    
+    if(request.body.CoAuthor) {
+        const CoAuthor = await User.findOne({ username: request.body.CoAuthor });
+        data.CoAuthor = CoAuthor._id;
+    }
     //create article
     const article = await Article.create(data);
     //error handling for create

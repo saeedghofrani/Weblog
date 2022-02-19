@@ -35,5 +35,9 @@ const articleSchema = new Schema({
         ref: 'User',
         required: true
     },
+    CoAuthor: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
 }, { timestamps: true });
 module.exports = mongoose.model('Article', articleSchema);
