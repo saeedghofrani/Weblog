@@ -11,11 +11,9 @@ const fs = require('fs');
 const articles = safeCall(async (request, response, _next) => {
     //get condition from param
     const condition = request.params.condition;
-    console.log(condition);
     //get all article
     if (condition.split('=')[0] === 'all') {
         const skip = Number(condition.split('=')[1]) * 5;
-        console.log(skip);
         //collect data from database sort bt createdAt
         const articles = await Article.find({}).populate('author').sort({ createdAt: -1 }).skip(skip).limit(6);
         //colect most visit Count articles 
@@ -37,7 +35,7 @@ const articles = safeCall(async (request, response, _next) => {
         }
         //find article writed by user
         // const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
-        const myArticle = await Article.find({ $or:[ {'author':user._id}, {'CoAuthor':user._id}]}).populate('author').sort({ createdAt: -1 });
+        const myArticle = await Article.find({ $or: [{ 'author': user._id }, { 'CoAuthor': user._id }] }).populate('author').sort({ createdAt: -1 });
         ///render article page with data
         response.render('./article/myArticles', { data: myArticle });
     }
@@ -84,8 +82,8 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
         author: request.session.user._id
     };
 
-    
-    if(request.body.CoAuthor) {
+
+    if (request.body.CoAuthor) {
         const CoAuthor = await User.findOne({ username: request.body.CoAuthor });
         data.CoAuthor = CoAuthor._id;
     }
@@ -143,8 +141,7 @@ const delMyArticle = safeCall(async (request, response, _next) => {
 //update article page 
 const updateArticlePage = safeCall(async (request, response, _next) => {
 
-    const article = await Article.findById(request.params.id);
-
+    const article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
     response.render('./article/updateArticle', { data: article });
 });
 //update article process
@@ -174,11 +171,15 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
     article.description = request.body.description;
     article.image = article.image;
 
+
     if (request.file) {
         article.image = request.file.filename;
-        article.save();
+        await article.save();
         fs.unlinkSync(join(__dirname, "../public/images/article", passImage));
+    } else {
+        await article.save();
     }
+
     //send success message
     response.status(200).send({
         success: true,
@@ -220,7 +221,8 @@ const favorit = safeCall(async (request, response, next) => {
     return response.status(200).send({
         success: true,
         message: 'article favorit',
-    })
+    });
+
 });
 
 module.exports = {
