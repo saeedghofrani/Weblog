@@ -106,14 +106,24 @@ const delMyArticle = safeCall(async (request, response, _next) => {
     const { id } = request.body;
 
     //delete article from database
-    const deletedArticle = await Article.findByIdAndDelete(id);
+    const article = await Article.findById(id);
 
     //error handling for MODEL.findByIdAndDelete
+    if (!article)
+        return response.status(400).send({
+            success: false,
+            message: 'delete article was unsuccesfull',
+        });
+
+    const deletedArticle = await Article.deleteOne(article);
+
     if (!deletedArticle)
         return response.status(400).send({
             success: false,
             message: 'delete article was unsuccesfull',
         });
+
+    fs.unlinkSync(join(__dirname, "../public/images/article", article.image));
 
     //send success message
     response.status(200).send({
@@ -149,12 +159,12 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
             message: 'update article was unsuccesfull',
         });
 
-    const passImage = article.image
+    const passImage = article.image;
 
-    article.title = request.body.title
-    article.content = request.body.content
-    article.description = request.body.description
-    article.image = article.image
+    article.title = request.body.title;
+    article.content = request.body.content;
+    article.description = request.body.description;
+    article.image = article.image;
 
     if (request.file) {
         article.image = request.file.filename;
@@ -179,7 +189,7 @@ const favorit = safeCall(async (request, response, next) => {
         return response.status(401).send({
             success: false,
             message: 'please login first',
-        })
+        });
     }
 
     const user = request.session.user;
@@ -192,11 +202,11 @@ const favorit = safeCall(async (request, response, next) => {
         return response.status(200).send({
             success: true,
             message: 'article favorit',
-        })
+        });
     }
 
     article.favorit--;
-    const updatedUer = await User.findByIdAndUpdate(user._id, { "$pullAll": { "favorites": article._id }}, { new: true }).populate('favorites');
+    const updatedUer = await User.findByIdAndUpdate(user._id, { "$pullAll": { "favorites": article._id } }, { new: true }).populate('favorites');
     await article.save();
     request.session.user = updatedUer;
     return response.status(200).send({
