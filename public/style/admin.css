@@ -65,7 +65,7 @@ th {
     bottom: 12px;
     width: 40px;
     height: 1px;
-    background-color: #0cc652;
+    background-color: #338275 !important;
 }
 @media (min-width: 768px) {
     .section-title.title-ex1 h2:after {
@@ -118,7 +118,7 @@ th {
     right: -35px;
     width: 88px;
     height: 88px;
-    background: #0cc652;
+    background: #338275 !important;
     opacity: 0.2;
     border-radius: 8px;
     transform: rotate(45deg);
@@ -130,7 +130,7 @@ th {
     right: -35px;
     width: 88px;
     height: 88px;
-    background: #0cc652;
+    background: #338275 !important;
     opacity: 0.2;
     border-radius: 8px;
     transform: rotate(45deg);
@@ -158,8 +158,8 @@ th {
     box-shadow: 0 8px 16px rgba(23, 74, 8, 0.245);
 }
 .price-card:hover .btn {
-    background: #0cc652;
-    border-color: #0cc652;
+    background: #338275 !important;
+    border-color:#338275 !important;
 }
 p.price span {
     display: inline-block;
@@ -167,7 +167,7 @@ p.price span {
     padding-right: 0;
     font-size: 50px;
     font-weight: 600;
-    color: #0cc652;
+    color:#338275 !important;
     position: relative;
 }
 p.price span:before {
@@ -195,8 +195,8 @@ ul li {
 }
  
 .button-37 {
-  background-color: #13aa52;
-  border: 1px solid #13aa52;
+  background-color:#338275 !important;
+  border: 1px solid #338275 !important;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
   box-sizing: border-box;
