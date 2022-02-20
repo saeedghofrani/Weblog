@@ -2,6 +2,7 @@
 const Article = require('../model/article.model');
 const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
+const mongoose = require('mongoose');
 const safeCall = require('../utils/safeCall.utils');
 
 const { join } = require('path');
@@ -61,7 +62,7 @@ const articles = safeCall(async (request, response, _next) => {
 //render add article page
 const addArticlePage = (request, response, _next) => {
     response.render('./article/addArticle');
-}
+};
 
 //add article procces 
 const addArticleProcess = safeCall(async (request, response, _next) => {
@@ -114,8 +115,8 @@ const delMyArticle = safeCall(async (request, response, _next) => {
     //delete article from database
     const article = await Article.findById(id).populate('author');
 
-    
-    if (request.session.user._id !== article.author._id) {
+
+    if (request.session.user._id !== mongoose.Types.ObjectId(article.author._id).valueOf()) {
         response.render('./error', { error: { status: 404, message: "page not found" } });
     }
 
@@ -146,10 +147,10 @@ const delMyArticle = safeCall(async (request, response, _next) => {
 //update article page 
 const updateArticlePage = safeCall(async (request, response, _next) => {
     const article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
-    if (request.session.user._id === article.author._id) {
-        response.render('./article/updateArticle', { data: article });
+    if (request.session.user._id === mongoose.Types.ObjectId(article.author._id).valueOf() || request.session.user._id === mongoose.Types.ObjectId(article.CoAuthor._id).valueOf()) {
+        return response.render('./article/updateArticle', { data: article });
     }
-    response.render('./error', { error: { status: 404, message: "page not found" } });
+    return response.render('./error', { error: { status: 404, message: "page not found" } });
 });
 //update article process
 const updateArticleProcess = safeCall(async (request, response, _next) => {
@@ -162,10 +163,10 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
             data: null
         });
 
-    let article = await Article.findById(request.params.id).populate('author');
+    let article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
 
-    if (request.session.user._id !== article.author._id) {
-        response.render('./error', { error: { status: 404, message: "page not found" } });
+    if (request.session.user._id !== mongoose.Types.ObjectId(article.author._id).valueOf() || request.session.user._id === mongoose.Types.ObjectId(article.CoAuthor._id).valueOf()) {
+        return response.render('./error', { error: { status: 404, message: "page not found" } });
     }
 
 
@@ -193,7 +194,7 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
     }
 
     //send success message
-    response.status(200).send({
+    return response.status(200).send({
         success: true,
         message: 'delete article was succesfull',
     });

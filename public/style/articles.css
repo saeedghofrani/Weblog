@@ -7,6 +7,12 @@ html {
   max-width: 100%;
   overflow-x: hidden;
 }
+.topImg {
+  max-height: 200px;
+}
+#carouselExampleControlsNoTouching img {
+  max-height: 400px;
+}
 body {
   background: #f1f1f1;
   width: 100vw;
@@ -88,6 +94,11 @@ h1 {
   overflow: hidden !important;
   overflow-wrap: break-word;
   z-index: 0;
+}
+.carouselExampleIndicators2 {
+  overflow: hidden;
+  overflow: hidden !important;
+  overflow-wrap: break-word;
 }
 .blog-card {
   display: flex;
@@ -186,7 +197,7 @@ h1 {
   background: #fff;
   position: relative;
   z-index: 1;
-  
+  overflow: hidden
 }
 .blog-card .description h1,
 .blog-card .description h2 {

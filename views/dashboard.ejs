@@ -9,17 +9,21 @@
 <body>
     <%- include('./common/navbar.ejs') %>
         <div class="container emp-profile">
+
             <section>
+
                 <div class="row cont">
                     <div class="col-md-4">
                         <form action="/dashboard" enctype="multipart/form-data" method="post" id="avatarForm">
                             <div class="profile-img">
-                                <img  src=" /images/avatars/<%= data.avatar %>" alt="profile photo" class="img-responsive" id="avatarImage"/>
-                                <span class="imageText"><i class='far fa-edit' style='font-size:15px'></i>Choose your avatar</span>
+                                <img src=" /images/avatars/<%= data.avatar %>" alt="profile photo"
+                                    class="img-responsive" id="avatarImage" />
+                                <span class="imageText"><i class='far fa-edit' style='font-size:15px'></i>Choose your
+                                    avatar</span>
                                 <div class="file btn btn-lg btn-primary">
-                                    <input  type="file" name="avatar" id="inputFile" accept="image/*" class="d-none" />
+                                    <input type="file" name="avatar" id="inputFile" accept="image/*" class="d-none" />
                                     <br>
-                                    <input class="avatarbtn d-none" type="submit" value="" id="avatarSubmit"/>
+                                    <input class="avatarbtn d-none" type="submit" value="" id="avatarSubmit" />
                                 </div>
                             </div>
                         </form>
@@ -89,6 +93,7 @@
 
                     </div>
                 </div>
+                
                 <div class="row cont">
                     <div class="col-md-4">
                         <div class="profile-work">
@@ -108,15 +113,18 @@
                                         <%= data.status %>
                                     </a>
                                     <% } %>
-                                    <p>Favorite Articles</p>
-                                    <% if(favorites.length > 0) { for( let i = 0; i < favorites.length; i++ ) { %>
-                                        <a class="col-12 text-center"><%= favorites[i].title %> </a><br />
-                                    <% } } else {%>
-                                        <a class="col-12 text-center">Sherlock: The Final Problem</a><br />
-                                        <a class="col-12 text-center">Sherlock: The Great Game</a><br />
-                                        <a class="col-12 text-center">Sherlock: The Reichenbach Fall</a><br />
-                                        <a class="col-12 text-center">Sherlock: His Last Vow</a><br />
-                                        <% } %> 
+                                        <p>Favorite Articles</p>
+                                        <% if(favorites.length> 0) { for( let i = 0; i < favorites.length; i++ ) { %>
+                                                <a class="col-12 text-center">
+                                                    <%= favorites[i].title %>
+                                                </a><br />
+                                                <% } } else {%>
+                                                    <a class="col-12 text-center">Sherlock: The Final Problem</a><br />
+                                                    <a class="col-12 text-center">Sherlock: The Great Game</a><br />
+                                                    <a class="col-12 text-center">Sherlock: The Reichenbach
+                                                        Fall</a><br />
+                                                    <a class="col-12 text-center">Sherlock: His Last Vow</a><br />
+                                                    <% } %>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -278,6 +286,7 @@
                     </div>
                 </div>
             </section>
+
         </div>
 
 
@@ -344,6 +353,7 @@
                 </div>
             </div>
         </div>
+
 
 
 
