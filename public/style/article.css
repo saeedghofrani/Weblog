@@ -24,12 +24,12 @@ p.oneArticleData {
 }
 .title {
     padding-left:20px;
-    font-family: 'Almendra SC';
+    font-family: 'Cinzel Decorative';
     color: #13443b;
 }
 .description {
     padding-left: 50px;
-    font-family: 'Gugi';
+    font-family: 'Cinzel Decorative';
     color: rgb(121, 121, 121);
     margin-bottom: 50px ;
 }
@@ -39,7 +39,7 @@ p.oneArticleData {
 }
 
 .writen {
-    font-family: 'Amita';
+    font-family: 'Charmonman';
     
     color: #338275;
 }
@@ -50,14 +50,14 @@ p.oneArticleData {
 .category {
     padding-left: 20px;
     padding-right: 20px;
-    font-family: 'Allura';
+    font-family: 'Charmonman';
     font-size:18px;
     color: #338275;
 }
 .date {
     padding-left: 20px;
     padding-right: 20px;
-    font-family: 'Allura';
+    font-family: 'Charmonman';
     font-size:18px;
     color: #338275;
 }

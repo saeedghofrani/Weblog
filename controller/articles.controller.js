@@ -48,7 +48,7 @@ const articles = safeCall(async (request, response, _next) => {
         //find article from database
         const article = await Article.findById(id).populate('author');
         //add visit count of article 
-        if (request.session.user && request.session.user.username !== article.author.username || !request.session.user) {
+        if ((request.session.user && request.session.user.username !== article.author.username) || (!request.session.user)) {
             article.visitCount++;
             article.save();
         }
