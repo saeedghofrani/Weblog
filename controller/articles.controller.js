@@ -112,7 +112,12 @@ const delMyArticle = safeCall(async (request, response, _next) => {
     const { id } = request.body;
 
     //delete article from database
-    const article = await Article.findById(id);
+    const article = await Article.findById(id).populate('author');
+
+    
+    if (request.session.user._id !== article.author._id) {
+        response.render('./error', { error: { status: 404, message: "page not found" } });
+    }
 
     //error handling for MODEL.findByIdAndDelete
     if (!article)
@@ -140,9 +145,11 @@ const delMyArticle = safeCall(async (request, response, _next) => {
 });
 //update article page 
 const updateArticlePage = safeCall(async (request, response, _next) => {
-
     const article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
-    response.render('./article/updateArticle', { data: article });
+    if (request.session.user._id === article.author._id) {
+        response.render('./article/updateArticle', { data: article });
+    }
+    response.render('./error', { error: { status: 404, message: "page not found" } });
 });
 //update article process
 const updateArticleProcess = safeCall(async (request, response, _next) => {
@@ -155,7 +162,12 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
             data: null
         });
 
-    let article = await Article.findById(request.params.id);
+    let article = await Article.findById(request.params.id).populate('author');
+
+    if (request.session.user._id !== article.author._id) {
+        response.render('./error', { error: { status: 404, message: "page not found" } });
+    }
+
 
     //error handling for findByIdAndUpdate
     if (!article)
