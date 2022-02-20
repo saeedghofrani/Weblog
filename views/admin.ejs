@@ -21,32 +21,45 @@
                                     <%= users[i].role %>
                                 </h2>
                                 <p class="text-success ">
-                                    <span class="text-muted">Username:</span>  <%= users[i].username %>
+                                    <span class="text-muted">Username:</span>
+                                    <%= users[i].username %>
                                 </p>
                                 <ul class="pricing-offers ">
                                     <li class="text-success">
-                                        <span class="text-muted">First Name:</span>  <%= users[i].firstName %>
+                                        <span class="text-muted">First Name:</span>
+                                        <%= users[i].firstName %>
                                     </li>
                                     <li class="text-success ">
-                                        <span class="text-muted">Last Name:</span>  <%= users[i].lastName %>
+                                        <span class="text-muted">Last Name:</span>
+                                        <%= users[i].lastName %>
                                     </li>
                                     <li class="text-success ">
-                                        <span class="text-muted">Email:</span>  <%= users[i].email %>
+                                        <span class="text-muted">Email:</span>
+                                        <%= users[i].email %>
                                     </li>
                                     <li class="text-success ">
-                                        <span class="text-muted">Phone:</span>  <%= users[i].phone %>
+                                        <span class="text-muted">Phone:</span>
+                                        <%= users[i].phone %>
                                     </li>
                                     <li class="text-success ">
-                                        <span class="text-muted">Gender:</span>  <%= users[i].gender %>
+                                        <span class="text-muted">Gender:</span>
+                                        <%= users[i].gender %>
                                     </li>
                                     <li class="text-success ">
-                                        <span class="text-muted">Status:</span>  <%= users[i].status %>
+                                        <span class="text-muted">Status:</span>
+                                        <%= users[i].status %>
                                     </li>
                                     <li class="col-12 ">
-                                        <button class="col-12 button-37 resetPass" userId="<%= users[i]._id %>">Reset Password</button>
+                                        <button class="col-12 button-37 resetPass" userId="<%= users[i]._id %>">Reset
+                                            Password</button>
                                     </li>
                                     <li class="col-12 ">
-                                        <button class="col-12 button-37 deleteUser" userId="<%= users[i]._id %>">Remove User</button>
+                                        <button class="col-12 button-37 deleteUser" userId="<%= users[i]._id %>">Remove
+                                            User</button>
+                                    </li>
+                                    <li class="col-12 ">
+                                        <button class="col-12 button-37" data-toggle="modal" data-target="#form" userId="<%= users[i]._id %>">Remove
+                                            User`s Article</button>
                                     </li>
                                 </ul>
                             </div>
@@ -55,6 +68,18 @@
                 </div>
             </div>
         </section>
+
+
+        <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4">
+                    <h1 class="text-center mb-5">Plaese Enter Article ID</h1>
+                    <input id="articleID" type="text" class="form-control mb-3" placeholder="">
+                    <div class="text-center mb-3"> <button class="btn btn-primary w-50 rounded-pill b1 button-37" id="deleArticleAdmin">Subscribe</button> </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <div class="toast" style="position: absolute; top: 20px; right: 20px;">
@@ -68,7 +93,7 @@
 
             </div>
         </div>
-        
+
         <%- include('./common/scripts.ejs') %>
             <script src="/script/admin.js"></script>
 </body>

@@ -20,7 +20,7 @@ router.route('/setup')
 
 router.route('/updateArticle/:id')
     .get(sessionsCheck.login, checkAccess.updateArticle, updateArticlePage)
-    .post(sessionsCheck.login, checkAccess.deleteArticle, upload.single('articlePicture'), articleValidation('update'), updateArticleProcess);
+    .post(sessionsCheck.login, checkAccess.updateArticle, upload.single('articlePicture'), articleValidation('update'), updateArticleProcess);
 
 
 router.route('/favorit/:id')
