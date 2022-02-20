@@ -2,11 +2,8 @@
 const Article = require('../model/article.model');
 const User = require('../model/user.model');
 // wrapper contain trycatch for error handling
-const mongoose = require('mongoose');
 const safeCall = require('../utils/safeCall.utils');
-
-const { join } = require('path');
-const fs = require('fs');
+const deletePicture = require('../utils/deletePicture.utils');
 
 //render article page 
 const articles = safeCall(async (request, response, _next) => {
@@ -34,7 +31,6 @@ const articles = safeCall(async (request, response, _next) => {
         if (!user) {
             return response.redirect('/auth/login');
         }
-        //find article writed by user
         // const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
         const myArticle = await Article.find({ $or: [{ 'author': user._id }, { 'CoAuthor': user._id }] }).populate('author').sort({ createdAt: -1 });
         ///render article page with data
@@ -113,12 +109,7 @@ const delMyArticle = safeCall(async (request, response, _next) => {
     const { id } = request.body;
 
     //delete article from database
-    const article = await Article.findById(id).populate('author');
-
-
-    if (request.session.user._id !== mongoose.Types.ObjectId(article.author._id).valueOf()) {
-        response.render('./error', { error: { status: 404, message: "page not found" } });
-    }
+    const article = await Article.findById(id);
 
     //error handling for MODEL.findByIdAndDelete
     if (!article)
@@ -135,7 +126,7 @@ const delMyArticle = safeCall(async (request, response, _next) => {
             message: 'delete article was unsuccesfull',
         });
 
-    fs.unlinkSync(join(__dirname, "../public/images/article", article.image));
+    deletePicture("../public/images/article", article.image);
 
     //send success message
     response.status(200).send({
@@ -146,11 +137,10 @@ const delMyArticle = safeCall(async (request, response, _next) => {
 });
 //update article page 
 const updateArticlePage = safeCall(async (request, response, _next) => {
+
     const article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
-    if (request.session.user._id === mongoose.Types.ObjectId(article.author._id).valueOf() || request.session.user._id === mongoose.Types.ObjectId(article.CoAuthor._id).valueOf()) {
-        return response.render('./article/updateArticle', { data: article });
-    }
-    return response.render('./error', { error: { status: 404, message: "page not found" } });
+    return response.render('./article/updateArticle', { data: article });
+
 });
 //update article process
 const updateArticleProcess = safeCall(async (request, response, _next) => {
@@ -164,10 +154,6 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
         });
 
     let article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
-
-    if (request.session.user._id !== mongoose.Types.ObjectId(article.author._id).valueOf() || request.session.user._id === mongoose.Types.ObjectId(article.CoAuthor._id).valueOf()) {
-        return response.render('./error', { error: { status: 404, message: "page not found" } });
-    }
 
 
     //error handling for findByIdAndUpdate
@@ -188,7 +174,7 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
     if (request.file) {
         article.image = request.file.filename;
         await article.save();
-        fs.unlinkSync(join(__dirname, "../public/images/article", passImage));
+        deletePicture("../public/images/article", passImage);
     } else {
         await article.save();
     }

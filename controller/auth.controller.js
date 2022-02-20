@@ -2,6 +2,7 @@
 const bcrypt = require('bcryptjs');
 //user model
 const User = require('../model/user.model');
+//article model
 const Article = require('../model/article.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
@@ -157,6 +158,7 @@ const delAccount = safeCall(async (request, response, _next) => {
     const user = request.session.user;
     //delete user by id
     await User.findByIdAndDelete(user._id);
+    //delet articles 
     await Article.deleteMany({ author: user._id });
     //redirect to logout 
     response.redirect('/auth/logout');
@@ -203,7 +205,7 @@ const resetPassword = safeCall(async (request, response, _next) => {
 
     //change user password to phoe number
     user.password = user.phone;
-    const savedUser = await user.save({ validateBeforeSave: false });
+    const savedUser = await user.save();
 
     //error handling for MODEL.SAVE
     if (!savedUser)

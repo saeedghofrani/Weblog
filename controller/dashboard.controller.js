@@ -1,9 +1,9 @@
 // user model
 const User = require('../model/user.model');
+const deletePicture = require('../utils/deletePicture.utils');
 // wrapper contain trycatch for error handling
+
 const safeCall = require('../utils/safeCall.utils');
-const { join } = require('path');
-const fs = require('fs');
 // render dashboard page
 const dashboard = (request, response, _next) => {
     //collect data from session
@@ -84,7 +84,7 @@ const avatarProcess = safeCall(async (request, response, next) => {
 
     if (request.session.user.avatar !== "profileAvatar.jpg") {
         //delete old avatar
-        fs.unlinkSync(join(__dirname, "../public/images/avatars", request.session.user.avatar));
+        deletePicture("../public/images/avatars", request.session.user.avatar);
     }
     //session user
     request.session.user = user;
