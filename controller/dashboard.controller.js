@@ -71,7 +71,7 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 const avatarProcess = safeCall(async (request, response, next) => {
 
     //update user by avatar
-    user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true }).lean();
+    const user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true }).lean();
 
     //error handling for MODEL.findOneAndUpdate
     if (!user) {

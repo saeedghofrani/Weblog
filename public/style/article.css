@@ -32,6 +32,7 @@ p.oneArticleData {
     font-family: 'Cinzel Decorative';
     color: rgb(121, 121, 121);
     margin-bottom: 50px ;
+    overflow-wrap: break-word;
 }
 .infoArticle {
     padding-left:20px;

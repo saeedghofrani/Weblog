@@ -10,17 +10,24 @@ const articles = safeCall(async (request, response, _next) => {
     //get condition from param
     const condition = request.params.condition;
     //get all article
+    if (condition === 'all') {
+        //colect most visit Count articles 
+        const topArticle = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(1);
+        return response.render('./article/articles', { topArticle });
+    }
+
     if (condition.split('=')[0] === 'all') {
-        const skip = Number(condition.split('=')[1]) * 5;
+        const skip = Number(condition.split('=')[1]) * 6;
         //collect data from database sort bt createdAt
         const articles = await Article.find({}).populate('author').sort({ createdAt: -1 }).skip(skip).limit(6);
-        //colect most visit Count articles 
-        const visitCount = await Article.find({}).populate('author').sort({ visitCount: -1 });
+        const count = await Article.find({}).count();
         //render artile page sorted 
-        if (request.session) {
-            return response.render('./article/articles', { data: articles, topArticle: visitCount, user: request.session.user, count: visitCount.length });
-        }
-        return response.render('./article/articles', { data: articles, topArticle: visitCount, count: visitCount.length });
+        return response.status(200).send({
+            success: true,
+            message: 'done',
+            data: articles,
+            count
+        });
     }
 
     //get users article
@@ -201,6 +208,12 @@ const favorit = safeCall(async (request, response, next) => {
     }
 
     const user = request.session.user;
+    if (!user) {
+        return response.status(401).send({
+            success: false,
+            message: 'please login first',
+        });
+    }
 
     if (request.body.data === "1") {
         article.favorit++;
@@ -212,15 +225,16 @@ const favorit = safeCall(async (request, response, next) => {
             message: 'article favorit',
         });
     }
-
-    article.favorit--;
-    const updatedUer = await User.findByIdAndUpdate(user._id, { "$pullAll": { "favorites": article._id } }, { new: true }).populate('favorites');
-    await article.save();
-    request.session.user = updatedUer;
-    return response.status(200).send({
-        success: true,
-        message: 'article favorit',
-    });
+    if (request.body.data === "0") {
+        article.favorit--;
+        const updatedUer = await User.findByIdAndUpdate(user._id, { "$pullAll": { "favorites": article._id } }, { new: true }).populate('favorites');
+        await article.save();
+        request.session.user = updatedUer;
+        return response.status(200).send({
+            success: true,
+            message: 'article favorit',
+        });
+    }
 
 });
 
