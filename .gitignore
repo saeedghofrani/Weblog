@@ -55,10 +55,7 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-
-# next.js build output
-.next
-
 .idae
 
 trash
+

@@ -170,13 +170,13 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
             message: 'update article was unsuccesfull',
         });
 
+
     const passImage = article.image;
 
     article.title = request.body.title;
     article.content = request.body.content;
     article.description = request.body.description;
     article.image = article.image;
-
 
     if (request.file) {
         article.image = request.file.filename;
