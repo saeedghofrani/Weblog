@@ -1,9 +1,9 @@
 // user model
 const User = require('../model/user.model');
+const deletePicture = require('../utils/deletePicture.utils');
 // wrapper contain trycatch for error handling
+
 const safeCall = require('../utils/safeCall.utils');
-const { join } = require('path');
-const fs = require('fs');
 // render dashboard page
 const dashboard = (request, response, _next) => {
     //collect data from session
@@ -14,8 +14,10 @@ const dashboard = (request, response, _next) => {
         password,
         gender,
         phone,
-        avatar
+        avatar,
+        favorites
     } = request.session.user;
+
 
     return response.render('dashboard', { data: data });
 };
@@ -45,7 +47,7 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
     } = request.body;
 
     //update user by id 
-    const updatedUser = await User.findByIdAndUpdate(user._id, data, { new: true }).lean();
+    const updatedUser = await User.findByIdAndUpdate(user._id, data, { new: true }).populate('favorites').lean();
 
     //error handling for MODEL.findOneAndUpdate
     if (!updatedUser)
@@ -69,7 +71,7 @@ const dashboardProcess = safeCall(async (request, response, _next) => {
 const avatarProcess = safeCall(async (request, response, next) => {
 
     //update user by avatar
-    user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true }).lean();
+    const user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true }).lean();
 
     //error handling for MODEL.findOneAndUpdate
     if (!user) {
@@ -82,7 +84,7 @@ const avatarProcess = safeCall(async (request, response, next) => {
 
     if (request.session.user.avatar !== "profileAvatar.jpg") {
         //delete old avatar
-        fs.unlinkSync(join(__dirname, "../public/images/avatars", request.session.user.avatar));
+        deletePicture("../public/images/avatars", request.session.user.avatar);
     }
     //session user
     request.session.user = user;

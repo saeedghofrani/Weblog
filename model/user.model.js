@@ -82,6 +82,10 @@ const UserSchema = new Schema({
         },
         default: 'example@gmail.com'
     },
+    favorites: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Article'
+    }],
     avatar: {
         type: String,
         default: 'profileAvatar.jpg'

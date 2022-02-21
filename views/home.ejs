@@ -4,66 +4,49 @@
 <head>
     <%- include('./common/header.ejs', {Document: "Home" }) %>
         <link rel="stylesheet" href="/style/home.css">
+        <link href='https://fonts.googleapis.com/css?family=Merienda One' rel='stylesheet'>
 </head>
 
 <body>
     <%- include('./common/navbar.ejs') %>
-    <header class="py-5 bg-image-full" style="background-image: url('/images/full-article.jfif')">
-        <div class="text-center my-5">
-            <img class="img-fluid rounded-circle mb-4" src="/images/images.jfif" />
-            <h1 class="text-black fs-3 fw-bolder">WELLCOME TO ESTER</h1>
-            <p class="text-black mb-0">READ ARTICLE, WRITE ARTICLE</p>
-        </div>
-    </header>
-    <!-- Content section-->
-    <section class="py-5">
-        <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <h2>Full Width Backgrounds</h2>
-                    <p class="lead">A single, lightweight helper class allows you to add engaging, full width background images to sections of your page.</p>
-                    <p class="mb-0">The universe is almost 14 billion years old, and, wow! Life had no problem starting here on Earth! I think it would be inexcusably egocentric of us to suggest that we're alone in the universe.</p>
+
+        <header class="py-5 bg-image-full"
+            style="background-image: url('/images/0ab78b8f8641471bc7bedf6738c25bcd.jpg');">
+
+            <div class="text-center my-5">
+                <img class="img-fluid rounded-circle mb-4 middlePicture" src="/images/middle.jpg" />
+            </div>
+
+        </header>
+
+        <!-- Content section-->
+        <section class="py-5">
+
+            <div class="container my-5">
+
+                <div class="row justify-content-center">
+                    <div class="col-9 text-center">
+                        <p class="text-black fs-3 mb-5 fw-bolder">WELLCOME TO ESTER</p>
+                        <p class="text-black mb-3 " style="color: rgb(12, 71, 19)">READ ARTICLE, WRITE ARTICLE</p>
+                        <p class="lead text-justify" style="color: rgb(12, 71, 19)">
+
+                            This page shares my best articles to
+                            read on topics like health, happiness, creativity, productivity and more. The central
+                            question that drives my work is, “How can we live better?” To answer that question, I like
+                            to write about science-based ways to solve practical problems.
+
+                            You’ll find interesting articles to read on topics like how to stop procrastinating as well
+                            as personal recommendations like my list of the best books to read and my minimalist travel
+                            guide. Ready to dive in? You can use the categories below to browse my best articles.
+
+                        </p>
+                    </div>
                 </div>
+
             </div>
-        </div>
-    </section>
-    <!-- Image element - set the background image for the header in the line below-->
-    <div class="py-5 bg-image-full" style="background-image: url('/images/download.jfif')">
-        <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
-        <div style="height: 20rem"></div>
-    </div>
-    <!-- Content section-->
-    <section class="py-5">
-        <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <h2>Engaging Background Images</h2>
-                    <p class="lead">The background images used in this template are sourced from Unsplash and are open source and free to use.</p>
-                    <p class="mb-0">I can't tell you how many people say they were turned off from science because of a science teacher that completely sucked out all the inspiration and enthusiasm they had for the course.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-        <!-- <div class="topArticle">
-            <video autoplay muted loop poster="" id="bgvid" playsinline autoplay muted loop>
-                <source src="/video/mixkit-cake-with-burning-candles-in-the-dark-5109-large.mp4" type="video/mp4">
-            </video>
-            <div id="polina">
-                <h1>ESTER</h1>
-                <p>filmed by Alexander Wagner 2011
-                <p><a href="http://thenewcode.com/777/Create-Fullscreen-HTML5-Page-Background-Video">original
-                        article</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta dictum turpis, eu mollis
-                    justo
-                    gravida ac. Proin non eros blandit, rutrum est a, cursus quam. Nam ultricies, velit ac suscipit
-                    vehicula, turpis eros sollicitudin lacus, at convallis mauris magna non justo. Etiam et suscipit
-                    elit.
-                    Morbi eu ornare nulla, sit amet ornare est. Sed vehicula ipsum a mattis dapibus. Etiam volutpat vel
-                    enim
-                    at auctor.</p>
-                <button>read more</button>
-            </div>
-        </div> -->
+
+        </section>
+
         <%- include('./common/scripts.ejs') %>
             <script src="/script/home.js"></script>
 </body>

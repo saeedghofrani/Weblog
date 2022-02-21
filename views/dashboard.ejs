@@ -4,34 +4,40 @@
 <head>
     <%- include('./common/header.ejs', {Document: "dashboard" }) %>
         <link rel="stylesheet" href="/style/dashboard.css">
+                <link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
 </head>
 
 <body>
     <%- include('./common/navbar.ejs') %>
         <div class="container emp-profile">
+
             <section>
+
                 <div class="row cont">
                     <div class="col-md-4">
                         <form action="/dashboard" enctype="multipart/form-data" method="post" id="avatarForm">
                             <div class="profile-img">
-                                <img  src=" /images/avatars/<%= data.avatar %>" alt="profile photo" class="img-responsive" id="avatarImage"/>
-                                <span class="imageText"><i class='far fa-edit' style='font-size:15px'></i>Choose your avatar</span>
+                                <img src=" /images/avatars/<%= data.avatar %>" alt="profile photo"
+                                    class="img-responsive" id="avatarImage" />
+                                <span class="imageText"><i class='far fa-edit' style='font-size:15px'></i>Choose your
+                                    avatar</span>
                                 <div class="file btn btn-lg btn-primary">
-                                    <input  type="file" name="avatar" id="inputFile" accept="image/*" class="d-none" />
+                                    <input type="file" name="avatar" id="inputFile" accept="image/*" class="d-none" />
                                     <br>
-                                    <input class="avatarbtn d-none" type="submit" value="" id="avatarSubmit"/>
+                                    <input class="avatarbtn d-none" type="submit" value="" id="avatarSubmit" />
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                            <h5 id="fullName">
+                            <h5  id="fullName">
                                 <%= data.firstName %>
                                     <%= data.lastName %>
                             </h5>
                             <h6>
-                                KNOWN AS: <%= data.username %>
+                                KNOWN AS: <span ><%= data.username %></span>
                             </h6>
                             <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -89,10 +95,11 @@
 
                     </div>
                 </div>
+
                 <div class="row cont">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>Articles</p>
+                            <p  style="  font-family: 'Cinzel Decorative';">Articles</p>
                             <a href="/articles/myArticle" id="Articles" class="col-12 text-center">My Article
                             </a>
                             <% if(data.role==='admin' ){ %>
@@ -100,7 +107,7 @@
                                 <a href="/admin" id="Articles" class="col-12 text-center">User Table
                                 </a>
                                 <% } else {%>
-                                    <p>Role</p>
+                                    <p style="  font-family: 'Cinzel Decorative';">Role</p>
                                     <a href="" class="col-12 text-center">
                                         <%= data.role %>
                                     </a><br />
@@ -108,11 +115,18 @@
                                         <%= data.status %>
                                     </a>
                                     <% } %>
-                                        <p>Favorite Articles</p>
-                                        <a class="col-12 text-center">Sherlock: The Final Problem</a><br />
-                                        <a class="col-12 text-center">Sherlock: The Great Game</a><br />
-                                        <a class="col-12 text-center">Sherlock: The Reichenbach Fall</a><br />
-                                        <a class="col-12 text-center">Sherlock: His Last Vow</a><br />
+                                        <p  style="  font-family: 'Cinzel Decorative';">Favorite Articles</p>
+                                        <% if(favorites.length> 0) { for( let i = 0; i < favorites.length; i++ ) { %>
+                                                <a class="col-12 text-center">
+                                                    <%= favorites[i].title %>
+                                                </a><br />
+                                                <% } } else {%>
+                                                    <a class="col-12 text-center">Sherlock: The Final Problem</a><br />
+                                                    <a class="col-12 text-center">Sherlock: The Great Game</a><br />
+                                                    <a class="col-12 text-center">Sherlock: The Reichenbach
+                                                        Fall</a><br />
+                                                    <a class="col-12 text-center">Sherlock: His Last Vow</a><br />
+                                                    <% } %>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -120,7 +134,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>User Name</label>
+                                        <label style="  font-family: 'Cinzel Decorative';">User Name</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p>
@@ -132,7 +146,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Email</label>
+                                        <label style="  font-family: 'Cinzel Decorative';">Email</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p>
@@ -143,7 +157,7 @@
                                 </div>
                                 <div class="row genderDiv">
                                     <div class="col-md-6">
-                                        <label>Gender</label>
+                                        <label style="  font-family: 'Cinzel Decorative';">Gender</label>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -174,7 +188,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Phone</label>
+                                        <label style="  font-family: 'Cinzel Decorative';">Phone</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p>
@@ -185,7 +199,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>First Name</label>
+                                        <label style="  font-family: 'Cinzel Decorative';">First Name</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p>
@@ -197,7 +211,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Last Name</label>
+                                        <label style="  font-family: 'Cinzel Decorative';">Last Name</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p>
@@ -274,6 +288,7 @@
                     </div>
                 </div>
             </section>
+
         </div>
 
 
@@ -340,6 +355,7 @@
                 </div>
             </div>
         </div>
+
 
 
 

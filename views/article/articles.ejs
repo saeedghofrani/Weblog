@@ -12,160 +12,49 @@
 
   <%- include('../common/navbar.ejs') %>
 
-      <section class="pt-2 pb-3 sectionTopArticle">
-        <div class="container">
-          <div class="row">
-            <div class="col-6">
-              <h3 class="mb-3 Top4">TOP 2 ARTICLE</h3>
-            </div>
-            <div class="col-6 text-right">
-              <a class="btn btn-primary mb-3 mr-1 movingBtn" href="#carouselExampleIndicators2" role="button"
-                data-slide="prev">
-                <i class="fa fa-arrow-left"></i>
-              </a>
-              <a class="btn btn-primary mb-3  movingBtn" href="#carouselExampleIndicators2" role="button"
-                data-slide="next">
-                <i class="fa fa-arrow-right"></i>
-              </a>
-            </div>
-            <div class="col-12">
-              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <div class="row">
-                      <% for( let i=0; i < 1; i++ ) { %>
-                        <div class="blog-card">
-                          <div class="meta">
-                            <div class="photo"
-                              style="background-image:  url(/images/article/<%=topArticle[i].image %>)">
-                            </div>
-                            <ul class="details">
-                              <li class="author"><a href="#">
-                                  <%= topArticle[i].author.username %>
-                                </a></li>
-                              <li class="date" id="date1">
-                                <%= topArticle[i].createdAt %>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="description">
-                            <span class=" translate-middle badge rounded-pill bg-danger">
-                              <%=topArticle[i].visitCount %>
-                            </span>
-                            <span class=" translate-middle badge rounded-pill bg-danger favorit">
-                              <i class="fa fa-star-o"></i>
-                              <i class='fas fa-star d-none'></i>
-                            </span>
-                            <h1>
-                              <%= topArticle[i].title %>
-                            </h1>
-                            <h2>Category: Any</h2>
-                            <p>
-                              <%= topArticle[i].description %>
-                            </p>
-                            <p class="read-more">
-                              <a href="/articles/<%= topArticle[i]._id%>">Read More</a>
-                            </p>
-                          </div>
-                        </div>
-                        <% } %>
-                    </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="">
-                      <div class="row">
-                        <% for( let i=1; i < 2; i++ ) { %>
-                          <div class="blog-card">
-                            <div class="meta">
-                              <div class="photo"
-                                style="background-image:  url(/images/article/<%=topArticle[i].image %>)"></div>
-                              <ul class="details">
-                                <li class="author"><a href="#">
-                                    <%= topArticle[i].author.username %>
-                                  </a></li>
-                                <li class="date" id="date2">
-                                  <%= topArticle[i].createdAt %>
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="description">
-                              <span class=" translate-middle badge rounded-pill bg-danger">
-                                <%=topArticle[i].visitCount %>
-                              </span>
-                              <span class=" translate-middle badge rounded-pill bg-danger favorit">
-                                <i class="fa fa-star-o"></i>
-                                <i class='fas fa-star d-none'></i>
-                              </span>
-                              <h1>
-                                <%= topArticle[i].title %>
-                              </h1>
-                              <h2>Category: Any</h2>
-                              <p>
-                                <%= topArticle[i].description %>
-                              </p>
-                              <p class="read-more">
-                                <a href="/articles/<%= topArticle[i]._id%>">Read More</a>
-                              </p>
-                            </div>
-                          </div>
-                          <% } %>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <% for( let i=0; i < 1; i++ ) { %>
+      <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark row m-5 p-4 mt-3">
+        <div class="col-6 col-md-6 px-0">
+          <h1>
+            MOST POPULAR ARTICLE
+          </h1>
+          <h2 class="display-4 fst-italic">
+            <%= topArticle[i].title %>
+          </h2>
+          <p class="lead my-3">
+            <%= topArticle[i].description %>
+          </p>
+          <p>
+            written by <%= topArticle[i].author.username %>
+          </p>
+          <p class="lead mb-0"><a href="/articles/<%= topArticle[i]._id%>" class="text-white fw-bold">Continue
+              reading...</a></p>
         </div>
-      </section>
-
-
-      <div class="lineDown"></div>
-
-
-      <div class="border-container  pillar-container">
-        <ul class="card-list row justify-content-center">
-          <% for( let i=0; i < data.length; i++ ) { %>
-            <div class="blog-card">
-              <div class="meta">
-                <div class="photo" style="background-image:  url(/images/article/<%=data[i].image %>)"></div>
-                <ul class="details">
-                  <li class="author"><a href="#">
-                      <%= data[i].author.username %>
-                    </a></li>
-                  <li class='date data<%=i%> '>
-                    <%= data[i].createdAt %>
-                  </li>
-                </ul>
-              </div>
-              <div class="description">
-                <span class=" translate-middle badge rounded-pill bg-danger">
-                  <%=data[i].visitCount %>
-                </span>
-                <span class=" translate-middle badge rounded-pill bg-danger favorit">
-                  <i class="fa fa-star-o"></i>
-                  <i class='fas fa-star d-none'></i>
-                </span>
-
-                <h1>
-                  <%= data[i].title %>
-                </h1>
-                <h2>Category: Any</h2>
-                <p class="">
-                  <%= data[i].description %>
-                </p>
-                <p class="read-more">
-                  <a href="/articles/<%= data[i]._id%>">Read More</a>
-                </p>
-              </div>
-            </div>
-            <% } %>
-        </ul>
+        <div class="col-6 d-flex justify-content-center ">
+          <img class="topImg" src="/images/article/<%= topArticle[i].image %> " alt="top article">
+        </div>
       </div>
+      <% } %>
 
 
-      <%- include('../common/scripts.ejs') %>
-        <script src="/script/articles.js"></script>
+        <div class="border-container  pillar-container">
+          <ul class="card-list row justify-content-center" id="list">
+
+          </ul>
+        </div>
+
+        <section class="pagination" cl aria-label="Page navigation example ">
+          <ul class="pagination justify-content-center " id="pagination">
+
+          </ul>
+        </section>
+
+
+
+
+
+        <%- include('../common/scripts.ejs') %>
+          <script src="/script/articles.js"></script>
 </body>
 
 </html>
