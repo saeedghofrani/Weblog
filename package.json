@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "admin": "node ./utils/dbAdmin.utils.js"
+    "admin": "node ./utils/dbAdmin.utils.js",
+    "evacuation": "node ./utils/dbEvacuation.utils.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
