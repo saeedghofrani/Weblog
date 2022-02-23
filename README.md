@@ -1,4 +1,4 @@
-#Saeed_Ghofrani_hw18_maktab62
+#Weblog
 
 ## install dependencies
 ```sh
@@ -11,4 +11,9 @@ npm install
 ```sh
 npm start # production stage
 npm run dev # development stage
+```
+
+## create admin
+```sh
+npm run admin
 ```
