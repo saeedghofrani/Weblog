@@ -161,9 +161,20 @@ const delAccount = safeCall(async (request, response, _next) => {
     //delete user by id
     await User.findByIdAndDelete(user._id);
     //delet articles 
+    const allUserArticle = await Article.find({ author: user._id });
+    console.log(allUserArticle);
+
     await Article.deleteMany({ author: user._id });
+    /**
+     *! how to delet all comments
+     */
+    // await Comment.deleteMany({"postId": { $in: [10, 2, 3, 5]}});
+
     await Comment.deleteMany({ username: user._id });
-    deletePicture("../public/images/avatars", request.session.user.avatar);
+    
+    if (request.session.user.avatar !== "profileAvatar.jpg")
+        deletePicture("../public/images/avatars", request.session.user.avatar);
+
     //redirect to logout 
     response.redirect('/auth/logout');
 
