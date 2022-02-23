@@ -124,8 +124,9 @@ const delMyArticle = safeCall(async (request, response, _next) => {
         });
 
     const deletedArticle = await Article.deleteOne(article);
+    const deleteComment = await Comment.deleteMany({ 'postId': id });
 
-    if (!deletedArticle)
+    if (!deletedArticle || !deleteComment)
         return response.status(400).send({
             success: false,
             message: 'delete article was unsuccesfull',
@@ -241,7 +242,7 @@ const comment = safeCall(async (request, response, _next) => {
 
     let comment = await Comment.create(data);
     comment = await Comment.populate(comment, { path: 'username' });
-    
+
     return response.status(200).send({
         success: true,
         message: 'article favorit',
@@ -249,6 +250,27 @@ const comment = safeCall(async (request, response, _next) => {
     });
 
 
+});
+
+const userComment = safeCall(async (request, response, _next) => {
+    const id = request.params.id;
+    const comments = await Comment.find({ username: id }).populate('username');
+    return response.status(200).send({
+        success: true,
+        message: 'comments send successfull',
+        data: comments
+    });
+});
+
+const delUserComment = safeCall(async (request, response, _next) => {
+    const id = request.params.id;
+    const comment = await Comment.findByIdAndDelete(id);
+    console.log(comment);
+    return response.status(200).send({
+        success: true,
+        message: 'comments send successfull',
+        data: comment
+    });
 });
 
 module.exports = {
@@ -259,5 +281,7 @@ module.exports = {
     updateArticleProcess,
     updateArticlePage,
     favorit,
-    comment
+    comment,
+    userComment,
+    delUserComment
 };

@@ -131,6 +131,15 @@ p.oneArticleData {
     border: 2px solid #338275 !important;
 }
 
+.h5 {
+    margin-bottom: 10px !important;
+    color: #338275 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    
+}
+
 .u-shadow-v18 {
     box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
 }
@@ -162,3 +171,30 @@ p.oneArticleData {
 .media-comment {
     margin-top:20px
 }
+
+#commentbtn {
+
+}
+
+
+
+
+
+.commentBtnShow {
+    padding: 5px;
+    background-color: #338275;
+    color: white;
+    border: 1px solid #338275 !important;
+    border-radius: 3px;
+}
+.commentBtnShow:hover {
+    background-color: white;
+    color: #338275;
+    border: 1px solid #338275 !important;
+}
+.commentBtnShow:active{
+    background-color: #338275;
+    color: white;
+    border: 1px solid #338275 !important;
+}
+

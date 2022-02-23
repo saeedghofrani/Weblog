@@ -289,3 +289,33 @@ h1 {
     padding-left: 25px;
   }
 }
+
+ul.pagination li a{
+  color: white !important;
+  background-color: #1b515e !important;
+  border: 1px solid #1b515e !important;
+  border-radius: 0px !important;
+  margin: 0 !important;
+  justify-self: flex-end !important;
+}
+ul.pagination li a:hover {
+  color: #1b515e !important;
+  background-color: white !important;
+  border: 1px solid #1b515e !important;
+  border-radius: 0px !important;
+  margin: 0 !important;
+  justify-self: flex-end !important;
+}
+ul.pagination li a:active {
+  color: white !important;
+  background-color: #1b515e !important;
+  border: 1px solid #1b515e !important;
+  border-radius: 0px !important;
+  margin: 0 !important;
+  justify-self: flex-end !important;
+  outline: none;
+}
+.active {
+  color: #1b515e !important;
+  background-color: white !important;
+}

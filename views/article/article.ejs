@@ -6,30 +6,25 @@
         <link rel="stylesheet" href="/style/article.css">
         <link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
-
+    
 </head>
 
 <body class="">
 
 
     <%- include('../common/navbar.ejs') %>
+
         <section class="d-flex justify-content-center sectionArticle">
 
-
-            <div class="container col-8 articleSection">
-
+            <div class="container col-12 col-lg-9 articleSection">
                 <div class="row justify-content-start align-content-center no-wrap col-12 articleInfo m-0 p-0">
-
                     <div class="col-12 m-0 p-0">
-
                         <h1 class="title text-center">
                             <%= data.title %>
                         </h1>
-
                         <h4 class="description text-center">
                             <%= data.description %>
                         </h4>
-
                         <div class="infoArticle">
                             <span class="col-12 writen">Written by</span><span class="oneArticleData p-0 m-0">
                                 <%= data.author.username %>
@@ -39,95 +34,155 @@
                                 <%= data.createdAt %>
                             </span>
                         </div>
-
-
                     </div>
-
                 </div>
 
+
                 <div class="contentContainer">
+
                     <div class="content col-12 m-0 p-0" id="content">
                         <%= data.content %>
                     </div>
-                </div>
+                    <div class="commentContainer d-none">
+                        <!-- comment section  -->
+                        <div class="comment">
+                            <h4 class="p-5">Commnets</h4>
+                            <div class="container">
+                                <div id="commentSection" class="row">
+                                    <form>
+                                        <div class="col-12">
+                                            <div class="media g-mb-30 media-comment">
+                                                <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
+                                                    src="/images/avatars/<%= user.avatar %>" alt="Image Description">
+                                                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                                                    <div class="g-mb-15">
+                                                        <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                                            <%= user.username %>
+                                                        </h5>
+                                                    </div>
 
+                                                    <input type="hidden" name="" id="ArticleId"
+                                                        value="<%= data._id %> " />
+                                                    <input type="hidden" id="parentCommentId" />
+                                                    <input type="text" class="col-12 commentInp" id="commentInp" />
 
-            </div>
-
-            <!-- comment section  -->
-            <div class="comment">
-                <h4 class="p-5">Commnets</h4>
-                <div class="container">
-                    <div id="commentSection" class="row">
-                        <form>
-                            <div class="col-12">
-                                <div class="media g-mb-30 media-comment">
-                                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                                        src="/images/avatars/<%= user.avatar %>" alt="Image Description">
-                                    <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                                        <div class="g-mb-15">
-                                            <h5 class="h5 g-color-gray-dark-v1 mb-0">
-                                                <%= user.username %>
-                                            </h5>
+                                                    <ul class="list-inline d-sm-flex my-0">
+                                                        <li class="list-inline-item ml-auto">
+                                                            <a id="commentbtn"
+                                                                class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
+                                                                href="#!">
+                                                                <i class="g-pos-rel g-top-1 g-mr-3"></i>
+                                                                comment
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </form>
 
-                                        <input type="hidden" name="" id="ArticleId" value="<%= data._id %> " />
-                                        <input type="hidden" id="parentCommentId" />
-                                        <input type="text" class="col-12 commentInp" id="commentInp" />
+                                    <% for (let i=0; i < comment.length; i++) { %>
+                                        <form>
+                                            <div class="col-12">
+                                                <div class="media g-mb-30 media-comment">
+                                                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
+                                                        src="/images/avatars/<%= comment[i].username.avatar %> "
+                                                        alt="Image Description">
+                                                    <div
+                                                        class="media-body u-shadow-v18 g-bg-secondary g-pa-30 <% if(comment[i].username.username == user.username){%>userComment<% } %>  ">
+                                                        <div class="g-mb-15">
+                                                            <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                                                <span>
+                                                                    <%= comment[i].username.username %></span>
+                                                                    <span id="commentDate<%= i %>"
+                                                                        class="g-color-gray-dark-v4 g-font-size-12 commentDateC ">
+                                                                        <%= comment[i].createdAt %>
+                                                                    </span>
+                                                            </h5>
 
-                                        <ul class="list-inline d-sm-flex my-0">
-                                            <li class="list-inline-item ml-auto">
-                                                <a id="commentbtn"
-                                                    class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                                                    href="#!">
-                                                    <i class="g-pos-rel g-top-1 g-mr-3"></i>
-                                                    comment
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                        </div>
+                                                        <p class="p-3 ">
+                                                            <%= comment[i].detail %>
+                                                        </p>
+                                                        <ul class="list-inline d-sm-flex my-0">
+                                                            <li class="list-inline-item ml-auto">
+                                                                <a id="replyBtn<%=i%> "
+                                                                    class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
+                                                                    href="#">
+                                                                    <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
+                                                                    Reply
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <% } %>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </div>
 
-                        <% for (let i=0; i < comment.length; i++) { %>
-                            <form>
-                                <div class="col-12">
-                                    <div class="media g-mb-30 media-comment">
-                                        <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                                            src="/images/avatars/<%= comment[i].username.avatar %> "
-                                            alt="Image Description">
-                                        <% console.log(comment[i].username.username===user.username) %>
-                                            <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30 <% if(comment[i].username.username == user.username){%>userComment<% } %>  ">
-                                                <div class="g-mb-15">
-                                                    <h5 class="h5 g-color-gray-dark-v1 mb-0">
-                                                        <%= comment[i].username.username %>
-                                                    </h5>
-                                                    <span class="g-color-gray-dark-v4 g-font-size-12">
-                                                        <%= comment[i].createdAt %>
-                                                    </span>
-                                                </div>
-                                                <p>
-                                                    <%= comment[i].detail %>
-                                                </p>
-                                                <ul class="list-inline d-sm-flex my-0">
-                                                    <li class="list-inline-item ml-auto">
-                                                        <a id="replyBtn"
-                                                            class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                                                            href="#!">
-                                                            <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
-                                                            Reply
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <% } %>
+                </div>
+            </div>
 
+            <div class="col-lg-3 col-1  align-items-flex-start">
+
+                <button id="commentShow" class="commentBtnShow col-12">Comments</button>
+
+                <br><br><br><br><br><br>
+
+
+                <div class="p-3">
+                    <h4 style="font-family: 'Charmonman';">
+                        About Articles
+                    </h4>
+
+                    <hr>
+                    <p class="text-justify" style="color: rgb(12, 71, 19);">
+                        In the 11th century, a Japanese woman known as Murasaki Shikibu wrote “The Tale of Genji,” a 54-chapter story of courtly seduction believed to be the world’s first novel.
+
+                        Over 1,000 years later, people the world over are still engrossed by novels — even in an era where stories appear on handheld screens and disappear 24 hours later.
+                        
+                        What exactly do human beings get from reading books? Is it just a matter of pleasure, or are there benefits beyond enjoyment? The scientific answer is a resounding “yes.”
+                        
+                        Reading books benefits both your physical and mental health, and those benefits can last a lifetime. They begin in early childhood and continue through the senior years. Here’s a brief explanation of how reading books can change your brain — and your body — for the better.
+                    </p>
+
+                </div>
+
+                <br><br><br><br>
+
+                <div class="p-3">
+                    <h4 style="font-family: 'Charmonman';">
+                        About Author
+                    </h4>
+
+                    <hr>
+                    <p class="text-justify" style="color: rgb(12, 71, 19);">
+                        The essential characteristics of a good writer are that you need lots of patience to keep the words flowing from your mind.
+
+                        Your mind should have the clarity to keep your choice of words at its best.
+                        
+                        The best part of being a writer is that you get loyal fans for your writing pieces if your ebook or paper version book becomes popular.
+                        
+                        These fans keep purchasing your books, which is the best reward a writer can have.
+                        
+                        It would be best if you were reading a lot to enrich your vocabulary to not sound like a newbie writer when people read your content.
+                        
+                        One of the most delicate characteristics of a good writer is to stay neutral with your views.
+                        
+                        Our views judge what kind of a writer we are, so we should have positivity around us.
+                        
+                        Never look back once we decide on something. We can have amendments, but should not change our decision.
+                    </p>
+                </div>
+            </div>
 
         </section>
+
+
 
 
         <%- include('../common/scripts.ejs') %>

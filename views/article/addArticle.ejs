@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="/style/addArticle.css">
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
             type="text/css" />
+            <link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
+            <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
 </head>
 
 <body class="px-5">
@@ -59,103 +61,62 @@
     </div>
 
     <div>
-        <div class="comment">
-            <h4 class="p-5">Commnets section</h4>
-            <div class="container">
-                <div class="row">
-                    <form>
-                        <div class="col-12">
-                            <div class="media g-mb-30 media-comment">
-                                <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                    alt="Image Description">
-                                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                                    <div class="g-mb-15">
-                                        <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
-                                    </div>
+        <div class="p-5  align-items-flex-start">
 
-                                    <input type="text" class="col-12 form-control">
+            <button id="commentShow" class="commentBtnShow col-12">Comments</button>
 
-                                    <ul class="list-inline d-sm-flex my-0">
-                                        <li class="list-inline-item ml-auto">
-                                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                                                href="#!">
-                                                <i class="g-pos-rel g-top-1 g-mr-3"></i>
-                                                comment
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </form> 
+            <br><br><br>
 
-                    <form>
-                        <div class="col-12">
-                            <div class="media g-mb-30 media-comment">
-                                <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                    alt="Image Description">
-                                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                                    <div class="g-mb-15">
-                                        <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
-                                        <span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>
-                                    </div>
 
-                                    <p>Comment example for article writer
-                                    </p>
+            <div class="p-3">
+                <h4 style="font-family: 'Charmonman';">
+                    About Articles
+                </h4>
 
-                                    <ul class="list-inline d-sm-flex my-0">
-                                        <li class="list-inline-item ml-auto">
-                                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                                                href="#!">
-                                                <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
-                                                Reply
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </form> 
+                <hr>
+                <p class="text-justify" style="color: rgb(12, 71, 19);">
+                    In the 11th century, a Japanese woman known as Murasaki Shikibu wrote “The Tale of Genji,” a 54-chapter story of courtly seduction believed to be the world’s first novel.
+
+                    Over 1,000 years later, people the world over are still engrossed by novels — even in an era where stories appear on handheld screens and disappear 24 hours later.
+                    
+                    What exactly do human beings get from reading books? Is it just a matter of pleasure, or are there benefits beyond enjoyment? The scientific answer is a resounding “yes.”
+                    
+                    Reading books benefits both your physical and mental health, and those benefits can last a lifetime. They begin in early childhood and continue through the senior years. Here’s a brief explanation of how reading books can change your brain — and your body — for the better.
+                </p>
+
+            </div>
+
+            <br><br><br>
+
+            <div class="p-3">
+                <h4 style="font-family: 'Charmonman';">
+                    About Author
+                </h4>
+
+                <hr>
+                <p class="text-justify" style="color: rgb(12, 71, 19);">
+                    The essential characteristics of a good writer are that you need lots of patience to keep the words flowing from your mind.
+
+                    Your mind should have the clarity to keep your choice of words at its best.
+                    
+                    The best part of being a writer is that you get loyal fans for your writing pieces if your ebook or paper version book becomes popular.
+                    
+                    These fans keep purchasing your books, which is the best reward a writer can have.
+                    
+                    It would be best if you were reading a lot to enrich your vocabulary to not sound like a newbie writer when people read your content.
+                    
+                    One of the most delicate characteristics of a good writer is to stay neutral with your views.
+                    
+                    Our views judge what kind of a writer we are, so we should have positivity around us.
+                    
+                    Never look back once we decide on something. We can have amendments, but should not change our decision.
+                </p>
+            </div>
+        </div>
 
     </section>
     </div>
-        <!-- <form action="/articles/setup" method="post" enctype="multipart/form-data" class="" id="formAddArticle">
 
-            <div class="container d-flex justify-content-center align-items-center topDiv" id="imageContainer">
-                <div class="col-3">
-                   
-                </div>
-
-                <div class="col-9">
-                    <input type="file" name="articlePicture" id="formFile"
-                        class=" form-control col-12 col-md-12 m-0 mb-1 d-none " required>
-
-                    <p class="text-success head col-12 m-1 p-2 ps-0 ms-0">TITLE</p>
-                    <input type="text" name="title" class="col-12 col-md-12 m-0 mb-1" required>
-
-                    <p class="text-success head col-12 m-1 p-2 ps-0 ms-0">DESCRIPTION</p>
-                    <input type="text" name="description" class="col-12 m-0 mb-3" required>
-
-                    <p class="text-success head col-12 m-1 p-2 ps-0 ms-0">Co-Author</p>
-                    <input type="text" name="CoAuthor" class="col-12 col-md-12 m-0 mb-1">
-                </div>
-            </div>
-
-            <div class="container p-0">
-
-
-                <textarea id="mytextarea" name="content">
-                </textarea required>
-
-                <input type="text" class="d-none" name="id">
-
-                <input type="button" class="btn btn-primary m-0 mt-3" value="add article" id="addArticleSubmit">
-
-        </div>
-        
-    </form> -->
 
 
 

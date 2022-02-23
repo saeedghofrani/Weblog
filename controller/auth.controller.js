@@ -1,9 +1,11 @@
 // Module dependencies.
 const bcrypt = require('bcryptjs');
+const deletePicture = require('../utils/deletePicture.utils');
 //user model
 const User = require('../model/user.model');
 //article model
 const Article = require('../model/article.model');
+const Comment = require('../model/comment.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
 
@@ -160,6 +162,8 @@ const delAccount = safeCall(async (request, response, _next) => {
     await User.findByIdAndDelete(user._id);
     //delet articles 
     await Article.deleteMany({ author: user._id });
+    await Comment.deleteMany({ username: user._id });
+    deletePicture("../public/images/avatars", request.session.user.avatar);
     //redirect to logout 
     response.redirect('/auth/logout');
 

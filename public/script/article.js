@@ -10,36 +10,53 @@ $(document).ready(function () {
 
     $(`.date`).text(datestring);
 
-    $('#replyBtn').click(function (e) {
-        e.preventDefault();
-
-    });
-
+    for (let i = 0; i < $('.commentDateC').length; i++) {
+        let element = $(`#commentDate${i}`).html();
+        x = new Date(element);
+        var datestring = ("0" + x.getDate()).slice(-2) + "-" + ("0" + (x.getMonth() + 1)).slice(-2) + "-" +
+            x.getFullYear();
+        $(`#commentDate${i}`).text(datestring);
+    }
 
     $('#commentbtn').click(function (e) {
         e.preventDefault();
         const detail = $('#commentInp').val();
         const parentCommentId = $('#parentCommentId').val();
         const id = $("#ArticleId").val();
-
         const data = {
             detail,
             parentCommentId,
         };
-        console.log(data);
         $.ajax({
             type: "POST",
             url: `/articles/comment/${id}`,
             data,
             success: function (response) {
-                console.log(response);
+                $('#commentInp').val("");
                 createComment(response.data);
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert(xhr.status);
             }
         });
+    });
 
+
+
+
+
+
+
+    $("#commentShow").click(function (e) {
+
+        e.preventDefault();
+        if ($(this).text() == "Comments")
+            $(this).text("Article");
+        else
+            $(this).text("Comments");
+
+        $("#content").toggleClass("d-none");
+        $(".commentContainer").toggleClass("d-none");
     });
 
 });
