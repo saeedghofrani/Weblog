@@ -320,8 +320,10 @@ ul.pagination li a:active {
   background-color: white !important;
 }
 
+
 /*search*/
 .search-box{
+  
   width: fit-content;
   height: fit-content;
   position: relative;
