@@ -17,3 +17,8 @@ npm run dev # development stage
 ```sh
 npm run admin
 ```
+
+## empty database
+```sh
+npm run evacuation
+```
