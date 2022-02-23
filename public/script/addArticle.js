@@ -53,6 +53,7 @@ $(document).ready(function () {
                 window.location.href = "/articles/myArticle";
             },
             error: function (xhr, textStatus, errorThrown) {
+                console.log(xhr.responseText);
                 $('.toast-body').removeClass('text-success');
                 $('.toast-body').addClass('text-danger');
                 $('.toast-body').css('border', '1px solid red');

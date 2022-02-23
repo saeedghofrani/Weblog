@@ -61,6 +61,10 @@
                                         <button class="col-12 button-37" data-toggle="modal" data-target="#form" userId="<%= users[i]._id %>">Remove
                                             User`s Article</button>
                                     </li>
+                                    <li class="col-12 ">
+                                        <button class="col-12 button-37 removeComment" id="" userId="<%= users[i]._id %>">Remove
+                                            User`s Comment</button>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -75,7 +79,7 @@
                 <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4">
                     <h1 class="text-center mb-5">Plaese Enter Article ID</h1>
                     <input id="articleID" type="text" class="form-control mb-3" placeholder="">
-                    <div class="text-center mb-3"> <button class="btn btn-primary w-50 rounded-pill b1 button-37" id="deleArticleAdmin">Subscribe</button> </div>
+                    <div class="text-center mb-3"> <button class="btn btn-primary w-50 rounded-pill b1 button-37" id="deleArticleAdmin">Remove</button> </div>
                 </div>
             </div>
         </div>

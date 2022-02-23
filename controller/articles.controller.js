@@ -1,65 +1,63 @@
 //aticle model
 const Article = require('../model/article.model');
 const User = require('../model/user.model');
+const Comment = require('../model/comment.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
 const deletePicture = require('../utils/deletePicture.utils');
 
 //render article page 
 const articles = safeCall(async (request, response, _next) => {
-    //get condition from param
+
     const condition = request.params.condition;
-    //get all article
+
     if (condition === 'all') {
-        //colect most visit Count articles 
         const topArticle = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(1);
-        return response.render('./article/articles', { topArticle });
+        return response.render('./article/articles', { topArticle, user: request.session.user });
     }
 
     if (condition.split('=')[0] === 'all') {
+
         const skip = Number(condition.split('=')[1]) * 6;
         //collect data from database sort bt createdAt
         const articles = await Article.find({}).populate('author').sort({ createdAt: -1 }).skip(skip).limit(6);
         const count = await Article.find({}).count();
+
         //render artile page sorted 
         return response.status(200).send({
             success: true,
             message: 'done',
             data: articles,
-            count
+            count,
+            user: request.session.user
         });
+
     }
 
     //get users article
     if (condition === 'myArticle') {
-        //collect user data from session
+
         const user = request.session.user;
-        //check for session
-        if (!user) {
-            return response.redirect('/auth/login');
-        }
         // const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
         const myArticle = await Article.find({ $or: [{ 'author': user._id }, { 'CoAuthor': user._id }] }).populate('author').sort({ createdAt: -1 });
-        ///render article page with data
         response.render('./article/myArticles', { data: myArticle });
     }
 
-
     else {
-
-        //get article id from request params
         const id = request.params.condition;
-        //find article from database
         const article = await Article.findById(id).populate('author');
+        const comment = await Comment.find({ 'postId': article._id }).populate('username');
+
         //add visit count of article 
-        if ((request.session.user && request.session.user.username !== article.author.username) || (!request.session.user)) {
+        if (request.session.user.username !== article.author.username) {
             article.visitCount++;
             article.save();
-        }
-        //render article page 
-        return response.render('./article/article', { data: article });
 
+        }
+
+        return response.render('./article/article', { data: article, user: request.session.user, comment });
     }
+
 });
 
 //render add article page
@@ -126,8 +124,9 @@ const delMyArticle = safeCall(async (request, response, _next) => {
         });
 
     const deletedArticle = await Article.deleteOne(article);
+    const deleteComment = await Comment.deleteMany({ 'postId': id });
 
-    if (!deletedArticle)
+    if (!deletedArticle || !deleteComment)
         return response.status(400).send({
             success: false,
             message: 'delete article was unsuccesfull',
@@ -200,20 +199,7 @@ const favorit = safeCall(async (request, response, next) => {
 
     const article = await Article.findById(id);
 
-    if (!request.session) {
-        return response.status(401).send({
-            success: false,
-            message: 'please login first',
-        });
-    }
-
     const user = request.session.user;
-    if (!user) {
-        return response.status(401).send({
-            success: false,
-            message: 'please login first',
-        });
-    }
 
     if (request.body.data === "1") {
         article.favorit++;
@@ -238,6 +224,55 @@ const favorit = safeCall(async (request, response, next) => {
 
 });
 
+const comment = safeCall(async (request, response, _next) => {
+
+    const id = request.params.id;
+    const user = request.session.user;
+    console.log(request.body);
+    const { detail } = request.body;
+    const data = {
+        postId: id,
+        username: user._id,
+        detail: detail
+    };
+
+    if (request.body.parentCommentId) {
+        data.parentCommentId = request.body.data.parentCommentId;
+    }
+
+    let comment = await Comment.create(data);
+    comment = await Comment.populate(comment, { path: 'username' });
+
+    return response.status(200).send({
+        success: true,
+        message: 'article favorit',
+        data: comment
+    });
+
+
+});
+
+const userComment = safeCall(async (request, response, _next) => {
+    const id = request.params.id;
+    const comments = await Comment.find({ username: id }).populate('username');
+    return response.status(200).send({
+        success: true,
+        message: 'comments send successfull',
+        data: comments
+    });
+});
+
+const delUserComment = safeCall(async (request, response, _next) => {
+    const id = request.params.id;
+    const comment = await Comment.findByIdAndDelete(id);
+    console.log(comment);
+    return response.status(200).send({
+        success: true,
+        message: 'comments send successfull',
+        data: comment
+    });
+});
+
 module.exports = {
     articles,
     addArticlePage,
@@ -245,5 +280,8 @@ module.exports = {
     delMyArticle,
     updateArticleProcess,
     updateArticlePage,
-    favorit
+    favorit,
+    comment,
+    userComment,
+    delUserComment
 };

@@ -29,6 +29,7 @@ $(document).ready(function () {
 
     /////////////////////////////////////////
     $('.fa-star-o').click(function (e) {
+        console.log('sssssss');
         e.preventDefault();
         let star;
         let id = $(this).attr("artId");

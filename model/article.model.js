@@ -27,9 +27,6 @@ const articleSchema = new Schema({
         type: Number,
         default: 0
     },
-    coment: {
-        type: [[String, mongoose.SchemaTypes.ObjectId]]
-    },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
