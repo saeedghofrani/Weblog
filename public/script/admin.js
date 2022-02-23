@@ -84,6 +84,7 @@ $(document).ready(function () {
             type: "GET",
             url: `/articles/comment/${id}`,
             success: function (response) {
+                $('#backToUsers').removeClass("d-none");
                 $('#appendDiv').html("");
                 for (let i = 0; i < response.data.length; i++) {
                     appendData(response.data[i]);
@@ -109,6 +110,7 @@ $(document).ready(function () {
             type: "delete",
             url: `/articles/comment/${id}`,
             success: function (response) {
+                console.log(response);
                 $('div').remove(`.${id}`);
             },
             error: function (xhr) {
@@ -122,13 +124,15 @@ $(document).ready(function () {
         });
     });
 
-    users = $('#appendDiv').html();
+    let users = $('#appendDiv').html();
+    // $('#backToUsers').click(function (e) { 
+    //     e.preventDefault();
+    //     $('#backToUsers').addClass("d-none");
+    //     $('#appendDiv').html("");
+    //     $('#appendDiv').append(users);
+    // });
 
 
-    function deleteComment(e) {
-        e.preventDefault();
-        console.log('ssssssssss');
-    }
 
 
 

@@ -46,8 +46,8 @@ const articles = safeCall(async (request, response, _next) => {
     else {
         const id = request.params.condition;
         const article = await Article.findById(id).populate('author');
-        const comment = await Comment.find({ 'postId': article._id }).populate('username');
-
+        const comment = await Comment.find({ 'postId': article._id }).populate('username').populate({ path: 'parentCommentId', populate: { path: 'username' } });
+        console.log(comment);
         //add visit count of article 
         if (request.session.user.username !== article.author.username) {
             article.visitCount++;
@@ -237,11 +237,11 @@ const comment = safeCall(async (request, response, _next) => {
     };
 
     if (request.body.parentCommentId) {
-        data.parentCommentId = request.body.data.parentCommentId;
+        data.parentCommentId = request.body.parentCommentId;
     }
 
     let comment = await Comment.create(data);
-    comment = await Comment.populate(comment, { path: 'username' });
+    comment = await Comment.populate('username').populate('parentCommentId');
 
     return response.status(200).send({
         success: true,
