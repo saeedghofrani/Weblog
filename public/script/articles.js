@@ -64,22 +64,32 @@ $(document).ready(function () {
     });
 
 
-    $('#searchInp').on('input', function(e) {
+    $('#searchInp').on('blur', function (e) {
         e.preventDefault();
         let search = $(this).val();
+        if($(this).val() === "") 
+            GetData(0);
+            
+        $(this).val('');
         $.ajax({
             type: "POST",
             url: `/articles/${search}`,
+            
             success: function (response) {
+                $('#list').html('');
                 console.log(response);
+                for (let i = 0; i < response.data.length; i++) {
+                    createCardSearch(response.data[i]);
+                }
+                
             },
             error: function (xhr) {
-                console.log(xhr.status);
+                console.log(xhr.responseText);
             },
         });
     });
 
-    
+
 
 });
 
@@ -118,6 +128,44 @@ function createCard(record, count) {
             ${record.author.username}
           </a></li>
         <li class='date data${count}'>
+          ${record.createdAt}
+        </li>
+      </ul>
+    </div>
+    <div class="description">
+      <span class=" translate-middle badge rounded-pill bg-danger">
+        ${record.visitCount}
+      </span>
+      <span class=" translate-middle badge rounded-pill bg-danger favorit">
+        <i class="fa fa-star-o favoritIcon" artId="${record._id}"></i>
+      </span>
+      <h1>
+        ${record.title}
+      </h1>
+      <h2>Category: Any</h2>
+      <p class="">
+        ${record.description}
+      </p>
+      <p class="read-more">
+        <a href="/articles/${record._id}">Read More</a>
+      </p>
+    </div>
+  </div>
+    `);
+
+}
+
+// build cards by an object//
+function createCardSearch(record) {
+    $('#list').append(`
+    <div class="blog-card">
+    <div class="meta">
+      <div class="photo" style="background-image:  url(/images/article/${record.image}"></div>
+      <ul class="details">
+        <li class="author"><a href="#">
+            ${record.author.username}
+          </a></li>
+        <li class='date'>
           ${record.createdAt}
         </li>
       </ul>

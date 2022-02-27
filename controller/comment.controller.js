@@ -19,11 +19,13 @@ const comment = safeCall(async (request, response, _next) => {
     }
 
     let comment = await Comment.create(data);
-    comment = await Comment.populate('username').populate('parentCommentId');
+    comment = await Comment.populate(comment, { path: "username" });
+    // comment = await comment.populate('username').populate('parentCommentId');
+    console.log(comment);
 
     return response.status(200).send({
         success: true,
-        message: 'article favorit',
+        message: 'article comment',
         data: comment
     });
 

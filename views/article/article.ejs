@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/style/article.css">
         <link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
-    
+
 </head>
 
 <body class="">
@@ -56,7 +56,8 @@
                                                     src="/images/avatars/<%= user.avatar %>" alt="Image Description">
                                                 <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                                                     <div class="g-mb-15">
-                                                        <span id="replyShow" class="" style="font-size: 10px; font-weight: 100;">
+                                                        <span id="replyShow" class=""
+                                                            style="font-size: 10px; font-weight: 100;">
 
                                                         </span>
                                                         <h5 class="h5 g-color-gray-dark-v1 mb-0">
@@ -64,8 +65,8 @@
                                                         </h5>
                                                     </div>
 
-                                                    <input type="hidden" name="" id="ArticleId"
-                                                        value="<%= data._id %> " />
+                                                    <input data-articleid="<%=data._id%>" type="hidden" name=""
+                                                        id="ArticleId" />
                                                     <input type="hidden" id="parentCommentId" />
                                                     <input type="text" class="col-12 commentInp" id="commentInp" />
 
@@ -93,19 +94,21 @@
                                                         alt="Image Description">
                                                     <div
                                                         class="media-body u-shadow-v18 g-bg-secondary g-pa-30 <% if(comment[i].username.username == user.username){%>userComment<% } %>  ">
-                                                        <div class="g-mb-15">
+                                                        <div class="g-mb-15 row justify-content-center">
                                                             <h5 class="h5 g-color-gray-dark-v1 mb-0">
                                                                 <span>
-                                                                    <% if (comment[i].parentCommentId) {%> 
-                                                                    <%= comment[i].parentCommentId.username.username %> 
-                                                                    <% } %> 
+                                            
+                                                                    <%= comment[i].username.username %>
+                                                                    
+                                                                    <% if (comment[i].parentCommentId) {%>
+                                                                        =><%= comment[i].parentCommentId.username.username
+                                                                            %>
+                                                                            <% } %>
                                                                 </span>
-                                                                <span>
-                                                                    <%= comment[i].username.username %></span>
-                                                                    <span id="commentDate<%=i%>"
-                                                                        class="g-color-gray-dark-v4 g-font-size-12 commentDateC">
-                                                                        <%=comment[i].createdAt%>
-                                                                    </span>
+                                                                <span id="commentDate<%=i%>"
+                                                                    class="g-color-gray-dark-v4 g-font-size-12 commentDateC">
+                                                                    <%=comment[i].createdAt%>
+                                                                </span>
                                                             </h5>
 
                                                         </div>
@@ -114,7 +117,8 @@
                                                         </p>
                                                         <ul class="list-inline d-sm-flex my-0">
                                                             <li class="list-inline-item ml-auto">
-                                                                <a id="replyBtn<%=i%>" commentId="<%=comment[i]._id%>" commentName="<%=comment[i].username.username%>"
+                                                                <a id="replyBtn<%=i%>" commentId="<%=comment[i]._id%>"
+                                                                    commentName="<%=comment[i].username.username%>"
                                                                     class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
                                                                     href="#">
                                                                     <i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
@@ -148,13 +152,18 @@
 
                     <hr>
                     <p class="text-justify" style="color: rgb(12, 71, 19);">
-                        In the 11th century, a Japanese woman known as Murasaki Shikibu wrote “The Tale of Genji,” a 54-chapter story of courtly seduction believed to be the world’s first novel.
+                        In the 11th century, a Japanese woman known as Murasaki Shikibu wrote “The Tale of Genji,” a
+                        54-chapter story of courtly seduction believed to be the world’s first novel.
 
-                        Over 1,000 years later, people the world over are still engrossed by novels — even in an era where stories appear on handheld screens and disappear 24 hours later.
-                        
-                        What exactly do human beings get from reading books? Is it just a matter of pleasure, or are there benefits beyond enjoyment? The scientific answer is a resounding “yes.”
-                        
-                        Reading books benefits both your physical and mental health, and those benefits can last a lifetime. They begin in early childhood and continue through the senior years. Here’s a brief explanation of how reading books can change your brain — and your body — for the better.
+                        Over 1,000 years later, people the world over are still engrossed by novels — even in an era
+                        where stories appear on handheld screens and disappear 24 hours later.
+
+                        What exactly do human beings get from reading books? Is it just a matter of pleasure, or are
+                        there benefits beyond enjoyment? The scientific answer is a resounding “yes.”
+
+                        Reading books benefits both your physical and mental health, and those benefits can last a
+                        lifetime. They begin in early childhood and continue through the senior years. Here’s a brief
+                        explanation of how reading books can change your brain — and your body — for the better.
                     </p>
 
                 </div>
@@ -168,21 +177,25 @@
 
                     <hr>
                     <p class="text-justify" style="color: rgb(12, 71, 19);">
-                        The essential characteristics of a good writer are that you need lots of patience to keep the words flowing from your mind.
+                        The essential characteristics of a good writer are that you need lots of patience to keep the
+                        words flowing from your mind.
 
                         Your mind should have the clarity to keep your choice of words at its best.
-                        
-                        The best part of being a writer is that you get loyal fans for your writing pieces if your ebook or paper version book becomes popular.
-                        
+
+                        The best part of being a writer is that you get loyal fans for your writing pieces if your ebook
+                        or paper version book becomes popular.
+
                         These fans keep purchasing your books, which is the best reward a writer can have.
-                        
-                        It would be best if you were reading a lot to enrich your vocabulary to not sound like a newbie writer when people read your content.
-                        
+
+                        It would be best if you were reading a lot to enrich your vocabulary to not sound like a newbie
+                        writer when people read your content.
+
                         One of the most delicate characteristics of a good writer is to stay neutral with your views.
-                        
+
                         Our views judge what kind of a writer we are, so we should have positivity around us.
-                        
-                        Never look back once we decide on something. We can have amendments, but should not change our decision.
+
+                        Never look back once we decide on something. We can have amendments, but should not change our
+                        decision.
                     </p>
                 </div>
             </div>

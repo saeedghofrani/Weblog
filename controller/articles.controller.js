@@ -46,7 +46,8 @@ const articles = safeCall(async (request, response, _next) => {
     else {
         const id = request.params.condition;
         const article = await Article.findById(id).populate('author');
-        const comment = await Comment.find({ 'postId': article._id }).populate('username').populate({ path: 'parentCommentId', populate: { path: 'username' } });
+        const comment = await Comment.find({ 'postId': article._id }).populate('username').populate({ path: 'parentCommentId', populate: { path: 'username'} }).lean();
+        console.log(comment);
         //add visit count of article 
         if (request.session.user.username !== article.author.username) {
             article.visitCount++;
@@ -219,7 +220,8 @@ const favorit = safeCall(async (request, response, next) => {
 const searchProcess = safeCall(async (request, response) => {
 
     const searchText = request.params.condition;
-    const articles = await Article.find({ $text: { $search: searchText } })
+    const articles = await Article.find({ $text: { $search: searchText } }).limit(6).populate('author');
+    console.log(articles);
     return response.status(200).send({
         success: true,
         message: 'done',

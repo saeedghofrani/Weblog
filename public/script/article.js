@@ -22,7 +22,10 @@ $(document).ready(function () {
         e.preventDefault();
         const detail = $('#commentInp').val();
         const parentCommentId = $('#parentCommentId').val();
-        const id = $("#ArticleId").val();
+        const p = document.getElementById('ArticleId');
+        const id =  p.dataset.articleid;
+
+        // const id = $("#ArticleId").val();
         const data = {
             detail,
             parentCommentId,
