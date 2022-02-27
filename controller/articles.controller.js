@@ -60,6 +60,7 @@ const articles = safeCall(async (request, response, _next) => {
 
 });
 
+
 //render add article page
 const addArticlePage = (request, response, _next) => {
     response.render('./article/addArticle');
@@ -273,6 +274,23 @@ const delUserComment = safeCall(async (request, response, _next) => {
     });
 });
 
+
+
+
+const searchProcess = safeCall(async (request, response) => {
+
+    const searchText = request.params.condition;
+    const articles = await Article.find({ $text: { $search: searchText} })
+    console.log(articles);
+    return response.status(200).send({
+        success: true,
+        message: 'done',
+        data: articles,
+    });
+
+});
+
+
 module.exports = {
     articles,
     addArticlePage,
@@ -283,5 +301,6 @@ module.exports = {
     favorit,
     comment,
     userComment,
-    delUserComment
+    delUserComment,
+    searchProcess
 };

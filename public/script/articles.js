@@ -63,6 +63,24 @@ $(document).ready(function () {
 
     });
 
+
+    $('#searchInp').on('input', function(e) {
+        e.preventDefault();
+        let search = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: `/articles/${search}`,
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr) {
+                console.log(xhr.status);
+            },
+        });
+    });
+
+    
+
 });
 
 GetData(0);

@@ -291,31 +291,36 @@ h1 {
 }
 
 ul.pagination li a{
-  color: white !important;
-  background-color: #1b515e !important;
-  border: 1px solid #1b515e !important;
+  color: white ;
+  background-color: #1b515e ;
+  border: 1px solid #1b515e;
   border-radius: 0px !important;
   margin: 0 !important;
-  justify-self: flex-end !important;
+  justify-self: flex-end ;
 }
 ul.pagination li a:hover {
-  color: #1b515e !important;
-  background-color: white !important;
-  border: 1px solid #1b515e !important;
+  color: #1b515e ;
+  background-color: white ;
+  border: 1px solid #1b515e ;
   border-radius: 0px !important;
   margin: 0 !important;
   justify-self: flex-end !important;
 }
 ul.pagination li a:active {
   color: white !important;
-  background-color: #1b515e !important;
-  border: 1px solid #1b515e !important;
+  background-color: #1b515e ;
+  border: 1px solid #1b515e ;
   border-radius: 0px !important;
   margin: 0 !important;
   justify-self: flex-end !important;
   outline: none;
 }
-.active {
+li.active a{
+  border: 1px solid #1b515e !important;
+  color: #1b515e !important;
+  background-color: white !important;
+}
+.active a{
   color: #1b515e !important;
   background-color: white !important;
 }
@@ -323,7 +328,6 @@ ul.pagination li a:active {
 
 /*search*/
 .search-box{
-  
   width: fit-content;
   height: fit-content;
   position: relative;

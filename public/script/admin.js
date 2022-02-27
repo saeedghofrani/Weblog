@@ -21,7 +21,6 @@ $(document).ready(function () {
         });
     });
 
-
     $(".resetPass").click(function (e) {
         var id = $(this).attr("userid");
         e.preventDefault();
@@ -75,8 +74,6 @@ $(document).ready(function () {
         });
     });
 
-
-
     $('.removeComment').click(function (e) {
         e.preventDefault();
         var id = $(this).attr("userid");
@@ -101,44 +98,30 @@ $(document).ready(function () {
         });
     });
 
-    $('.deleteComment').click(function (e) {
-        e.preventDefault();
-        const id = $(this).attr("commentId");
-        console.log(id);
-        console.log('saeed sdaed a');
-        $.ajax({
-            type: "delete",
-            url: `/articles/comment/${id}`,
-            success: function (response) {
-                console.log(response);
-                $('div').remove(`.${id}`);
-            },
-            error: function (xhr) {
-                $('.toast-body').removeClass('text-success');
-                $('.toast-body').addClass('text-danger');
-                $('.toast-body').css('border', '1px solid red');
-                $('.toast-body').css('font-size', 16);
-                $('.toast-body').text(xhr.responseText);
-                $('.toast').toast("show");
-            }
-        });
-    });
-
-    let users = $('#appendDiv').html();
-    // $('#backToUsers').click(function (e) { 
+    // $('.deleteComment').click(function (e) {
     //     e.preventDefault();
-    //     $('#backToUsers').addClass("d-none");
-    //     $('#appendDiv').html("");
-    //     $('#appendDiv').append(users);
+    //     const id = $(this).attr("commentId");
+    //     console.log(id);
+    //     console.log('saeed sdaed a');
+    //     $.ajax({
+    //         type: "delete",
+    //         url: `/articles/comment/${id}`,
+    //         success: function (response) {
+    //             console.log(response);
+    //             $('div').remove(`.${id}`);
+    //         },
+    //         error: function (xhr) {
+    //             $('.toast-body').removeClass('text-success');
+    //             $('.toast-body').addClass('text-danger');
+    //             $('.toast-body').css('border', '1px solid red');
+    //             $('.toast-body').css('font-size', 16);
+    //             $('.toast-body').text(xhr.responseText);
+    //             $('.toast').toast("show");
+    //         }
+    //     });
     // });
 
-
-
-
-
-
-
-
+    let users = $('#appendDiv').html();
 
     function appendData(record) {
         $("#appendDiv").append(`
@@ -155,7 +138,7 @@ $(document).ready(function () {
                             </p>
                             <ul class="list-inline d-sm-flex my-0">
                                 <li class="list-inline-item ml-auto">
-                                    <button commentId="${record._id}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover deleteComment">
+                                    <button commentId="${record._id}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover deleteComment" onclick="test(${1})">
                                         Delete
                                     </button>
                                 </li>
@@ -166,9 +149,14 @@ $(document).ready(function () {
             </div> 
         `);
     }
-
-
-
-    
 });
 
+function test(recordId) { 
+    // $(".deleteComment").bind('click', function (e) {
+        // $(".deleteComment").click(function (e) { 
+        //     e.preventDefault();
+        //     console.log('ssssss');
+        // });
+    // });
+    console.log(recordId);
+ }

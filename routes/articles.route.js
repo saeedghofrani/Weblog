@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 // controller
-const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage, comment, favorit, userComment, delUserComment } = require('../controller/articles.controller.js');
+const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage, comment, favorit, userComment, delUserComment, searchProcess } = require('../controller/articles.controller.js');
 //multer middleware
 const upload = require('../utils/multerInitializer.utils').uploadarticlePicture;
 const checkAccess = require('../middleware/checkAccess.middleware');
@@ -31,12 +31,8 @@ router.route('/comment/:id')
 router.route('/favorit/:id')
     .post(favorit);
 
-/**
- ** get all article (condition = all);
- ** get user articles (condition = myArticle);
- ** get article page (condition = article id);
- */
 router.route('/:condition')
-    .get(articles);
+    .get(articles)
+    .post(searchProcess);
 
 module.exports = router;    
