@@ -110,24 +110,13 @@ const delMyArticle = safeCall(async (request, response, _next) => {
 
     //delete article from database
     const article = await Article.findById(id);
-
-    //error handling for MODEL.findByIdAndDelete
-    if (!article)
-        return response.status(400).send({
-            success: false,
-            message: 'delete article was unsuccesfull',
-        });
-
     const deletedArticle = await Article.deleteOne(article);
-    const deleteComment = await Comment.deleteMany({ 'postId': id });
 
-    if (!deletedArticle || !deleteComment)
+    if (!deletedArticle)
         return response.status(400).send({
             success: false,
             message: 'delete article was unsuccesfull',
         });
-
-    deletePicture("../public/images/article", article.image);
 
     //send success message
     response.status(200).send({
