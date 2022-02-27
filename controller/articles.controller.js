@@ -47,19 +47,15 @@ const articles = safeCall(async (request, response, _next) => {
         const id = request.params.condition;
         const article = await Article.findById(id).populate('author');
         const comment = await Comment.find({ 'postId': article._id }).populate('username').populate({ path: 'parentCommentId', populate: { path: 'username' } });
-        console.log(comment);
         //add visit count of article 
         if (request.session.user.username !== article.author.username) {
             article.visitCount++;
             article.save();
-
         }
-
         return response.render('./article/article', { data: article, user: request.session.user, comment });
     }
 
 });
-
 
 //render add article page
 const addArticlePage = (request, response, _next) => {
@@ -75,7 +71,6 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
             message: response.locals.message,
             data: null
         });
-
     //collect user data from session
     let data = {
         title: request.body.title,
@@ -84,8 +79,6 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
         image: request.file.filename,
         author: request.session.user._id
     };
-
-
     if (request.body.CoAuthor) {
         const CoAuthor = await User.findOne({ username: request.body.CoAuthor });
         data.CoAuthor = CoAuthor._id;
@@ -170,9 +163,7 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
             message: 'update article was unsuccesfull',
         });
 
-
     const passImage = article.image;
-
     article.title = request.body.title;
     article.content = request.body.content;
     article.description = request.body.description;
@@ -225,63 +216,10 @@ const favorit = safeCall(async (request, response, next) => {
 
 });
 
-const comment = safeCall(async (request, response, _next) => {
-
-    const id = request.params.id;
-    const user = request.session.user;
-    console.log(request.body);
-    const { detail } = request.body;
-    const data = {
-        postId: id,
-        username: user._id,
-        detail: detail
-    };
-
-    if (request.body.parentCommentId) {
-        data.parentCommentId = request.body.parentCommentId;
-    }
-
-    let comment = await Comment.create(data);
-    comment = await Comment.populate('username').populate('parentCommentId');
-
-    return response.status(200).send({
-        success: true,
-        message: 'article favorit',
-        data: comment
-    });
-
-
-});
-
-const userComment = safeCall(async (request, response, _next) => {
-    const id = request.params.id;
-    const comments = await Comment.find({ username: id }).populate('username');
-    return response.status(200).send({
-        success: true,
-        message: 'comments send successfull',
-        data: comments
-    });
-});
-
-const delUserComment = safeCall(async (request, response, _next) => {
-    const id = request.params.id;
-    const comment = await Comment.findByIdAndDelete(id);
-    console.log(comment);
-    return response.status(200).send({
-        success: true,
-        message: 'comments send successfull',
-        data: comment
-    });
-});
-
-
-
-
 const searchProcess = safeCall(async (request, response) => {
 
     const searchText = request.params.condition;
-    const articles = await Article.find({ $text: { $search: searchText} })
-    console.log(articles);
+    const articles = await Article.find({ $text: { $search: searchText } })
     return response.status(200).send({
         success: true,
         message: 'done',
@@ -299,8 +237,5 @@ module.exports = {
     updateArticleProcess,
     updateArticlePage,
     favorit,
-    comment,
-    userComment,
-    delUserComment,
     searchProcess
 };

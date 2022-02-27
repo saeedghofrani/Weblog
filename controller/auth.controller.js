@@ -9,7 +9,6 @@ const Comment = require('../model/comment.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
 
-
 //render login page
 const login = (_request, response, _next) => {
     return response.render('login');
@@ -86,18 +85,14 @@ const logout = (request, response, _next) => {
 
 };
 
-
-//re
 const pass = (_request, response, _next) => {
     response.render('pass');
 
 };
-
 //change password controller
 const passProcces = safeCall(async (request, response, _next) => {
     //collect data
     const { oldPass, password, confPass } = request.body;
-
     //validation error handler 
     if (response.locals.error)
         return response.status(400).send({
@@ -111,10 +106,8 @@ const passProcces = safeCall(async (request, response, _next) => {
             success: false,
             message: 'password don`t match',
         });
-
     //get user from session
     const user = request.session.user;
-
     //find user and get password
     const userTarget = await User.findOne(user).select('+password');
     //error handling for MODEL.FINDBYID
@@ -136,10 +129,8 @@ const passProcces = safeCall(async (request, response, _next) => {
 
     //set user password to new password
     userTarget.password = password;
-
     //save password on user database
     const savedUser = await userTarget.save();
-
     //error handling for MODEL.SAVE
     if (!savedUser)
         return response.status(400).send({
@@ -177,24 +168,19 @@ const delAccount = safeCall(async (request, response, _next) => {
 
     if (request.session.user.avatar !== "profileAvatar.jpg")
         deletePicture("../public/images/avatars", request.session.user.avatar);
-
     //redirect to logout 
     response.redirect('/auth/logout');
 
 });
 
 const inactivate = safeCall(async (request, response, _next) => {
-
     //get user from session
     const user = request.session.user;
-
     //inactivate user
     const inActiveUser = await User.findByIdAndUpdate(user._id, { status: "inactive" });
-
     //error handling for MODEL.findByIdAndUpdate
     if (!inActiveUser)
         return response.render('error', { error: { message: "there was something wrong" }, stats: 500 });
-
     //redirect to logout
     response.redirect('/auth/logout');
 });
@@ -203,7 +189,6 @@ const inactivate = safeCall(async (request, response, _next) => {
 const resetPassword = safeCall(async (request, response, _next) => {
     //collect data from request
     const { username, email, phone } = request.body;
-
     //find user by username
     const user = await User.findOne({ username }).select('+password');
 
@@ -220,11 +205,9 @@ const resetPassword = safeCall(async (request, response, _next) => {
             {
                 ERROR: "wrong phone number"
             });
-
     //change user password to phoe number
     user.password = user.phone;
     const savedUser = await user.save();
-
     //error handling for MODEL.SAVE
     if (!savedUser)
         return response.render('pass',
@@ -234,7 +217,6 @@ const resetPassword = safeCall(async (request, response, _next) => {
 
     //redirec to login page
     return response.redirect('/auth/login');
-
 });
 
 module.exports = {

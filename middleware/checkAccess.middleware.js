@@ -1,7 +1,9 @@
 const Article = require('../model/article.model');
 const mongoose = require('mongoose');
 
+// check access for CoAuthor and admin
 const checkAccess = {
+    //access for delete article granted to author and admin
     deleteArticle: async (req, res, next) => {
 
         const { id } = req.body;
@@ -12,12 +14,12 @@ const checkAccess = {
         next();
 
     },
+    //access for update article granted to author and coAuthor
     updateArticle: async (req, res, next) => {
 
         const article = await Article.findById(req.params.id).populate('author').populate('CoAuthor');
-        
+
         const articleId = mongoose.Types.ObjectId(article.author._id).valueOf();
-        console.log(articleId);
         if (req.session.user._id !== articleId && req.session.user._id !== mongoose.Types.ObjectId(article.CoAuthor._id).valueOf()) {
             return res.render('./error', { error: { status: 404, message: "page not found" } });
         }

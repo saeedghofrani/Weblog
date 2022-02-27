@@ -1,7 +1,18 @@
 const sendEmail = require('../utils/email.utils')
+
+const home = (_request, response, _next) => {
+    return response.render('home');
+};
+
+
 const contact = (_request, response, _next) => {
     response.render('contact');
 };
+
+const about = (_request, response, _next) => {
+    response.render('about');
+};
+
 const contactProcces = async (request, response, next) => {
     const {
         from,
@@ -12,7 +23,10 @@ const contactProcces = async (request, response, next) => {
     await sendEmail(from, subject, text);
 
 }
+
 module.exports = {
     contact,
-    contactProcces
+    contactProcces,
+    about,
+    home
 };

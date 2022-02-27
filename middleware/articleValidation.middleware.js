@@ -24,7 +24,7 @@ const wraper = (mod) => {
                 descriptionValidation(req, res);
 
                 contentValidation(req, res);
-                
+
                 if (req.file)
                     imageValidation(req, res);
 

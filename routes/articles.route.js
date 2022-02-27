@@ -9,7 +9,7 @@ const upload = require('../utils/multerInitializer.utils').uploadarticlePicture;
 const checkAccess = require('../middleware/checkAccess.middleware');
 // session middleware
 const sessionsCheck = require("../middleware/sessionCheck.middleware");
-const authorization = require('../middleware/authorization.middleware');
+
 const articleValidation = require('../middleware/articleValidation.middleware.js');
 
 router.use(sessionsCheck.login);
@@ -22,11 +22,6 @@ router.route('/setup')
 router.route('/updateArticle/:id')
     .get(checkAccess.updateArticle, updateArticlePage)
     .post(checkAccess.updateArticle, upload.single('articlePicture'), articleValidation('update'), updateArticleProcess);
-
-router.route('/comment/:id')
-    .get(authorization(['admin']), userComment)
-    .post(comment)
-    .delete(delUserComment);
 
 router.route('/favorit/:id')
     .post(favorit);

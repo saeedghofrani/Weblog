@@ -79,7 +79,7 @@ $(document).ready(function () {
         var id = $(this).attr("userid");
         $.ajax({
             type: "GET",
-            url: `/articles/comment/${id}`,
+            url: `/comment/${id}`,
             success: function (response) {
                 $('#backToUsers').removeClass("d-none");
                 $('#appendDiv').html("");

@@ -6,7 +6,6 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 // mongoose plugin dependencie
-const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -91,9 +90,6 @@ const UserSchema = new Schema({
         default: 'profileAvatar.jpg'
     }
 }, { timestamps: true });
-
-//uniqu validator
-// UserSchema.plugin(uniqueValidator, { message: 'this is already taken.' });
 
 //hashing password hook
 UserSchema.pre('save', async function (next) {

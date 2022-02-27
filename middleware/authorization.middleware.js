@@ -12,4 +12,5 @@ const accessController = (roles) => {
         next();
     };
 };
+
 module.exports = accessController;

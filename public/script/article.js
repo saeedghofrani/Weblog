@@ -29,7 +29,7 @@ $(document).ready(function () {
         };
         $.ajax({
             type: "POST",
-            url: `/articles/comment/${id}`,
+            url: `/comment/${id}`,
             data,
             success: function (response) {
                 $('#commentInp').val("");
