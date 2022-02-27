@@ -138,7 +138,7 @@ $(document).ready(function () {
                             </p>
                             <ul class="list-inline d-sm-flex my-0">
                                 <li class="list-inline-item ml-auto">
-                                    <button commentId="${record._id}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover deleteComment" onclick="test(${1})">
+                                    <button commentId="${record._id}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover deleteComment" onclick="test('${record._id}')">
                                         Delete
                                     </button>
                                 </li>
@@ -159,4 +159,20 @@ function test(recordId) {
         // });
     // });
     console.log(recordId);
+    $.ajax({
+        type: "delete",
+        url: `/comment/${recordId}`,
+        success: function (response) {
+            console.log(response);
+            $('div').remove(`.${recordId}`);
+        },
+        error: function (xhr) {
+            $('.toast-body').removeClass('text-success');
+            $('.toast-body').addClass('text-danger');
+            $('.toast-body').css('border', '1px solid red');
+            $('.toast-body').css('font-size', 16);
+            $('.toast-body').text(xhr.responseText);
+            $('.toast').toast("show");
+        }
+    });
  }
