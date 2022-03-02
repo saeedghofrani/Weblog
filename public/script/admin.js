@@ -138,7 +138,7 @@ $(document).ready(function () {
                             </p>
                             <ul class="list-inline d-sm-flex my-0">
                                 <li class="list-inline-item ml-auto">
-                                    <button commentId="${record._id}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover deleteComment" onclick="test('${record._id}')">
+                                    <button commentId="${record._id}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover deleteComment button-37" onclick="test('${record._id}')">
                                         Delete
                                     </button>
                                 </li>

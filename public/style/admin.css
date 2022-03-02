@@ -330,3 +330,12 @@ ul li {
 #commentbtn {
 
 }
+#backToUsers {
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+}
+
+.deleteComment {
+    color: white !important;
+}

@@ -22,9 +22,9 @@ const contactProcces = async (request, response, next) => {
         subject,
         text
     } = request.body;
-
+    console.log(from, subject, text);
     await sendEmail(from, subject, text);
-
+    response.render('contact');
 }
 
 module.exports = {

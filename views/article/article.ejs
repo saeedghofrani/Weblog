@@ -4,6 +4,8 @@
 <head>
     <%- include('../common/header.ejs', {Document: "Articles" }) %>
         <link rel="stylesheet" href="/style/article.css">
+        <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
+        type="text/css" />
         <link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
 
@@ -68,7 +70,9 @@
                                                     <input data-articleid="<%=data._id%>" type="hidden" name=""
                                                         id="ArticleId" />
                                                     <input type="hidden" id="parentCommentId" />
-                                                    <input type="text" class="col-12 commentInp" id="commentInp" />
+                                                    <!-- <input type="text" class="col-12 commentInp" id="commentInp" /> -->
+                                                    <textarea id="commentInp" name="content">
+                                                    </textarea required>
 
                                                     <ul class="list-inline d-sm-flex my-0">
                                                         <li class="list-inline-item ml-auto">
@@ -112,7 +116,7 @@
                                                             </h5>
 
                                                         </div>
-                                                        <p class="p-3 ">
+                                                        <p class="p-3 detailComment detailComment<%= i %> ">
                                                             <%= comment[i].detail %>
                                                         </p>
                                                         <ul class="list-inline d-sm-flex my-0">
@@ -206,6 +210,11 @@
 
 
         <%- include('../common/scripts.ejs') %>
+        <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+        <script>
+            new FroalaEditor('textarea');
+        </script>
             <script src="/script/article.js"></script>
 </body>
 

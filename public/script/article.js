@@ -1,6 +1,19 @@
 $(document).ready(function () {
     let x = document.getElementById('content').innerText;
     decodeHTMLEntities(x);
+    for (let i = 0; i < $('.detailComment').length; i++) {
+        let cccc = document.getElementsByClassName('detailComment')[i].innerText;
+        cccc = $(`.detailComment${i}`).text();
+        console.log(cccc);
+        decodeHTMLEntitiesC(cccc, `detailComment${i}`);
+    }
+    function decodeHTMLEntitiesC(text, element) {
+        console.log(text);
+        return $("." + element)
+            .html(text)
+            .text();
+    }
+
 
     x = $(`.date`).text();
     x = new Date(x);

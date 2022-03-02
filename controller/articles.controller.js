@@ -47,7 +47,6 @@ const articles = safeCall(async (request, response, _next) => {
         const id = request.params.condition;
         const article = await Article.findById(id).populate('author');
         const comment = await Comment.find({ 'postId': article._id }).populate('username').populate({ path: 'parentCommentId', populate: { path: 'username'} }).lean();
-        console.log(comment);
         //add visit count of article 
         if (request.session.user.username !== article.author.username) {
             article.visitCount++;
@@ -107,7 +106,6 @@ const delMyArticle = safeCall(async (request, response, _next) => {
 
     //collect id from request
     const { id } = request.body;
-
     //delete article from database
     const article = await Article.findById(id);
     const deletedArticle = await Article.deleteOne(article);
@@ -127,10 +125,8 @@ const delMyArticle = safeCall(async (request, response, _next) => {
 });
 //update article page 
 const updateArticlePage = safeCall(async (request, response, _next) => {
-
     const article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
     return response.render('./article/updateArticle', { data: article });
-
 });
 //update article process
 const updateArticleProcess = safeCall(async (request, response, _next) => {
@@ -172,15 +168,12 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
         success: true,
         message: 'delete article was succesfull',
     });
-
 });
 
 const favorit = safeCall(async (request, response, next) => {
 
     const id = request.params.id;
-
     const article = await Article.findById(id);
-
     const user = request.session.user;
 
     if (request.body.data === "1") {
@@ -203,11 +196,8 @@ const favorit = safeCall(async (request, response, next) => {
             message: 'article favorit',
         });
     }
-
 });
-
 const searchProcess = safeCall(async (request, response) => {
-
     const searchText = request.params.condition;
     const articles = await Article.find({ $text: { $search: searchText } }).limit(6).populate('author');
     console.log(articles);
@@ -216,9 +206,7 @@ const searchProcess = safeCall(async (request, response) => {
         message: 'done',
         data: articles,
     });
-
 });
-
 
 module.exports = {
     articles,
