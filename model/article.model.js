@@ -43,11 +43,15 @@ const articleSchema = new Schema({
 
 articleSchema.index({ title: 'text', description: 'text' });
 
-articleSchema.pre(/^delete/ || 'findByIdAndDelete', async function(next) {
-
-    await Comment.deleteMany({ 'postId': this._conditions._id });
-    deletePicture("../public/images/article", this._conditions.image);
+articleSchema.pre(/^find/, function (next) {
+    this.populate({ path: "author" });
     next();
-})
+});
+
+articleSchema.pre( 'findOneAndDelete', async function (next) {
+    await Comment.deleteMany({ 'postId': this._conditions._id });
+
+    next();
+});
 
 module.exports = mongoose.model('Article', articleSchema);

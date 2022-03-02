@@ -12,7 +12,7 @@ const articles = safeCall(async (request, response, _next) => {
     const condition = request.params.condition;
 
     if (condition === 'all') {
-        const topArticle = await Article.find({}).populate('author').sort({ visitCount: -1 }).limit(1);
+        const topArticle = await Article.find({}).sort({ visitCount: -1 }).limit(1);
         return response.render('./article/articles', { topArticle, user: request.session.user });
     }
 
@@ -20,7 +20,7 @@ const articles = safeCall(async (request, response, _next) => {
 
         const skip = Number(condition.split('=')[1]) * 6;
         //collect data from database sort bt createdAt
-        const articles = await Article.find({}).populate('author').sort({ createdAt: -1 }).skip(skip).limit(6);
+        const articles = await Article.find({}).sort({ createdAt: -1 }).skip(skip).limit(6);
         const count = await Article.find({}).count();
 
         //render artile page sorted 
@@ -39,21 +39,18 @@ const articles = safeCall(async (request, response, _next) => {
 
         const user = request.session.user;
         // const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
-        const myArticle = await Article.find({ $or: [{ 'author': user._id }, { 'CoAuthor': user._id }] }).populate('author').sort({ createdAt: -1 });
-        response.render('./article/myArticles', { data: myArticle });
+        const myArticle = await Article.find({ $or: [{ 'author': user._id }, { 'CoAuthor': user._id }] }).sort({ createdAt: -1 });
+        return response.render('./article/myArticles', { data: myArticle });
     }
 
-    else {
-        const id = request.params.condition;
-        const article = await Article.findById(id).populate('author');
-        const comment = await Comment.find({ 'postId': article._id }).populate('username').populate({ path: 'parentCommentId', populate: { path: 'username'} }).lean();
-        //add visit count of article 
-        if (request.session.user.username !== article.author.username) {
-            article.visitCount++;
-            article.save();
-        }
-        return response.render('./article/article', { data: article, user: request.session.user, comment });
+    const article = await Article.findById(request.params.condition);
+    const comment = await Comment.find({ 'postId': article._id }).lean();
+    //add visit count of article 
+    if (request.session.user.username !== article.author.username) {
+        article.visitCount++;
+        article.save();
     }
+    return response.render('./article/article', { data: article, user: request.session.user, comment });
 
 });
 
@@ -103,29 +100,27 @@ const addArticleProcess = safeCall(async (request, response, _next) => {
 });
 
 const delMyArticle = safeCall(async (request, response, _next) => {
-
     //collect id from request
-    const { id } = request.body;
-    //delete article from database
-    const article = await Article.findById(id);
-    const deletedArticle = await Article.deleteOne(article);
+    const article = await Article.findByIdAndDelete(request.body.id);
 
-    if (!deletedArticle)
+    if (!article)
         return response.status(400).send({
             success: false,
             message: 'delete article was unsuccesfull',
         });
 
+    deletePicture("../public/images/article", article.image);
     //send success message
     response.status(200).send({
         success: true,
         message: 'delete article was succesfull',
     });
-
 });
+
+
 //update article page 
 const updateArticlePage = safeCall(async (request, response, _next) => {
-    const article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
+    const article = await Article.findById(request.params.id).populate('CoAuthor');
     return response.render('./article/updateArticle', { data: article });
 });
 //update article process
@@ -139,36 +134,27 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
             data: null
         });
 
-    let article = await Article.findById(request.params.id).populate('author').populate('CoAuthor');
+    const article = {
+        title: request.body.title,
+        content: request.body.content,
+        description: request.body.description,
+        image: request.file.filename
+    };
 
-
-    //error handling for findByIdAndUpdate
-    if (!article)
-        return response.status(400).send({
-            success: false,
-            message: 'update article was unsuccesfull',
-        });
-
-    const passImage = article.image;
-    article.title = request.body.title;
-    article.content = request.body.content;
-    article.description = request.body.description;
-    article.image = article.image;
-
-    if (request.file) {
+    if (request.file)
         article.image = request.file.filename;
-        await article.save();
-        deletePicture("../public/images/article", passImage);
-    } else {
-        await article.save();
-    }
 
-    //send success message
+    const updatedArticle = await Article.findByIdAndUpdate(request.params.id, article);
+
+    if (request.file)
+        deletePicture("../public/images/article", updatedArticle.image);
+
     return response.status(200).send({
         success: true,
         message: 'delete article was succesfull',
     });
 });
+
 
 const favorit = safeCall(async (request, response, next) => {
 
@@ -199,7 +185,7 @@ const favorit = safeCall(async (request, response, next) => {
 });
 const searchProcess = safeCall(async (request, response) => {
     const searchText = request.params.condition;
-    const articles = await Article.find({ $text: { $search: searchText } }).limit(6).populate('author');
+    const articles = await Article.find({ $text: { $search: searchText } }).limit(6);
     console.log(articles);
     return response.status(200).send({
         success: true,

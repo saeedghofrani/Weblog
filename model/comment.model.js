@@ -21,4 +21,9 @@ const CommentSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
+CommentSchema.pre(/^find/, function (next) {
+    this.populate('username').populate({ path: 'parentCommentId', populate: { path: 'username' } });
+    next();
+});
+
 module.exports = mongoose.model('Comment', CommentSchema);
