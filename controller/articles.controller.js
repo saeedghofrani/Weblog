@@ -137,8 +137,7 @@ const updateArticleProcess = safeCall(async (request, response, _next) => {
     const article = {
         title: request.body.title,
         content: request.body.content,
-        description: request.body.description,
-        image: request.file.filename
+        description: request.body.description
     };
 
     if (request.file)

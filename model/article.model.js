@@ -50,7 +50,6 @@ articleSchema.pre(/^find/, function (next) {
 
 articleSchema.pre( 'findOneAndDelete', async function (next) {
     await Comment.deleteMany({ 'postId': this._conditions._id });
-
     next();
 });
 
