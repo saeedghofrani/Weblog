@@ -7,9 +7,6 @@ const { db: { host, port, name } } = config;
 //connection string for mongoose
 const connectionString = `mongodb://${host}:${port}/${name}`;
 
-// let connectionString = "mongodb://127.0.0.1:27017/myapp";
-// mongoose.connect(connectionString);
-
 // conecting mongo database
 mongoose.connect(connectionString)
     .catch(err => {
@@ -17,6 +14,7 @@ mongoose.connect(connectionString)
             console.log(err); process.exit(1);
         }
     });
+
 // give connection to variable
 const db = mongoose.connection;
 
@@ -33,4 +31,5 @@ db.on('disconnected', () => mongoose.connect(connectionString)
             console.log(err); process.exit(1);
         }
     }));
+
 module.exports = db;

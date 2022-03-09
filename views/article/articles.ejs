@@ -13,7 +13,7 @@
   <%- include('../common/navbar.ejs') %>
 
     <% for( let i=0; i < 1; i++ ) { %>
-      <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark row m-5 p-4 mt-3">
+      <div class=" text-white rounded bg-dark row m-5 p-4 mt-3 p-4 p-md-5 mb-4">
         <div class="col-6 col-md-6 px-0">
           <h1>
             MOST POPULAR ARTICLE
@@ -30,11 +30,18 @@
           <p class="lead mb-0"><a href="/articles/<%= topArticle[i]._id%>" class="text-white fw-bold">Continue
               reading...</a></p>
         </div>
-        <div class="col-6 d-flex justify-content-center ">
-          <img class="topImg" src="/images/article/<%= topArticle[i].image %> " alt="top article">
+        <div class="col-6 d-flex justify-content-center bg-image-full"
+          style="background-image: url(/images/article/<%= topArticle[i].image %> ); border-radius:10px;">
         </div>
       </div>
       <% } %>
+
+        <div class="col-12 d-flex justify-content-end">
+          <div class="search-box m-3 ms-5 row justify-content-center">
+            <button id="searchBtn" class="btn-search"><i class="fas fa-search"></i></button>
+            <input id="searchInp" type="text" class="input-search" placeholder="Type to Search...">
+          </div>
+        </div>
 
 
         <div class="border-container  pillar-container">

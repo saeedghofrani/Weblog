@@ -1,6 +1,19 @@
 $(document).ready(function () {
     let x = document.getElementById('content').innerText;
     decodeHTMLEntities(x);
+    for (let i = 0; i < $('.detailComment').length; i++) {
+        let cccc = document.getElementsByClassName('detailComment')[i].innerText;
+        cccc = $(`.detailComment${i}`).text();
+        console.log(cccc);
+        decodeHTMLEntitiesC(cccc, `detailComment${i}`);
+    }
+    function decodeHTMLEntitiesC(text, element) {
+        console.log(text);
+        return $("." + element)
+            .html(text)
+            .text();
+    }
+
 
     x = $(`.date`).text();
     x = new Date(x);
@@ -22,18 +35,22 @@ $(document).ready(function () {
         e.preventDefault();
         const detail = $('#commentInp').val();
         const parentCommentId = $('#parentCommentId').val();
-        const id = $("#ArticleId").val();
+        const p = document.getElementById('ArticleId');
+        const id =  p.dataset.articleid;
+
+        // const id = $("#ArticleId").val();
         const data = {
             detail,
             parentCommentId,
         };
         $.ajax({
             type: "POST",
-            url: `/articles/comment/${id}`,
+            url: `/comment/${id}`,
             data,
             success: function (response) {
                 $('#commentInp').val("");
                 createComment(response.data);
+                console.log(response);
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert(xhr.status);
@@ -58,6 +75,18 @@ $(document).ready(function () {
         $("#content").toggleClass("d-none");
         $(".commentContainer").toggleClass("d-none");
     });
+
+
+    for (let i = 0; i < (($(".list-inline-item").length) - 1); i++) {
+        $(`#replyBtn${i}`).click(function (e) { 
+            e.preventDefault();
+            let parentComment = $(this).attr("commentId");
+            let commentName = $(this).attr("commentName");
+            $('#parentCommentId').val(parentComment);
+            $('#replyShow').html(commentName + `<i class="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>`);
+        });
+
+    }
 
 });
 

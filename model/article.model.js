@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Comment = require('./comment.model');
+const deletePicture = require('../utils/deletePicture.utils');
 const Schema = mongoose.Schema;
 const articleSchema = new Schema({
     title: {
@@ -38,4 +40,17 @@ const articleSchema = new Schema({
         required: false,
     },
 }, { timestamps: true });
+
+articleSchema.index({ title: 'text', description: 'text' });
+
+articleSchema.pre(/^find/, function (next) {
+    this.populate({ path: "author" });
+    next();
+});
+
+articleSchema.pre( 'findOneAndDelete', async function (next) {
+    await Comment.deleteMany({ 'postId': this._conditions._id });
+    next();
+});
+
 module.exports = mongoose.model('Article', articleSchema);

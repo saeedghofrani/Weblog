@@ -25,7 +25,7 @@ nav ul li a {
   font-family: "Open Sans";
   text-transform: uppercase;
   color: #1b515e;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bolder;
   text-decoration: none;
   display: flex;
@@ -35,7 +35,7 @@ nav ul li a {
 
 
 nav ul li a:hover span {
-  bottom: 90%;
+  bottom: 89%;
   visibility: visible;
   opacity: 1;
 }
@@ -86,3 +86,4 @@ nav a btn {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.503), inset 0 0 1px rgba(0, 0, 0, 0.6);
   background: rgba(0, 0, 0, 0.1);
 }
+

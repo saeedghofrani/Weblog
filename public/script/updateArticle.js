@@ -39,7 +39,8 @@ $(document).ready(function () {
 
 
     $('#updateArticleSubmit').click(function (e) {
-        let id = $("#idInput").val();
+        const x = document.getElementById('idInput');
+        id =  x.dataset.articleid;
         e.preventDefault();
         var data = new FormData($('#formAddArticle')[0]);
         $.ajax({

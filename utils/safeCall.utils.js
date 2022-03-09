@@ -1,4 +1,4 @@
-const safeCallUtils = function (mainFunc, req, res, next) {
+const safeCallUtils = function (mainFunc, _req, _res, next) {
     return function () {
         try {
             mainFunc.apply(this, arguments);

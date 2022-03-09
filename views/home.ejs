@@ -5,6 +5,7 @@
     <%- include('./common/header.ejs', {Document: "Home" }) %>
         <link rel="stylesheet" href="/style/home.css">
         <link href='https://fonts.googleapis.com/css?family=Merienda One' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 </head>
 
 <body>
@@ -46,6 +47,56 @@
             </div>
 
         </section>
+
+        <ul class="card-list row justify-content-center">
+            <% for( let i=0; i < data.length; i++ ) { %>
+                <div class="blog-card <%= data[i]._id %>">
+                    <div class="meta">
+                        <div class="photo" style="background-image: url(/images/article/<%=data[i].image %>) ">
+                        </div>
+                        <ul class="details">
+                            <li class="author">
+                                <%= data[i].author.username %>
+                            </li>
+                            <li class="date data<%=i    %> ">
+                                <%= data[i].createdAt.toLocaleDateString('en-US') %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="description">
+                        <h1>
+                            <%= data[i].title %>
+                        </h1>
+                        <h2>Category: any</h2>
+                        <p class="col-12 ">
+                            <%= data[i].description %>
+                        </p>
+                        <p class="read-more mt-4 d-flex justify-content-end align-items-between">
+                            <a class=" d-flex align-items-center readMore"
+                                href="http://localhost:3000/articles/<%= data[i]._id%>">Read More</a>
+                        </p>
+                    </div>
+                </div>
+                <% } %>
+        </ul>
+
+        <div class="footer-basic">
+            <footer>
+                <hr>
+                <div class="social"><a href="#"><i class="icon ion-social-github"></i></a><a href="#"><i
+                            class="icon ion-social-linkedin"></i></a><a href="#"><i
+                            class="icon ion-email"></i></a><a href="#"><i
+                            class="icon ion-social-twitter"></i></a></div>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Home</a></li>
+                    <li class="list-inline-item"><a href="#">Articles</a></li>
+                    <li class="list-inline-item"><a href="#">About</a></li>
+                    <li class="list-inline-item"><a href="#">Contact Us</a></li>
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                </ul>
+                <p class="copyright">ESTER © 2021</p>
+            </footer>
+        </div>
 
         <%- include('./common/scripts.ejs') %>
             <script src="/script/home.js"></script>

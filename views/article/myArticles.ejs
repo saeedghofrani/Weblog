@@ -34,10 +34,8 @@
                             <%= data[i].description %>
                         </p>
                         <p class="read-more mt-4 d-flex justify-content-around align-items-between">
-                            <a class=" mx-2 upRE"
-                                href="/articles/updateArticle/<%= data[i]._id%>">Update</a>
-                            <a class=" removeArticle mx-2 upRE"
-                                articleid="<%= data[i]._id%>">Remove</a>
+                            <a class=" mx-2 upRE" href="/articles/updateArticle/<%= data[i]._id%>">Update</a>
+                            <a class=" removeArticle mx-2 upRE" articleid="<%= data[i]._id%>">Remove</a>
                             <a class=" d-flex align-items-center readMore"
                                 href="http://localhost:3000/articles/<%= data[i]._id%>">Read More</a>
 
