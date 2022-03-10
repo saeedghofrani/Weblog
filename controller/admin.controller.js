@@ -2,12 +2,14 @@
 const safeCall = require('../utils/safeCall.utils');
 //user model
 const User = require('../model/user.model');
+const Article = require('../model/article.model');
+const Comment = require('../model/comment.model');
+const deletePicture = require('../utils/deletePicture.utils');
 
 //render table user for admin
 const admin = safeCall(async (request, response, _next) => {
     //collect users from database
     const users = await User.find({});
-
     response.render('admin', { users });
 
 });
@@ -51,13 +53,28 @@ const deleteUser = safeCall(async (request, response, _next) => {
             message: 'delete user was unsuccesfull',
         });
 
-    //send success message
+    const allUserArticle = await Article.find({ author: user._id });
+
+    for (let i = 0; i < allUserArticle.length; i++) {
+        await Comment.deleteMany({ "postId": allUserArticle[i]._id });
+        deletePicture("../public/images/article", allUserArticle[i].image);
+    }
+
+    await Article.deleteMany({ author: user._id });
+
+    await Comment.deleteMany({ username: user._id });
+
+    if (user.avatar !== "profileAvatar.jpg")
+        deletePicture("../public/images/avatars", user.avatar);
+    //redirect to logout 
     return response.status(200).send({
         success: true,
         message: 'delete was succesfull',
     });
 
 });
+
+
 
 module.exports = {
     admin,

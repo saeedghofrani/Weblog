@@ -1,9 +1,9 @@
-//aticle model
 const Article = require('../model/article.model');
 const User = require('../model/user.model');
 const Comment = require('../model/comment.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../utils/safeCall.utils');
+
 const deletePicture = require('../utils/deletePicture.utils');
 
 //render article page 
@@ -37,7 +37,7 @@ const articles = safeCall(async (request, response, _next) => {
     //get users article
     if (condition === 'myArticle') {
 
-        const user = request.session.user;
+        const user = request.session.user ;
         // const myArticle = await Article.find({ author: user._id }).populate('author').sort({ createdAt: -1 });
         const myArticle = await Article.find({ $or: [{ 'author': user._id }, { 'CoAuthor': user._id }] }).sort({ createdAt: -1 });
         return response.render('./article/myArticles', { data: myArticle });

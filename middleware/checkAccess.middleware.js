@@ -5,9 +5,11 @@ const mongoose = require('mongoose');
 const checkAccess = {
     //access for delete article granted to author and admin
     deleteArticle: async (req, res, next) => {
-
+        console.log(req.body);
         const { id } = req.body;
-        const article = await Article.findById(id).populate('author');
+        console.log(id);
+        const article = await Article.findById(id);
+        console.log(article);
         if (req.session.user._id !== mongoose.Types.ObjectId(article.author._id).valueOf() && req.session.user.role !== 'admin') {
             return res.render('./error', { error: { status: 404, message: "page not found" } });
         }
