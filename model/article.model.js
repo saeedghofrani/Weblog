@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Comment = require('./comment.model');
 const deletePicture = require('../utils/deletePicture.utils');
+const Article = require('../model/article.model');
 const Schema = mongoose.Schema;
 const articleSchema = new Schema({
     title: {
@@ -52,5 +53,16 @@ articleSchema.pre( 'findOneAndDelete', async function (next) {
     await Comment.deleteMany({ 'postId': this._conditions._id });
     next();
 });
+
+// articleSchema.pre( /deleteMany/, async function (next) {
+//     // await Comment.deleteMany({ 'postId': this._conditions._id });
+//     const allUserArticle = await Article.find({ author: this._conditions.author });
+//     console.log(allUserArticle);
+//     Promise.all(allUserArticle.map((value, index, array) => {
+//         Comment.deleteMany({ "postId": value._id });
+//         deletePicture("../public/images/article", value.image);
+//     }));
+//     next();
+// });
 
 module.exports = mongoose.model('Article', articleSchema);

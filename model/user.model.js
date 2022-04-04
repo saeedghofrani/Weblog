@@ -4,6 +4,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const Article = require('../model/article.model');
+const Comment = require('../model/comment.model');
 
 // mongoose plugin dependencie
 const Schema = mongoose.Schema;
@@ -105,6 +107,27 @@ UserSchema.pre('save', async function (next) {
 UserSchema.pre(/^find/, function async(next) {
     this.find({ status: { $ne: "inactive" } });
     next();
-})
+});
+
+UserSchema.pre("findOneAndDelete", async function (next) {
+
+    await Article.deleteMany({ author: this._conditions._id });
+    await Comment.deleteMany({ username: this._conditions._id });
+    console.log(this._conditions._id);
+    // console.log(allUserArticle);
+
+    // for (let i = 0; i < allUserArticle.length; i++) {
+    //     await Comment.deleteMany({ "postId": allUserArticle[i]._id });
+    //     deletePicture("../public/images/article", allUserArticle[i].image);
+    // }
+
+    // allUserArticle.map((value, index, array) => {
+    //     Comment.deleteMany({ "postId": value._id });
+    //     deletePicture("../public/images/article", value.image);
+    // });
+
+    next();
+
+});
 
 module.exports = mongoose.model('User', UserSchema);

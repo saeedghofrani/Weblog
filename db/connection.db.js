@@ -19,7 +19,7 @@ mongoose.connect(connectionString)
 const db = mongoose.connection;
 
 // database on error event
-db.on('error', console.error.bind(console, 'MongoDB conne ction error:'));
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // database on conect event
 db.on('connected', () => console.log('MongoDB connected'));

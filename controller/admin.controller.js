@@ -15,7 +15,7 @@ const admin = safeCall(async (request, response, _next) => {
 });
 
 const resetPass = safeCall(async (request, response, _next) => {
-    //collect users from database + password 
+    // collect users from database + password 
     const user = await User.findById(request.body.id).select('+password');
 
     //error handling for find by id
@@ -44,25 +44,34 @@ const resetPass = safeCall(async (request, response, _next) => {
 });
 
 const deleteUser = safeCall(async (request, response, _next) => {
-    //collect users from database by id
-    const user = await User.findByIdAndDelete(request.body.id);
-    //error handling for find by id and delete 
-    if (!user)
-        return response.status(400).send({
-            success: false,
-            message: 'delete user was unsuccesfull',
-        });
 
-    const allUserArticle = await Article.find({ author: user._id });
 
+    const allUserArticle = await Article.find({ author: request.body.id });
+    console.log(allUserArticle);
     for (let i = 0; i < allUserArticle.length; i++) {
         await Comment.deleteMany({ "postId": allUserArticle[i]._id });
         deletePicture("../public/images/article", allUserArticle[i].image);
     }
+    // Promise.all(allUserArticle.map((value, index, array) => {
+    //     Comment.deleteMany({ "postId": value._id });
+    //     deletePicture("../public/images/article", value.image);
+    // }));
 
-    await Article.deleteMany({ author: user._id });
+    //collect users from database by id
+    const user = await User.findByIdAndDelete(request.body.id);
 
-    await Comment.deleteMany({ username: user._id });
+
+
+    // const allUserArticle = await Article.find({ author: user._id });
+
+    // for (let i = 0; i < allUserArticle.length; i++) {
+    //     await Comment.deleteMany({ "postId": allUserArticle[i]._id });
+    //     deletePicture("../public/images/article", allUserArticle[i].image);
+    // }
+
+    // await Article.deleteMany({ author: user._id });
+
+    // await Comment.deleteMany({ username: user._id });
 
     if (user.avatar !== "profileAvatar.jpg")
         deletePicture("../public/images/avatars", user.avatar);
@@ -71,7 +80,6 @@ const deleteUser = safeCall(async (request, response, _next) => {
         success: true,
         message: 'delete was succesfull',
     });
-
 });
 
 
