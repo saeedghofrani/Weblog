@@ -14,7 +14,7 @@ const CommentSchema = new mongoose.Schema({
     username: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'User',
-    },
+    },  
     detail: {
         type: String,
         required: true,
