@@ -56,7 +56,7 @@ const articles = safeCall(async (request, response, _next) => {
 
 //render add article page
 const addArticlePage = (request, response, _next) => {
-    response.render('./article/addArticle');
+    return response.render('./article/addArticle');
 };
 
 //add article procces 
