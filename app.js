@@ -83,13 +83,13 @@ app.use((err, req, res, _next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     res.status(err.status || 404);
-    res.render('error', { error: { message: "page has gone missing", status: err.status || 404 } });
+    res.json({ path: "authentication", success: false, result: { error: "Path does not exist" } });
 
     // uncaught Exception handler
     process.on("uncaughtException", (err) => {
         console.log("UNCAUGHT EXCEPTION, APP SHUTTING DOWN NOW!!");
         console.log(err.message, err.name);
-        res.render('error', { error: { message: "internall server error", status: 500 } });
+        res.json({ path: "authentication", success: false, result: { error: "Path does not exist" } });
         process.exit(1);
     });
 });

@@ -125,7 +125,7 @@ function createCard(record, count) {
       <div class="photo" style="background-image:  url(/images/article/${record.image}"></div>
       <ul class="details">
         <li class="author"><a href="#">
-            ${record.author.username}
+            ${record.author}
           </a></li>
         <li class='date data${count}'>
           ${record.createdAt}

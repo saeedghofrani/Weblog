@@ -9,6 +9,7 @@
 
 <body>
     <%- include('./common/navbar.ejs') %>
+
         <section class="pricing-section">
             <div class="container">
                 <div id="appendDiv" class="row">
@@ -58,11 +59,7 @@
                                             User</button>
                                     </li>
                                     <li class="col-12 ">
-                                        <button class="col-12 button-37" data-toggle="modal" data-target="#form" userId="<%= users[i]._id %>">Remove
-                                            User`s Article</button>
-                                    </li>
-                                    <li class="col-12 ">
-                                        <button class="col-12 button-37 removeComment" id="" userId="<%= users[i]._id %>">Remove
+                                        <button class="col-12 button-37 removeComment" userId="<%= users[i]._id %>">Remove
                                             User`s Comment</button>
                                     </li>
                                 </ul>
@@ -78,17 +75,22 @@
             </div>
            
         </section>
+        <button class="col-3 button-37 " id="deleArticleAdmin">Remove Article</button>
 
 
-        <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4">
-                    <h1 class="text-center mb-5">Plaese Enter Article ID</h1>
-                    <input id="articleID" type="text" class="form-control mb-3" placeholder="">
-                    <div class="text-center mb-3"> <button class="btn btn-primary w-50 rounded-pill b1 button-37" id="deleArticleAdmin">Remove</button> </div>
-                </div>
-            </div>
-        </div>
+        
+        <div class="border-container  pillar-container">
+            <ul class="card-list row justify-content-center" id="list">
+  
+            </ul>
+          </div>
+  
+          <section class="pagination" cl aria-label="Page navigation example ">
+            <ul class="pagination justify-content-center " id="pagination">
+  
+            </ul>
+          </section>
+  
 
 
 

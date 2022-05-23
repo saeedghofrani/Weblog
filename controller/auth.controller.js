@@ -183,7 +183,7 @@ const inactivate = safeCall(async (request, response, _next) => {
         return response.render('error', { error: { message: "there was something wrong" }, stats: 500 });
     //redirect to logout
     response.redirect('/auth/logout');
-});
+}); 
 
 //reset password without login
 const resetPassword = safeCall(async (request, response, _next) => {
