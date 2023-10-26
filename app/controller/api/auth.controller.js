@@ -9,225 +9,217 @@ const Comment = require('../../model/comment.model');
 // wrapper contain trycatch for error handling
 const safeCall = require('../../utils/safeCall.utils');
 
-//render login page
-const login = (_request, response, _next) => {
-    return response.render('login');
-};
+class AuthController {
 
-//check username and password for access to dashboard
-const loginProcess = safeCall(async (request, response, _next) => {
-    // get user pass from request
-    const { username, password } = request.body;
-    // find user by username and get password
-    const user = await User.findOne({ username }).select('+password').populate('favorites');
-    // send error case of wrong username 
-    if (!user)
-        return response.render('login', {
-            ERROR: "wrong username or password"
-        });
+    //render login page
+    login = (_request, response, _next) => {
+        return response.render('login');
+    };
 
-    //compaire password
-    const userPass = await bcrypt.compare(password, user.password);
-    // send error case of wrong password
-    if (!userPass)
-        return response.render('login', {
-            ERROR: "wrong username or password"
-        });
-    //set session for user 
-    request.session.user = user;
-    //redirect to dashboard route
-    return response.redirect('/dashboard');
-});
+    //check username and password for access to dashboard
+    loginProcess = safeCall(async (request, response, _next) => {
+        // get user pass from request
+        const { username, password } = request.body;
+        // find user by username and get password
+        const user = await User.findOne({ username }).select('+password').populate('favorites');
+        // send error case of wrong username 
+        if (!user)
+            return response.render('login', {
+                ERROR: "wrong username or password"
+            });
 
-//render Rigester page
-const register = (_request, response, _next) => {
-    response.render('register');
-};
+        //compaire password
+        const userPass = await bcrypt.compare(password, user.password);
+        // send error case of wrong password
+        if (!userPass)
+            return response.render('login', {
+                ERROR: "wrong username or password"
+            });
+        //set session for user 
+        request.session.user = user;
+        //redirect to dashboard route
+        return response.redirect('/dashboard');
+    });
 
-//create acount 
-const registerProcess = safeCall(async (request, response, _next) => {
-    //validation error handler 
-    if (response.locals.error)
-        return response.render('register', {
-            ERROR: response.locals.message
-        });
+    //render Rigester page
+    register = (_request, response, _next) => {
+        response.render('register');
+    };
 
-    // collect data from request body (form)
-    const data = {
-        username,
-        password,
-        firstName,
-        lastName,
-        phone
-    } = request.body;
+    //create acount 
+    registerProcess = safeCall(async (request, response, _next) => {
+        //validation error handler 
+        if (response.locals.error)
+            return response.render('register', {
+                ERROR: response.locals.message
+            });
 
-    //create user by collected data
-    const user = await User.create(data);
-    //error handling for MODEL.CREATE
-    if (!user)
-        return response.render('register', {
-            ERROR: 'creating user was unsuccessful'
-        });
-    //set session for user
-    // request.session.user = user;
-    //redirect to dashboard
-    return response.redirect('/auth/login');
-});
+        // collect data from request body (form)
+        const data = {
+            username,
+            password,
+            firstName,
+            lastName,
+            phone
+        } = request.body;
 
-//logout controller 
-const logout = (request, response, _next) => {
-    //remove browser cookies
-    response.clearCookie('user_sid');
-    //remove session 
-    request.session.destroy();
-    // redirect to login page
-    return response.redirect('/auth/login');
+        //create user by collected data
+        const user = await User.create(data);
+        //error handling for MODEL.CREATE
+        if (!user)
+            return response.render('register', {
+                ERROR: 'creating user was unsuccessful'
+            });
+        //set session for user
+        // request.session.user = user;
+        //redirect to dashboard
+        return response.redirect('/auth/login');
+    });
 
-};
+    //logout controller 
+    logout = (request, response, _next) => {
+        //remove browser cookies
+        response.clearCookie('user_sid');
+        //remove session 
+        request.session.destroy();
+        // redirect to login page
+        return response.redirect('/auth/login');
 
-const pass = (_request, response, _next) => {
-    response.render('pass');
+    };
 
-};
-//change password controller
-const passProcces = safeCall(async (request, response, _next) => {
-    //collect data
-    const { oldPass, password, confPass } = request.body;
-    //validation error handler 
-    if (response.locals.error)
-        return response.status(400).send({
-            success: false,
-            message: response.locals.message,
-        });
+    pass = (_request, response, _next) => {
+        response.render('pass');
 
-    //check confirm password
-    if (password !== confPass)
-        return response.status(400).send({
-            success: false,
-            message: 'password don`t match',
-        });
-    //get user from session
-    const user = request.session.user;
-    //find user and get password
-    const userTarget = await User.findOne(user).select('+password');
-    //error handling for MODEL.FINDBYID
-    if (!userTarget)
-        return response.status(400).send({
-            success: false,
-            message: 'update was unsuccesfull',
-        });
+    };
+    //change password controller
+    passProcces = safeCall(async (request, response, _next) => {
+        //collect data
+        const { oldPass, password, confPass } = request.body;
+        //validation error handler 
+        if (response.locals.error)
+            return response.status(400).send({
+                success: false,
+                message: response.locals.message,
+            });
 
-    //compaire password of user
-    const userPass = await bcrypt.compare(oldPass, userTarget.password);
+        //check confirm password
+        if (password !== confPass)
+            return response.status(400).send({
+                success: false,
+                message: 'password don`t match',
+            });
+        //get user from session
+        const user = request.session.user;
+        //find user and get password
+        const userTarget = await User.findOne(user).select('+password');
+        //error handling for MODEL.FINDBYID
+        if (!userTarget)
+            return response.status(400).send({
+                success: false,
+                message: 'update was unsuccesfull',
+            });
 
-    //error handling for BCRYPT.COMPAIRE
-    if (!userPass)
-        return response.status(400).send({
-            success: false,
-            message: 'wrong password',
-        });
+        //compaire password of user
+        const userPass = await bcrypt.compare(oldPass, userTarget.password);
 
-    //set user password to new password
-    userTarget.password = password;
-    //save password on user database
-    const savedUser = await userTarget.save();
-    //error handling for MODEL.SAVE
-    if (!savedUser)
-        return response.status(400).send({
-            success: false,
+        //error handling for BCRYPT.COMPAIRE
+        if (!userPass)
+            return response.status(400).send({
+                success: false,
+                message: 'wrong password',
+            });
+
+        //set user password to new password
+        userTarget.password = password;
+        //save password on user database
+        const savedUser = await userTarget.save();
+        //error handling for MODEL.SAVE
+        if (!savedUser)
+            return response.status(400).send({
+                success: false,
+                message: 'update was succesfull',
+            });
+
+        //send success message
+        return response.status(200).send({
+            success: true,
             message: 'update was succesfull',
         });
-
-    //send success message
-    return response.status(200).send({
-        success: true,
-        message: 'update was succesfull',
     });
-});
 
-//delete user acount
-const delAccount = safeCall(async (request, response, _next) => {
-    // get user data from session
-    const user = request.session.user;
-    //delete user by id
-    await User.findByIdAndDelete(user._id);
-    //delet articles 
-    const allUserArticle = await Article.find({ author: user._id });
-    for (let i = 0; i < allUserArticle.length; i++) {
-        await Comment.deleteMany({ "postId": allUserArticle[i]._id });
-        deletePicture("../public/images/article", allUserArticle[i].image);
-    }
+    //delete user acount
+    delAccount = safeCall(async (request, response, _next) => {
+        // get user data from session
+        const user = request.session.user;
+        //delete user by id
+        await User.findByIdAndDelete(user._id);
+        //delet articles 
+        const allUserArticle = await Article.find({ author: user._id });
+        for (let i = 0; i < allUserArticle.length; i++) {
+            await Comment.deleteMany({ "postId": allUserArticle[i]._id });
+            deletePicture("../public/images/article", allUserArticle[i].image);
+        }
 
-    await Article.deleteMany({ author: user._id });
-    /**
-     *! how to delet all comments
-     */
-    // await Comment.deleteMany({"postId": { $in: [10, 2, 3, 5]}});
+        await Article.deleteMany({ author: user._id });
+        /**
+         *! how to delet all comments
+         */
+        // await Comment.deleteMany({"postId": { $in: [10, 2, 3, 5]}});
 
-    await Comment.deleteMany({ username: user._id });
+        await Comment.deleteMany({ username: user._id });
 
-    if (request.session.user.avatar !== "profileAvatar.jpg")
-        deletePicture("../public/images/avatars", request.session.user.avatar);
-    //redirect to logout 
-    response.redirect('/auth/logout');
+        if (request.session.user.avatar !== "profileAvatar.jpg")
+            deletePicture("../public/images/avatars", request.session.user.avatar);
+        //redirect to logout 
+        response.redirect('/auth/logout');
 
-});
+    });
 
-const inactivate = safeCall(async (request, response, _next) => {
-    //get user from session
-    const user = request.session.user;
-    //inactivate user
-    const inActiveUser = await User.findByIdAndUpdate(user._id, { status: "inactive" });
-    //error handling for MODEL.findByIdAndUpdate
-    if (!inActiveUser)
-        return response.render('error', { error: { message: "there was something wrong" }, stats: 500 });
-    //redirect to logout
-    response.redirect('/auth/logout');
-}); 
+    inactivate = safeCall(async (request, response, _next) => {
+        //get user from session
+        const user = request.session.user;
+        //inactivate user
+        const inActiveUser = await User.findByIdAndUpdate(user._id, { status: "inactive" });
+        //error handling for MODEL.findByIdAndUpdate
+        if (!inActiveUser)
+            return response.render('error', { error: { message: "there was something wrong" }, stats: 500 });
+        //redirect to logout
+        response.redirect('/auth/logout');
+    });
 
-//reset password without login
-const resetPassword = safeCall(async (request, response, _next) => {
-    //collect data from request
-    const { username, email, phone } = request.body;
-    //find user by username
-    const user = await User.findOne({ username }).select('+password');
+    //reset password without login
+    resetPassword = safeCall(async (request, response, _next) => {
+        //collect data from request
+        const { username, email, phone } = request.body;
+        //find user by username
+        const user = await User.findOne({ username }).select('+password');
 
-    //check for accurate username
-    if (!user)
-        return response.render('pass',
-            {
-                ERROR: "wrong username"
-            });
+        //check for accurate username
+        if (!user)
+            return response.render('pass',
+                {
+                    ERROR: "wrong username"
+                });
 
-    //check for accurate phone number
-    if (user.phone !== phone)
-        return response.render('pass',
-            {
-                ERROR: "wrong phone number"
-            });
-    //change user password to phoe number
-    user.password = user.phone;
-    const savedUser = await user.save();
-    //error handling for MODEL.SAVE
-    if (!savedUser)
-        return response.render('pass',
-            {
-                ERROR: "reset password failed"
-            });
+        //check for accurate phone number
+        if (user.phone !== phone)
+            return response.render('pass',
+                {
+                    ERROR: "wrong phone number"
+                });
+        //change user password to phoe number
+        user.password = user.phone;
+        const savedUser = await user.save();
+        //error handling for MODEL.SAVE
+        if (!savedUser)
+            return response.render('pass',
+                {
+                    ERROR: "reset password failed"
+                });
 
-    //redirec to login page
-    return response.redirect('/auth/login');
-});
+        //redirec to login page
+        return response.redirect('/auth/login');
+    });
+}
 
-module.exports = {
-    login,
-    loginProcess,
-    register,
-    registerProcess,
-    logout,
-    pass,
-    passProcces,
-    delAccount,
-    inactivate,
-    resetPassword
-};
+module.exports = new AuthController()
