@@ -1,10 +1,10 @@
 // try catch function for error handling
-const safeCall = require('../utils/safeCall.utils');
+const safeCall = require('../../utils/safeCall.utils');
 //user model
-const User = require('../model/user.model');
-const Article = require('../model/article.model');
-const Comment = require('../model/comment.model');
-const deletePicture = require('../utils/deletePicture.utils');
+const User = require('../../model/user.model');
+const Article = require('../../model/article.model');
+const Comment = require('../../model/comment.model');
+const deletePicture = require('../../utils/deletePicture.utils');
 
 //render table user for admin
 const admin = safeCall(async (request, response, _next) => {

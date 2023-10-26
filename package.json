@@ -4,13 +4,14 @@
   "private": false,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
     "admin": "node ./utils/dbAdmin.utils.js",
     "evacuation": "node ./utils/dbEvacuation.utils.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
+    "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "dotenv": "^14.2.0",
     "ejs": "~2.6.1",
@@ -24,6 +25,8 @@
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "serve-favicon": "^2.5.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
     "validator": "^13.7.0"
   },
   "main": "app.js",

@@ -3,11 +3,11 @@
 const express = require('express');
 const router = express.Router();
 // controller
-const { admin, resetPass, deleteUser } = require('../controller/admin.controller.js');
+const { admin, resetPass, deleteUser } = require('../../controller/api/admin.controller.js');
 // session middleware
-const sessionsCheck = require("../middleware/sessionCheck.middleware");
+const sessionsCheck = require("../../middleware/sessionCheck.middleware.js");
 // authorization middleware
-const authorization = require('../middleware/authorization.middleware');
+const authorization = require('../../middleware/authorization.middleware.js');
 
 
 // check session

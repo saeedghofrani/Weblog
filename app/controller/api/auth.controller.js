@@ -1,13 +1,13 @@
 // Module dependencies.
 const bcrypt = require('bcryptjs');
-const deletePicture = require('../utils/deletePicture.utils');
+const deletePicture = require('../../utils/deletePicture.utils');
 //user model
-const User = require('../model/user.model');
+const User = require('../../model/user.model');
 //article model
-const Article = require('../model/article.model');
-const Comment = require('../model/comment.model');
+const Article = require('../../model/article.model');
+const Comment = require('../../model/comment.model');
 // wrapper contain trycatch for error handling
-const safeCall = require('../utils/safeCall.utils');
+const safeCall = require('../../utils/safeCall.utils');
 
 //render login page
 const login = (_request, response, _next) => {

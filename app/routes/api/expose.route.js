@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 //controller
 
-const { contact, contactProcces, home, about } = require('../controller/expose.controller.js');
+const { contact, contactProcces, home, about } = require('../../controller/api/expose.controller.js');
 
 router.route('/home')
     .get(home);

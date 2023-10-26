@@ -4,8 +4,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const Article = require('../model/article.model');
-const Comment = require('../model/comment.model');
+const Article = require('./article.model');
+const Comment = require('./comment.model');
 
 // mongoose plugin dependencie
 const Schema = mongoose.Schema;

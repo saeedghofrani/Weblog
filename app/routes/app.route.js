@@ -3,12 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 //Junction Box
-const dashboardRouter = require('./dashboard.route.js');
-const articlesRouter = require('./articles.route.js');
-const authRouter = require('./auth.route.js');
-const adminRouter = require('./admin.route.js');
-const commentRouter = require('./comment.route.js');
-const exposeRouter = require('./expose.route.js');
+const dashboardRouter = require('./api/dashboard.route.js');
+const articlesRouter = require('./api/articles.route.js');
+const authRouter = require('./api/auth.route.js');
+const adminRouter = require('./api/admin.route.js');
+const commentRouter = require('./api/comment.route.js');
+const exposeRouter = require('./api/expose.route.js');
 
 //route and address
 router.use('/', exposeRouter);

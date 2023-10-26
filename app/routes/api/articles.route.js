@@ -3,14 +3,14 @@
 const express = require('express');
 const router = express.Router();
 // controller
-const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage, comment, favorit, userComment, delUserComment, searchProcess } = require('../controller/articles.controller.js');
+const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage, comment, favorit, userComment, delUserComment, searchProcess } = require('../../controller/api/articles.controller.js');
 //multer middleware
-const upload = require('../utils/multerInitializer.utils').uploadarticlePicture;
-const checkAccess = require('../middleware/checkAccess.middleware');
+const upload = require('../../utils/multerInitializer.utils.js').uploadarticlePicture;
+const checkAccess = require('../../middleware/checkAccess.middleware.js');
 // session middleware
-const sessionsCheck = require("../middleware/sessionCheck.middleware");
+const sessionsCheck = require("../../middleware/sessionCheck.middleware.js");
 
-const articleValidation = require('../middleware/articleValidation.middleware.js');
+const articleValidation = require('../../middleware/articleValidation.middleware.js');
 
 router.use(sessionsCheck.login);
 

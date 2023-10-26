@@ -1,7 +1,7 @@
 //aticle model
-const Comment = require('../model/comment.model');
+const Comment = require('../../model/comment.model');
 // wrapper contain trycatch for error handling
-const safeCall = require('../utils/safeCall.utils');
+const safeCall = require('../../utils/safeCall.utils');
 
 const comment = safeCall(async (request, response, _next) => {
 

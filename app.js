@@ -5,24 +5,26 @@ const createError = require('http-errors');
 const express = require('express');
 const { join } = require('path');
 const favicon = require('serve-favicon');
-const config = require('./config/config');
+const config = require('./app/config/config');
 const { session: { sessionSecret } } = config;
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const morgan = require('morgan');
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./swagger.json');
 
 /**
  * database connection
  */
-require("./db/connection.db");
+require("./app/db/connection.db");
 
 const app = express();
 
 /**
  * require Junction Box
  */
-const appRouter = require('./routes/app.route.js');
+const appRouter = require('./app/routes/app.route.js');
 
 /**
  * logger
@@ -30,9 +32,15 @@ const appRouter = require('./routes/app.route.js');
 app.use(morgan('tiny'));
 
 /**
+ * logger
+ */
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
+
+
+/**
  * set up view --ejs
  */
-app.set('views', join(__dirname, 'views'));
+app.set('views', join(__dirname, './app/views'));
 app.set('view engine', 'ejs');
 
 /**

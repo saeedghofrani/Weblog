@@ -1,9 +1,9 @@
 // user model
-const User = require('../model/user.model');
-const deletePicture = require('../utils/deletePicture.utils');
+const User = require('../../model/user.model');
+const deletePicture = require('../../utils/deletePicture.utils');
 // wrapper contain trycatch for error handling
 
-const safeCall = require('../utils/safeCall.utils');
+const safeCall = require('../../utils/safeCall.utils');
 // render dashboard page
 const dashboard = (request, response, _next) => {
     //collect data from session

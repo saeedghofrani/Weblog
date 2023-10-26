@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Comment = require('./comment.model');
 const deletePicture = require('../utils/deletePicture.utils');
-const Article = require('../model/article.model');
+const Article = require('./article.model');
 const Schema = mongoose.Schema;
 const articleSchema = new Schema({
     title: {

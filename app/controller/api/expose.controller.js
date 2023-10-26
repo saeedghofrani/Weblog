@@ -1,6 +1,6 @@
-const sendEmail = require('../utils/email.utils');
-const Article = require('../model/article.model');
-const safeCall = require('../utils/safeCall.utils');
+const sendEmail = require('../../utils/email.utils');
+const Article = require('../../model/article.model');
+const safeCall = require('../../utils/safeCall.utils');
 
 const home = safeCall(async (_request, response, _next) => {
     const articles = await Article.find().sort({ visitCount: -1 }).limit(4).populate('author');

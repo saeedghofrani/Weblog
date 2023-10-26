@@ -3,13 +3,13 @@
 const express = require('express');
 const router = express.Router();
 //session middleware
-const sessionsCheck = require('../middleware/sessionCheck.middleware');
+const sessionsCheck = require('../../middleware/sessionCheck.middleware');
 // validation middleware
-const userValidator = require('../middleware/userValidation.middleware');
+const userValidator = require('../../middleware/userValidation.middleware');
 // duplicate Check middleware
-const duplicate = require('../middleware/duplicateCheck.middleware');
+const duplicate = require('../../middleware/duplicateCheck.middleware');
 //controller
-const { login, loginProcess, register, registerProcess, logout, pass, passProcces, delAccount, inactivate, resetPassword } = require('../controller/auth.controller.js');
+const { login, loginProcess, register, registerProcess, logout, pass, passProcces, delAccount, inactivate, resetPassword } = require('../../controller/api/auth.controller.js');
 
 //forget password router
 router.route('/pass')
