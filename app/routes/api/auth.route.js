@@ -9,38 +9,38 @@ const userValidator = require('../../middleware/userValidation.middleware');
 // duplicate Check middleware
 const duplicate = require('../../middleware/duplicateCheck.middleware');
 //controller
-const { login, loginProcess, register, registerProcess, logout, pass, passProcces, delAccount, inactivate, resetPassword } = require('../../controller/api/auth.controller.js');
+const { Login, LoginProcess, Register, RegisterProcess, Logout, Pass, PassProcces, DelAccount, Inactivate, ResetPassword } = require('../../controller/api/auth.controller.js');
 
 //forget password router
 router.route('/pass')
-    .get(pass)
-    .put(userValidator('pass'), passProcces)
-    .post(resetPassword);
+    .get(Pass)
+    .put(userValidator('pass'), PassProcces)
+    .post(ResetPassword);
 
 //inactavate user router
 router.route('/inActive')
-    .get(inactivate);
+    .get(Inactivate);
 
 //remove acount 
 router.route('/delAccount')
-    .get(delAccount);
+    .get(DelAccount);
 
 //logout route
 router.route('/logout')
-    .get(logout);
+    .get(Logout);
 
 //check session and cookie
 router.use(sessionsCheck.dashboard);
 
 //login router
 router.route('/login')
-    .get(login)
-    .post(loginProcess);
+    .get(Login)
+    .post(LoginProcess);
 
 //register router
 router.route('/register')
-    .get(register)
-    .post(duplicate.register, userValidator('create'), registerProcess);
+    .get(Register)
+    .post(duplicate.register, userValidator('create'), RegisterProcess);
 
 
 module.exports = router;

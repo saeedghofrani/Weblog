@@ -9,14 +9,14 @@ const deletePicture = require('../../utils/deletePicture.utils');
 class AdminController {
 
     //render table user for admin
-    admin = safeCall(async (request, response, _next) => {
+    Admin = safeCall(async (request, response, _next) => {
         //collect users from database
         const users = await User.find({});
         response.render('admin', { users });
 
     });
 
-    resetPass = safeCall(async (request, response, _next) => {
+    ResetPass = safeCall(async (request, response, _next) => {
         // collect users from database + password 
         const user = await User.findById(request.body.id).select('+password');
 
@@ -45,14 +45,14 @@ class AdminController {
         });
     });
 
-    deleteUser = safeCall(async (request, response, _next) => {
+    DeleteUser = safeCall(async (request, response, _next) => {
 
 
         const allUserArticle = await Article.find({ author: request.body.id });
         console.log(allUserArticle);
         for (let i = 0; i < allUserArticle.length; i++) {
             await Comment.deleteMany({ "postId": allUserArticle[i]._id });
-            deletePicture("../public/images/article", allUserArticle[i].image);
+            deletePicture(process.cwd() + "/public/images/article", allUserArticle[i].image);
         }
         // Promise.all(allUserArticle.map((value, index, array) => {
         //     Comment.deleteMany({ "postId": value._id });
@@ -76,7 +76,7 @@ class AdminController {
         // await Comment.deleteMany({ username: user._id });
 
         if (user.avatar !== "profileAvatar.jpg")
-            deletePicture("../public/images/avatars", user.avatar);
+            deletePicture(process.cwd() + "public/images/avatars", user.avatar);
         //redirect to logout 
         return response.status(200).send({
             success: true,

@@ -12,12 +12,12 @@ const safeCall = require('../../utils/safeCall.utils');
 class AuthController {
 
     //render login page
-    login = (_request, response, _next) => {
+    Login = (_request, response, _next) => {
         return response.render('login');
     };
 
     //check username and password for access to dashboard
-    loginProcess = safeCall(async (request, response, _next) => {
+    LoginProcess = safeCall(async (request, response, _next) => {
         // get user pass from request
         const { username, password } = request.body;
         // find user by username and get password
@@ -38,16 +38,17 @@ class AuthController {
         //set session for user 
         request.session.user = user;
         //redirect to dashboard route
+        console.log(request.session.user);
         return response.redirect('/dashboard');
     });
 
     //render Rigester page
-    register = (_request, response, _next) => {
+    Register = (_request, response, _next) => {
         response.render('register');
     };
 
     //create acount 
-    registerProcess = safeCall(async (request, response, _next) => {
+    RegisterProcess = safeCall(async (request, response, _next) => {
         //validation error handler 
         if (response.locals.error)
             return response.render('register', {
@@ -56,13 +57,12 @@ class AuthController {
 
         // collect data from request body (form)
         const data = {
-            username,
-            password,
-            firstName,
-            lastName,
-            phone
+            username: request.body.username,
+            password: request.body.password,
+            firstName: request.body.firstName,
+            lastName: request.body.lastName,
+            phone: request.body.phone
         } = request.body;
-
         //create user by collected data
         const user = await User.create(data);
         //error handling for MODEL.CREATE
@@ -77,7 +77,7 @@ class AuthController {
     });
 
     //logout controller 
-    logout = (request, response, _next) => {
+    Logout = (request, response, _next) => {
         //remove browser cookies
         response.clearCookie('user_sid');
         //remove session 
@@ -87,12 +87,12 @@ class AuthController {
 
     };
 
-    pass = (_request, response, _next) => {
+    Pass = (_request, response, _next) => {
         response.render('pass');
 
     };
     //change password controller
-    passProcces = safeCall(async (request, response, _next) => {
+    PassProcces = safeCall(async (request, response, _next) => {
         //collect data
         const { oldPass, password, confPass } = request.body;
         //validation error handler 
@@ -148,7 +148,7 @@ class AuthController {
     });
 
     //delete user acount
-    delAccount = safeCall(async (request, response, _next) => {
+    DelAccount = safeCall(async (request, response, _next) => {
         // get user data from session
         const user = request.session.user;
         //delete user by id
@@ -157,7 +157,7 @@ class AuthController {
         const allUserArticle = await Article.find({ author: user._id });
         for (let i = 0; i < allUserArticle.length; i++) {
             await Comment.deleteMany({ "postId": allUserArticle[i]._id });
-            deletePicture("../public/images/article", allUserArticle[i].image);
+            deletePicture(process.cwd() + "/public/images/article", allUserArticle[i].image);
         }
 
         await Article.deleteMany({ author: user._id });
@@ -169,13 +169,13 @@ class AuthController {
         await Comment.deleteMany({ username: user._id });
 
         if (request.session.user.avatar !== "profileAvatar.jpg")
-            deletePicture("../public/images/avatars", request.session.user.avatar);
+            deletePicture(process.cwd() + "/public/images/avatars", request.session.user.avatar);
         //redirect to logout 
         response.redirect('/auth/logout');
 
     });
 
-    inactivate = safeCall(async (request, response, _next) => {
+    Inactivate = safeCall(async (request, response, _next) => {
         //get user from session
         const user = request.session.user;
         //inactivate user
@@ -188,7 +188,7 @@ class AuthController {
     });
 
     //reset password without login
-    resetPassword = safeCall(async (request, response, _next) => {
+    ResetPassword = safeCall(async (request, response, _next) => {
         //collect data from request
         const { username, email, phone } = request.body;
         //find user by username

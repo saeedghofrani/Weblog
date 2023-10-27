@@ -1,7 +1,7 @@
 const session = {
     //check if user dont have session
     login: (req, res, next) => {
-
+        console.log('here123');
         if (!req.session.user || !req.cookies.user_sid)
             return res.redirect('/auth/login');
 

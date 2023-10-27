@@ -9,7 +9,7 @@ const userValidation = require('../../middleware/userValidation.middleware');
 //duplicate Check middleware
 const duplicate = require('../../middleware/duplicateCheck.middleware');
 //controller
-const { dashboard, dashboardProcess, avatarProcess } = require('../../controller/api/dashboard.controller.js');
+const { Dashboard, DashboardProcess, AvatarProcess } = require('../../controller/api/dashboard.controller.js');
 //upload Avatar
 const upload = require('../../utils/multerInitializer.utils').uploadAvatar;
 
@@ -19,12 +19,12 @@ router.use(sessionsCheck.login);
 router.route('/')
 
     //dashboard page
-    .get(dashboard)
+    .get(Dashboard)
 
     //update user data
-    .put(duplicate.dashboard, userValidation('update'), dashboardProcess)
+    .put(duplicate.dashboard, userValidation('update'), DashboardProcess)
 
     //update avatar
-    .post(upload.single('avatar'), avatarProcess);
+    .post(upload.single('avatar'), AvatarProcess);
 
 module.exports = router;

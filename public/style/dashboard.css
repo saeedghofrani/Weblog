@@ -145,6 +145,7 @@ a.profile-edit-btn {
 }
 .genderDiv {
   height: 40px !important;
+  margin-bottom: 40px !important;
 }
 .profile-work p {
   font-size: 12px;

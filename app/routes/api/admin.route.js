@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 // controller
-const { admin, resetPass, deleteUser } = require('../../controller/api/admin.controller.js');
+const { Admin, ResetPass, DeleteUser } = require('../../controller/api/admin.controller.js');
 // session middleware
 const sessionsCheck = require("../../middleware/sessionCheck.middleware.js");
 // authorization middleware
@@ -19,12 +19,12 @@ router.use(authorization(['admin']));
 router.route('/')
 
     //admin page
-    .get(admin)
+    .get(Admin)
 
     //restet user password
-    .patch(resetPass)
+    .patch(ResetPass)
 
     //delete user
-    .delete(deleteUser)
+    .delete(DeleteUser)
 
 module.exports = router;

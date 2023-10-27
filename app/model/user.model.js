@@ -26,13 +26,13 @@ const UserSchema = new Schema({
         trim: true,
         required: [true, 'Password is required'],
         minlength: [8, 'invalid password'],
-        validate: {
-            validator: function (v) {
-                const reg = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-                return reg.test(v);
-            },
-            message: '{VALUE} is not a valid password!'
-        },
+        // validate: {
+        //     // validator: function (v) {
+        //     //     const reg = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        //     //     return reg.test(v);
+        //     // },
+        //     message: '{VALUE} is not a valid password!'
+        // },
         select: false,
     },
     username: {

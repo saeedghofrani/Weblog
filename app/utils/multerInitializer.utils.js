@@ -34,7 +34,7 @@ const fileFilter = (req, file, cb) => {
 }
 
 const avatarStorage = multer.diskStorage({
-    destination: destination(path.join(__dirname, '../public/images/avatars')),
+    destination: destination(path.join(process.cwd(), '/public/images/avatars')),
     filename: filename('avatar')
 });
 const uploadAvatar = multer({
@@ -43,7 +43,7 @@ const uploadAvatar = multer({
 });
 
 const articlePictureStorage = multer.diskStorage({
-    destination: destination(path.join(__dirname, '../public/images/article')),
+    destination: destination(path.join(process.cwd(), '/public/images/article')),
     filename: filename('articlePicture')
 });
 const uploadarticlePicture = multer({

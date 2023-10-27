@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 // controller
-const { articles, addArticlePage, addArticleProcess, delMyArticle, updateArticleProcess, updateArticlePage, comment, favorit, userComment, delUserComment, searchProcess } = require('../../controller/api/articles.controller.js');
+const { Articles, AddArticlePage, AddArticleProcess, DelMyArticle, UpdateArticleProcess, UpdateArticlePage, comment, Favorit, delUserComment, SearchProcess } = require('../../controller/api/articles.controller.js');
 //multer middleware
 const upload = require('../../utils/multerInitializer.utils.js').uploadarticlePicture;
 const checkAccess = require('../../middleware/checkAccess.middleware.js');
@@ -15,19 +15,19 @@ const articleValidation = require('../../middleware/articleValidation.middleware
 router.use(sessionsCheck.login);
 
 router.route('/setup')
-    .get(addArticlePage)
-    .post(upload.single('articlePicture'), articleValidation('create'), addArticleProcess)
-    .delete(checkAccess.deleteArticle, delMyArticle);
+    .get(AddArticlePage)
+    .post(upload.single('articlePicture'), articleValidation('create'), AddArticleProcess)
+    .delete(checkAccess.deleteArticle, DelMyArticle);
 
 router.route('/updateArticle/:id')
-    .get(checkAccess.updateArticle, updateArticlePage)
-    .post(checkAccess.updateArticle, upload.single('articlePicture'), articleValidation('update'), updateArticleProcess);
+    .get(checkAccess.updateArticle, UpdateArticlePage)
+    .post(checkAccess.updateArticle, upload.single('articlePicture'), articleValidation('update'), UpdateArticleProcess);
 
 router.route('/favorit/:id')
-    .post(favorit);
+    .post(Favorit);
 
 router.route('/:condition')
-    .get(articles)
-    .post(searchProcess);
+    .get(Articles)
+    .post(SearchProcess);
 
 module.exports = router;    

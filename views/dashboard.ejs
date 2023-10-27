@@ -116,17 +116,14 @@
                                     </a>
                                     <% } %>
                                         <p  style="  font-family: 'Cinzel Decorative';">Favorite Articles</p>
-                                        <% if(favorites.length> 0) { for( let i = 0; i < favorites.length; i++ ) { %>
+                                        <% if(data.favorites.length> 0) { for( let i = 0; i < data.favorites.length; i++ ) { %>
                                                 <a class="col-12 text-center">
-                                                    <%= favorites[i].title %>
+                                                    <%= data.favorites[i].title %>
                                                 </a><br />
                                                 <% } } else {%>
-                                                    <a class="col-12 text-center">Sherlock: The Final Problem</a><br /> `*/-9+6
-                                                    3..
-                                                    36+9-/*
+                                                    <a class="col-12 text-center">Sherlock: The Final Problem</a><br />
                                                     <a class="col-12 text-center">Sherlock: The Great Game</a><br />
-                                                    <a class="col-12 text-center">Sherlock: The Reichenbach
-                                                        Fall</a><br />
+                                                    <a class="col-12 text-center">Sherlock: The ReichenbachFall</a><br />
                                                     <a class="col-12 text-center">Sherlock: His Last Vow</a><br />
                                                     <% } %>                                                        
                         </div>                                                        
@@ -161,8 +158,8 @@
                                     <div class="col-md-6">
                                         <label style="  font-family: 'Cinzel Decorative';">Gender</label>
                                     </div>
-                                    <div cl10ass="col-md-6">
-                                         <div class="form-group">
+                                    <div cl10ass="col-md-3">
+                                         <div class="form-group genderDiv">
                                             <select name="gender" id="gender" disabled readonly class="inputUpdate">
                                                 <% if(data.gender==='none' ){ %>
                                                     <option id="genderOptional" value="none">Gender

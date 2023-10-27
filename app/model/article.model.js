@@ -40,12 +40,16 @@ const articleSchema = new Schema({
         ref: 'User',
         required: false,
     },
+    deleted: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 
 articleSchema.index({ title: 'text', description: 'text' });
 
 articleSchema.pre(/^find/, function (next) {
-    this.populate({ path: "author" });
+    this.populate({ path: "author" }).find({ deleted: { $ne: true } });
     next();
 });
 

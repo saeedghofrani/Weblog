@@ -136,9 +136,6 @@ function createCard(record, count) {
       <span class=" translate-middle badge rounded-pill bg-danger">
         ${record.visitCount}
       </span>
-      <span class=" translate-middle badge rounded-pill bg-danger favorit">
-        <i class="fa fa-star-o favoritIcon" artId="${record._id}"></i>
-      </span>
       <h1>
         ${record.title}
       </h1>
@@ -173,9 +170,6 @@ function createCardSearch(record) {
     <div class="description">
       <span class=" translate-middle badge rounded-pill bg-danger">
         ${record.visitCount}
-      </span>
-      <span class=" translate-middle badge rounded-pill bg-danger favorit">
-        <i class="fa fa-star-o favoritIcon" artId="${record._id}"></i>
       </span>
       <h1>
         ${record.title}

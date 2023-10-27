@@ -4,17 +4,17 @@ const express = require('express');
 const router = express.Router();
 //controller
 
-const { contact, contactProcces, home, about } = require('../../controller/api/expose.controller.js');
+const { Contact, ContactProcces, Home, About } = require('../../controller/api/expose.controller.js');
 
 router.route('/home')
-    .get(home);
+    .get(Home);
 
 router.route('/about')
     //about page
-    .get(about);
+    .get(About);
 
 router.route('/contact')
-    .get(contact)
-    .post(contactProcces);
+    .get(Contact)
+    .post(ContactProcces);
 
 module.exports = router;

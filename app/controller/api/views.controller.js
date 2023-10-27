@@ -6,7 +6,7 @@ const safeCall = require('../../utils/safeCall.utils');
 
 class ViewsController {
 
-    articles = safeCall(async (request, response, _next) => {
+    Articles = safeCall(async (request, response, _next) => {
 
         const condition = request.params.condition;
 
@@ -53,10 +53,10 @@ class ViewsController {
 
     });
 
-    addArticlePage = (request, response, _next) => {
+    AddArticlePage = (request, response, _next) => {
         response.render('./article/addArticle');
     };
-    updateArticlePage = safeCall(async (request, response, _next) => {
+    UpdateArticlePage = safeCall(async (request, response, _next) => {
         const article = await Article.findById(request.params.id).populate('CoAuthor');
         return response.render('./article/updateArticle', { data: article });
     });

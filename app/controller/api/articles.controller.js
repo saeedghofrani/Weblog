@@ -8,7 +8,7 @@ const deletePicture = require('../../utils/deletePicture.utils');
 
 class ArticleController {
     //render article page 
-    articles = safeCall(async (request, response, _next) => {
+    Articles = safeCall(async (request, response) => {
 
         const condition = request.params.condition;
 
@@ -21,7 +21,7 @@ class ArticleController {
 
             const skip = Number(condition.split('=')[1]) * 6;
             //collect data from database sort bt createdAt
-            const articles = await Article.find({}).sort({ createdAt: -1 }).skip(skip).limit(6);
+            const articles = await Article.find({}).sort({ createdAt: -1 }).populate('author').skip(skip).limit(6);
             const count = await Article.find({}).count();
 
             //render artile page sorted 
@@ -56,12 +56,12 @@ class ArticleController {
     });
 
     //render add article page
-    addArticlePage = (request, response, _next) => {
+    AddArticlePage = (request, response, _next) => {
         return response.render('./article/addArticle');
     };
 
     //add article procces 
-    addArticleProcess = safeCall(async (request, response, _next) => {
+    AddArticleProcess = safeCall(async (request, response, _next) => {
         //validation for aticle input
         if (response.locals.error)
             return response.status(400).send({
@@ -100,9 +100,9 @@ class ArticleController {
 
     });
 
-    delMyArticle = safeCall(async (request, response, _next) => {
+    DelMyArticle = safeCall(async (request, response, _next) => {
         //collect id from request
-        const article = await Article.findByIdAndDelete(request.body.id);
+        const article = await Article.findByIdAndUpdate(request.body.id, { deleted: true });
 
         if (!article)
             return response.status(400).send({
@@ -110,7 +110,7 @@ class ArticleController {
                 message: 'delete article was unsuccesfull',
             });
 
-        deletePicture("../public/images/article", article.image);
+        deletePicture(process.cwd() + "/public/images/article", article.image);
         //send success message
         response.status(200).send({
             success: true,
@@ -119,12 +119,12 @@ class ArticleController {
     });
 
     //update article page 
-    updateArticlePage = safeCall(async (request, response, _next) => {
+    UpdateArticlePage = safeCall(async (request, response, _next) => {
         const article = await Article.findById(request.params.id).populate('CoAuthor');
         return response.render('./article/updateArticle', { data: article });
     });
     //update article process
-    updateArticleProcess = safeCall(async (request, response, _next) => {
+    UpdateArticleProcess = safeCall(async (request, response, _next) => {
 
         //validation for update article
         if (response.locals.error)
@@ -146,7 +146,7 @@ class ArticleController {
         const updatedArticle = await Article.findByIdAndUpdate(request.params.id, article);
 
         if (request.file)
-            deletePicture("../public/images/article", updatedArticle.image);
+            deletePicture(process.cwd() + "/public/images/article", updatedArticle.image);
 
         return response.status(200).send({
             success: true,
@@ -155,7 +155,7 @@ class ArticleController {
     });
 
 
-    favorit = safeCall(async (request, response, next) => {
+    Favorit = safeCall(async (request, response, next) => {
 
         const id = request.params.id;
         const article = await Article.findById(id);
@@ -182,7 +182,7 @@ class ArticleController {
             });
         }
     });
-    searchProcess = safeCall(async (request, response) => {
+    SearchProcess = safeCall(async (request, response) => {
         const searchText = request.params.condition;
         const articles = await Article.find({ $text: { $search: searchText } }).limit(6);
         console.log(articles);

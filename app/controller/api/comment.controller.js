@@ -4,7 +4,7 @@ const Comment = require('../../model/comment.model');
 const safeCall = require('../../utils/safeCall.utils');
 class CommentController {
 
-    comment = safeCall(async (request, response, _next) => {
+    Comment = safeCall(async (request, response, _next) => {
 
         const id = request.params.id;
         const user = request.session.user;
@@ -33,7 +33,7 @@ class CommentController {
 
     });
 
-    userComment = safeCall(async (request, response, _next) => {
+    UserComment = safeCall(async (request, response, _next) => {
         const id = request.params.id;
         const comments = await Comment.find({ username: id }).populate('username');
         return response.status(200).send({
@@ -43,7 +43,7 @@ class CommentController {
         });
     });
 
-    delUserComment = safeCall(async (request, response, _next) => {
+    DelUserComment = safeCall(async (request, response, _next) => {
         const id = request.params.id;
         const comment = await Comment.findByIdAndDelete(id);
         console.log(comment);

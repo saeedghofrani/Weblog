@@ -8,25 +8,24 @@ const safeCall = require('../../utils/safeCall.utils');
 class DashboardController {
 
     // render dashboard page
-    dashboard = (request, response, _next) => {
+    Dashboard = (request, response, _next) => {
         //collect data from session
         const data = {
-            firstName,
-            lastName,
-            username,
-            password,
-            gender,
-            phone,
-            avatar,
-            favorites
+            firstName: request.session.user.firstName,
+            lastName: request.session.user.lastName,
+            username: request.session.user.username,
+            password: request.session.user.password,
+            gender: request.session.user.gender,
+            phone: request.session.user.phone,
+            avatar: request.session.user.avatar,
+            favorites: request.session.user.favorites
         } = request.session.user;
-
-
-        return response.render('dashboard', { data: data });
+        console.log(data);
+        return response.render('dashboard', {data: data} );
     };
 
     // update user dashboard
-    dashboardProcess = safeCall(async (request, response, _next) => {
+    DashboardProcess = safeCall(async (request, response, _next) => {
         //validation error handler
 
         if (response.locals.error)
@@ -41,12 +40,12 @@ class DashboardController {
 
         //collect data from request body
         const data = {
-            firstName,
-            lastName,
-            username,
-            email,
-            gender,
-            phone,
+            firstName: request.body.firstName,
+            lastName: request.body.lastName,
+            username: request.body.username,
+            email: request.body.email,
+            gender: request.body.gender,
+            phone: request.body.phone,
         } = request.body;
 
         //update user by id 
@@ -71,11 +70,10 @@ class DashboardController {
     });
 
     //update avatar
-    avatarProcess = safeCall(async (request, response, next) => {
+    AvatarProcess = safeCall(async (request, response, next) => {
 
         //update user by avatar
         const user = await User.findByIdAndUpdate(request.session.user._id, { avatar: request.file.filename }, { new: true }).lean();
-
         //error handling for MODEL.findOneAndUpdate
         if (!user) {
             return response.status(400).send({
@@ -87,7 +85,7 @@ class DashboardController {
 
         if (request.session.user.avatar !== "profileAvatar.jpg") {
             //delete old avatar
-            deletePicture("../public/images/avatars", request.session.user.avatar);
+            deletePicture(process.cwd() + "/public/images/avatars", request.session.user.avatar);
         }
         //session user
         request.session.user = user;

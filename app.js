@@ -40,7 +40,7 @@ app.use(morgan('tiny'));
 /**
  * set up view --ejs
  */
-app.set('views', join(__dirname, './app/views'));
+app.set('views', join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
 /**
@@ -58,12 +58,12 @@ app.use(cookieParser());
 /**
  * express static assets
  */
-app.use(express.static(join(__dirname, 'public')));
+app.use(express.static(join(process.cwd() , 'public')));
 
 /**
  * set web icon
  */
-app.use(favicon(join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(favicon(join(process.cwd() , 'public', 'images', 'favicon.ico')));
 
 /**
  * set up session
@@ -91,12 +91,14 @@ app.use((err, req, res, _next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     res.status(err.status || 404);
+    console.log(err);
     res.json({ path: "authentication", success: false, result: { error: "Path does not exist" } });
 
     // uncaught Exception handler
     process.on("uncaughtException", (err) => {
         console.log("UNCAUGHT EXCEPTION, APP SHUTTING DOWN NOW!!");
         console.log(err.message, err.name);
+        console.log(err);
         res.json({ path: "authentication", success: false, result: { error: "Path does not exist" } });
         process.exit(1);
     });
